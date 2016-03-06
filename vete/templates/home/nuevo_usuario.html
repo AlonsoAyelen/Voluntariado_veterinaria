@@ -1,0 +1,54 @@
+
+{% extends 'home/base.html'%}
+
+{% block section %}
+    {% if mensaje %}
+        <legend align="center">{{mensaje}}</legend>
+    {% endif %}
+    <div class="container">
+<div class="col-lg-8 control-label">
+<div class="well bs-component">
+<form class="form-horizontal" method='post' action='{% url 'nuevo_usuario' %}'>{% csrf_token %}
+  <fieldset>
+    <legend>Agregar usuario</legend>
+    <div class="form-group">
+      <label for="nombre" class="col-lg-2 control-label">Nombre</label>
+      <div class="col-lg-10">
+        <input type="text" class="form-control" id="nombre" placeholder="Nombre" name="nombre">
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="clave" class="col-lg-2 control-label">Clave</label>
+      <div class="col-lg-10">
+        <input type="password" class="form-control" id="clave" placeholder="Clave" name="clave">
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="clave_conf" class="col-lg-2 control-label">Repetir clave</label>
+      <div class="col-lg-10">
+        <input type="password" class="form-control" id="clave_conf" placeholder="Clave" name="clave_conf">
+      </div>
+    </div>
+     <div class="form-group">
+      <label for="select" class="col-lg-2 control-label">Tipo de usuario</label>
+      <div class="col-lg-10">
+        <select class="form-control" id="tipo" name="tipo">
+          <option>Clinico</option>
+          <option>Data entry</option>
+        </select>
+        </div>
+        </div>
+
+    <div class="form-group">
+      <div class="col-lg-10 col-lg-offset-2">
+        <button type="reset" class="btn btn-default">Cancel</button>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </div>
+    </div>
+  </fieldset>
+</form>
+</div>
+</div>
+</div>
+
+{% endblock %}

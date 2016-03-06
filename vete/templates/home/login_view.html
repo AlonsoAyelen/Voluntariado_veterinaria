@@ -1,0 +1,40 @@
+
+{% extends 'home/base.html'%}
+
+{% block section %}
+    {% if mensaje %}
+        <legend align="center">{{mensajeLogin}}</legend>
+    {% endif %}
+    <div class="container">
+<div class="col-lg-8 control-label">
+<div class="well bs-component">
+<form class="form-horizontal" method='post' action='{% url 'login' %}'>{% csrf_token %}
+  <fieldset>
+    <legend>Login</legend>
+    <div class="form-group">
+      <label for="nombreLogin" class="col-lg-2 control-label">Nombre</label>
+      <div class="col-lg-10">
+        <input type="text" class="form-control" id="nombreLogin" placeholder="Nombre" name="nombreLogin">
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="claveLogin" class="col-lg-2 control-label">Clave</label>
+      <div class="col-lg-10">
+        <input type="password" class="form-control" id="claveLogin" placeholder="Clave" name="claveLogin">
+      </div>
+    </div>
+    
+
+    <div class="form-group">
+      <div class="col-lg-10 col-lg-offset-2">
+        <button type="reset" class="btn btn-default">Cancel</button>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </div>
+    </div>
+  </fieldset>
+</form>
+</div>
+</div>
+</div>
+
+{% endblock %}

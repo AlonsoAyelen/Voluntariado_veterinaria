@@ -1,0 +1,28 @@
+from django import forms
+
+class CaninoForm(forms.Form):
+
+	nombre 		= forms.CharField(widget=forms.TextInput())
+	especie 	= forms.CharField(widget=forms.TextInput())
+	sexo 		= forms.CharField(widget=forms.TextInput())
+	raza 		= forms.CharField(widget=forms.TextInput())
+	edad 		= forms.IntegerField()
+	motivo_de_consulta = forms.CharField(widget=forms.TextInput())
+	uso_de_la_mascota = forms.CharField(widget=forms.TextInput())
+	habitos = forms.CharField(widget=forms.TextInput())
+	contacto_con_basural = forms.CharField(widget=forms.TextInput())
+	caza = forms.CharField(widget=forms.TextInput())
+	caza_roedores = forms.CharField(widget=forms.TextInput())
+	observacion_roedores = forms.BooleanField(required=False)
+	vacunado_contra_leptospirosis = forms.CharField(widget=forms.TextInput())
+	desparasitado = forms.CharField(widget=forms.TextInput())
+	eliminacion_de_excretas = forms.CharField(widget=forms.TextInput())
+	habitos_alimenticios = forms.CharField(widget=forms.TextInput())
+	signos_clinicos = forms.BooleanField(required=False)
+	piel_Linfonodos = forms.CharField(widget=forms.TextInput())
+	digestivo = forms.CharField(widget=forms.TextInput())
+	cardio_respiratorio = forms.CharField(widget=forms.TextInput())
+	urogenital = forms.CharField(widget=forms.TextInput())
+	musculoesqueleticonervioso = forms.CharField(widget=forms.TextInput())
+	procedimiento_realizado = forms.CharField(widget=forms.TextInput())
+	status  = forms.BooleanField(required=False)

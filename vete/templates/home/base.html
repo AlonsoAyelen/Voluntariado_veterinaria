@@ -1,0 +1,58 @@
+<!DOCTYPE HTML>
+<HTML lang='es'>
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+    <!-- CDN Bootstrap -->
+    <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css">-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="http://bootswatch.com/flatly/bootstrap.min.css" >
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="http://bootswatch.com/flatly/bootstrap.css" >
+</head>
+<body >
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+				      <ul class="nav navbar-nav">
+				      	 {% block nav %}
+                            <li {% block usuarios_active %}{% endblock %}><a href="#">Manejo de usuarios</a></li>
+				      	 	<li {% block caninos_active %}{% endblock %}><a href="#">Manejo de caninos</a></li>
+        					<li {% block duenios_active %}{% endblock %}><a href="info_personal.html">Manejo de dueños<span class="sr-only">(current)</span></a></li>
+        					<li {% block estadisticas_active %}{% endblock %}><a href="#">Estadisticas</a></li>
+						{% endblock%}
+				      </ul>
+				      <ul class="nav navbar-nav navbar-right">
+                		<li><a href="#">Cerrar sesión</a></li>
+              		  </ul>
+				        
+				    </div>
+  				</div>
+			</nav>
+
+
+
+
+
+
+
+
+
+
+			<div class="container" >
+				{% block section %}{% endblock %}
+			</div>
+	</body>
+</HTML>
