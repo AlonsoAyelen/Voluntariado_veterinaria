@@ -8,7 +8,6 @@ from django.db import models
 
 
 
-
 class Propietario(models.Model):
 	nombre = models.CharField(max_length = 100)
 	apellido = models.CharField(max_length = 100)
@@ -27,21 +26,23 @@ class Propietario(models.Model):
 	vivienda = models.CharField(max_length = 100)
 	material = models.CharField(max_length = 100)
 	ambientes = models.IntegerField()
-	agujeros = models.BooleanField(default = False)
+	agujeros = models.CharField(max_length = 100)
 	agua = models.CharField(max_length = 100)
 	excretas = models.CharField(max_length = 100)
 	residuos_domiciliarios = models.CharField(max_length = 100)
 	recoleccion_de_residuos = models.CharField(max_length = 100)
-	basural = models.BooleanField(default = False)
-	roedores = models.BooleanField(default = False)
-	agua_servida = models.BooleanField(default = False)
-	inundaciones = models.BooleanField(default = False)
+	basural = models.CharField(max_length = 100)
+	roedores = models.CharField(max_length = 100)
+	agua_servida = models.CharField(max_length = 100)
+	inundaciones = models.CharField(max_length = 100)
 	ultima_inundacion = models.DateField(auto_now = True)
 	integrante = models.CharField(max_length = 100)
 	sintomas = models.CharField(max_length = 100)
 	aclaracion = models.CharField(max_length = 100)
 	status  = models.BooleanField(default = True)
-
+	class Meta:
+		managed = True      # add this\
+		app_label = 'vete' # & this
 class Canino(models.Model):
 	propietario = models.ForeignKey(Propietario)
 	nombre = models.CharField(max_length = 80)
@@ -136,3 +137,5 @@ class Hemograma(models.Model):
 	FLA_M = models.IntegerField()
 	observaciones = models.TextField()
 	status  = models.BooleanField(default = True)
+
+

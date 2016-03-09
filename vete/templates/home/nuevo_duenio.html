@@ -10,11 +10,17 @@
 <div class="well bs-component">
 <form class="form-horizontal" method='post' action=''>{% csrf_token %}
   <fieldset>
-    <legend>Agregar usuario</legend>
+    <legend>Agregar duenio</legend>
     <div class="form-group">
       <label for="nombreDuenio" class="col-lg-2 control-label">Nombre</label>
       <div class="col-lg-10">
         <input type="text" class="form-control" id="nombreDuenio" placeholder="Nombre" name="nombreDuenio">
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="apellido" class="col-lg-2 control-label">Apellido</label>
+      <div class="col-lg-10">
+        <input type="text" class="form-control" id="apellido" placeholder="Apellido" name="apellido">
       </div>
     </div>
     <div class="form-group">
@@ -24,17 +30,41 @@
       </div>
     </div>
     <div class="form-group">
+      <label for="barrio" class="col-lg-2 control-label">Barrio</label>
+      <div class="col-lg-10">
+        <input type="text" class="form-control" id="barrio" placeholder="Barrio" name="barrio">
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="procedencia" class="col-lg-2 control-label">Procedencia</label>
+      <div class="col-lg-10">
+        <input type="text" class="form-control" id="procedencia" placeholder="Procedencia" name="procedencia">
+      </div>
+    </div>
+    <div class="form-group">
       <label for="telefono" class="col-lg-2 control-label">Telefono</label>
       <div class="col-lg-10">
         <input type="text" class="form-control" id="telefono" placeholder="Telefono" name="telefono">
       </div>
     </div>
     <div class="form-group">
-      <label for="barrio" class="col-lg-2 control-label">Barrio</label>
+      <label for="edad" class="col-lg-2 control-label">Edad</label>
       <div class="col-lg-10">
-        <input type="text" class="form-control" id="barrio" placeholder="Barrio" name="barrio">
+        <input type="number" class="form-control" id="edad" placeholder="Edad" name="edad">
       </div>
     </div>
+    <div class="form-group">
+      <label for="grado_de_instruccion" class="col-lg-2 control-label">Grado de instruccion</label>
+      <div class="col-lg-10">
+        <input type="text" class="form-control" id="grado_de_instruccion" placeholder="Grado de instruccion" name="grado_de_instruccion">
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="ocupacion" class="col-lg-2 control-label">Ocupacion</label>
+      <div class="col-lg-10">
+        <input type="text" class="form-control" id="ocupacion" placeholder="Ocupacion" name="ocupacion">
+      </div>
+    </div>    
     <div class="form-group">
       <label for="convivientes_adultos" class="col-lg-2 control-label">Adultos</label>
       <div class="col-lg-10">
@@ -47,8 +77,126 @@
         <input type="number" class="form-control" id="convivientes_ninios" placeholder="Convivientes ninios" name="convivientes_ninios">
       </div>
     </div>
-    
 
+
+
+
+
+
+    <div class="form-group">
+      <label for="en_edad_escolar" class="col-lg-2 control-label">En edad escolar</label>
+      <div class="col-lg-10">
+        <input type="number" class="form-control" id="en_edad_escolar" placeholder="En edad escolar" name="en_edad_escolar">
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="mascotas" class="col-lg-2 control-label">Mascotas</label>
+      <div class="col-lg-10">
+        <input type="number" class="form-control" id="mascotas" placeholder="Mascotas" name="mascotas">
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="tipos" class="col-lg-2 control-label">Tipos de mascotas</label>
+      <div class="col-lg-10">
+        <input type="text" class="form-control" id="tipos" placeholder="Tipos de mascotas" name="tipos">
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="vivienda" class="col-lg-2 control-label">Vivienda</label>
+      <div class="col-lg-10">
+        <input type="text" class="form-control" id="vivienda" placeholder="Vivienda" name="vivienda">
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="material" class="col-lg-2 control-label">Material</label>
+      <div class="col-lg-10">
+        <input type="text" class="form-control" id="material" placeholder="Material" name="material">
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="ambientes" class="col-lg-2 control-label">Ambientes</label>
+      <div class="col-lg-10">
+        <input type="number" class="form-control" id="ambientes" placeholder="Ambientes" name="ambientes">
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="agujeros" class="col-lg-2 control-label">Agujeros</label>
+      <div class="col-lg-10">
+        <input type="text" class="form-control" id="agujeros" placeholder="Agujeros" name="agujeros">
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="agua" class="col-lg-2 control-label">Agua</label>
+      <div class="col-lg-10">
+        <input type="text" class="form-control" id="agua" placeholder="Agua" name="agua">
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="excretas" class="col-lg-2 control-label">Excretas</label>
+      <div class="col-lg-10">
+        <input type="text" class="form-control" id="excretas" placeholder="Excretas" name="excretas">
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="residuos_domiciliarios" class="col-lg-2 control-label">Residuos domiciliarios</label>
+      <div class="col-lg-10">
+        <input type="text" class="form-control" id="residuos_domiciliarios" placeholder="Residuos domiciliarios" name="residuos_domiciliarios">
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="recoleccion_de_residuos" class="col-lg-2 control-label">Recoleccion de residuos</label>
+      <div class="col-lg-10">
+        <input type="text" class="form-control" id="recoleccion_de_residuos" placeholder="Recoleccion de residuos" name="recoleccion_de_residuos">
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="basural" class="col-lg-2 control-label">Basural</label>
+      <div class="col-lg-10">
+        <input type="text" class="form-control" id="basural" placeholder="Basural" name="basural">
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="roedores" class="col-lg-2 control-label">Roedores</label>
+      <div class="col-lg-10">
+        <input type="text" class="form-control" id="roedores" placeholder="Roedores" name="roedores">
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="agua_servida" class="col-lg-2 control-label">Agua servida</label>
+      <div class="col-lg-10">
+        <input type="text" class="form-control" id="agua_servida" placeholder="Agua servida" name="agua_servida">
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="inundaciones" class="col-lg-2 control-label">Inundaciones</label>
+      <div class="col-lg-10">
+        <input type="text" class="form-control" id="inundaciones" placeholder="Inundaciones" name="inundaciones">
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="ultima_inundacion" class="col-lg-2 control-label">Ultima inundacion</label>
+      <div class="col-lg-10">
+        <input type="date" class="form-control" id="ultima_inundacion" placeholder="Ultima inundacion" name="ultima_inundacion">
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="integrante" class="col-lg-2 control-label">Integrante</label>
+      <div class="col-lg-10">
+        <input type="text" class="form-control" id="integrante" placeholder="Integrante" name="integrante">
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="sintomas" class="col-lg-2 control-label">Sintomas</label>
+      <div class="col-lg-10">
+        <input type="text" class="form-control" id="sintomas" placeholder="Sintomas" name="sintomas">
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="aclaracion" class="col-lg-2 control-label">Aclaracion</label>
+      <div class="col-lg-10">
+        <input type="text" class="form-control" id="aclaracion" placeholder="Aclaracion" name="aclaracion">
+      </div>
+    </div>
     <div class="form-group">
       <div class="col-lg-10 col-lg-offset-2">
         <button type="reset" class="btn btn-default">Cancel</button>
