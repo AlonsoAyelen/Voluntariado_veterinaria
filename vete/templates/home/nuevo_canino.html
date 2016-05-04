@@ -1,0 +1,450 @@
+
+{% extends 'home/base.html'%}
+
+{% block section %}
+     {% if mensaje %}
+        <legend align="center">{{mensaje}}</legend>
+    {% endif %}
+    <div class="container">
+<div class="col-lg-8 control-label">
+<div class="well bs-component">
+<form class="form-horizontal" method='post' action=''>{% csrf_token %}
+  <fieldset>
+    <legend>Agregar canino</legend>
+    <div class="form-group">
+      <label for="duenio" class="col-lg-2 control-label">Duenio</label>
+      <div class="col-lg-10">
+       <select value="{{duenio.id}}" id="duenio" placeholder="Duenio" name="duenio" required value="{{duenio.nombre}}"> 
+        {% for duenio in duenios %}
+          <option value="{{duenio.id}}" id="duenio" placeholder="Duenio" name="duenio" required>{{duenio.nombre}} </option>
+        {% endfor%}
+      </select>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="nombreCanino" class="col-lg-2 control-label">Nombre</label>
+      <div class="col-lg-10">
+        <input type="text" class="form-control" id="nombreCanino" placeholder="Nombre" name="nombreCanino" required value="{{nombre}}">
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="especie" class="col-lg-2 control-label">Especie</label>
+      <div class="col-lg-10">
+        <input type="text" class="form-control" id="especie" placeholder="Especie" name="especie" required value="{{especie}}">
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="sexo" class="col-lg-2 control-label">Sexo</label>
+      {% if sexo == "Macho" %}
+      <div class="col-lg-10">
+        <input name="sexo" type="radio" value="Macho" checked="checked"/> Macho
+        <input name="sexo" type="radio" value="Hembra" /> Hembra
+      </div>
+      {% else %}
+      <div class="col-lg-10">
+        <input name="sexo" type="radio" value="Macho" /> Macho
+        <input name="sexo" type="radio" value="Hembra" checked="checked"/> Hembra
+      </div>
+      {% endif %}
+    </div>
+    <div class="form-group">
+      <label for="raza" class="col-lg-2 control-label">Raza</label>
+      <div class="col-lg-10">
+        <input type="text" class="form-control" id="raza" placeholder="Raza" name="raza" required value="{{raza}}">
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="edad" class="col-lg-2 control-label">Edad</label>
+      <div class="col-lg-10">
+        <input type="number" class="form-control" id="edad" placeholder="Edad" name="edad" required value="{{edad}}">
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="motivo_de_consulta" class="col-lg-2 control-label">Motivo de consulta</label>
+      <div class="col-lg-10">
+        <input type="text" class="form-control" id="motivo_de_consulta" placeholder="Motivo de consulta" name="motivo_de_consulta" required value="{{motivo_de_consulta}}">
+      </div>
+    </div>
+    <legend>Anamnesis:</legend>
+    <div class="form-group">
+      <label for="uso_de_la_mascota" class="col-lg-2 control-label">Uso de la mascota</label>
+      {% if uso_de_la_mascota == "Guardia" %}
+      <div class="">
+        <input name="uso_de_la_mascota" type="radio" value="Guardia" checked="checked"/> Guardia
+        <input name="uso_de_la_mascota" type="radio" value="Caza"  /> Caza
+        <input name="uso_de_la_mascota" type="radio" value="Compania" /> Compania
+        <input name="uso_de_la_mascota" type="radio" value="Otra" /> Otra
+      </div>
+      {% elif uso_de_la_mascota == "Caza" %}
+      <div class="">
+        <input name="uso_de_la_mascota" type="radio" value="Guardia" /> Guardia
+        <input name="uso_de_la_mascota" type="radio" value="Caza" checked="checked" /> Caza
+        <input name="uso_de_la_mascota" type="radio" value="Compania" /> Compania
+        <input name="uso_de_la_mascota" type="radio" value="Otra" /> Otra
+      </div>
+      {% elif uso_de_la_mascota == "Compania" %}
+      <div class="">
+        <input name="uso_de_la_mascota" type="radio" value="Guardia" /> Guardia
+        <input name="uso_de_la_mascota" type="radio" value="Caza"  /> Caza
+        <input name="uso_de_la_mascota" type="radio" value="Compania" checked="checked" /> Compania
+        <input name="uso_de_la_mascota" type="radio" value="Otra" /> Otra
+      </div>
+      {% else %}
+      <div class="">
+        <input name="uso_de_la_mascota" type="radio" value="Guardia" /> Guardia
+        <input name="uso_de_la_mascota" type="radio" value="Caza"  /> Caza
+        <input name="uso_de_la_mascota" type="radio" value="Compania" /> Compania
+        <input name="uso_de_la_mascota" type="radio" value="Otra" checked="checked"/> Otra
+      </div>
+      {% endif %}
+    </div>
+    <div class="form-group">
+      <label for="habitos" class="col-lg-2 control-label">Habitos</label>
+      {% if habitos == "No sale" %}
+      <div class="col-lg-10">
+        <input name="habitos" type="radio" value="No sale" checked="checked"/> No sale
+        <input name="habitos" type="radio" value="Sale con correa"  /> Sale con correa
+        <input name="habitos" type="radio" value="Sale sin correa" /> Sale sin correa
+        <input name="habitos" type="radio" value="Sale sin supervision" /> Sale sin supervision
+        <input name="habitos" type="radio" value="Vagabundo" /> Vagabundo
+      </div>
+      {% elif habitos == "Sale con correa" %}
+      <div class="col-lg-10">
+        <input name="habitos" type="radio" value="No sale" /> No sale
+        <input name="habitos" type="radio" value="Sale con correa" checked="checked" /> Sale con correa
+        <input name="habitos" type="radio" value="Sale sin correa" /> Sale sin correa
+        <input name="habitos" type="radio" value="Sale sin supervision" /> Sale sin supervision
+        <input name="habitos" type="radio" value="Vagabundo" /> Vagabundo
+      </div>
+      {% elif habitos == "Sale sin correa" %}
+      <div class="col-lg-10">
+        <input name="habitos" type="radio" value="No sale" /> No sale
+        <input name="habitos" type="radio" value="Sale con correa"  /> Sale con correa
+        <input name="habitos" type="radio" value="Sale sin correa" checked="checked"/> Sale sin correa
+        <input name="habitos" type="radio" value="Sale sin supervision" /> Sale sin supervision
+        <input name="habitos" type="radio" value="Vagabundo" /> Vagabundo
+      </div>
+      {% elif habitos == "Sale sin supervision" %}
+      <div class="col-lg-10">
+        <input name="habitos" type="radio" value="No sale" /> No sale
+        <input name="habitos" type="radio" value="Sale con correa"  /> Sale con correa
+        <input name="habitos" type="radio" value="Sale sin correa" /> Sale sin correa
+        <input name="habitos" type="radio" value="Sale sin supervision" checked="checked"/> Sale sin supervision
+        <input name="habitos" type="radio" value="Vagabundo" /> Vagabundo
+      </div>
+      {% else %}
+      <div class="col-lg-10">
+        <input name="habitos" type="radio" value="No sale" /> No sale
+        <input name="habitos" type="radio" value="Sale con correa"  /> Sale con correa
+        <input name="habitos" type="radio" value="Sale sin correa" /> Sale sin correa
+        <input name="habitos" type="radio" value="Sale sin supervision" /> Sale sin supervision
+        <input name="habitos" type="radio" value="Vagabundo" checked="checked"/> Vagabundo
+      </div>
+      {% endif %}
+    </div>
+    <div class="form-group">
+      <label for="contacto_con_basural" class="col-lg-2 control-label">Contacto con basural</label>
+      {% if contacto_con_basural == "Ninguno" %}
+      <div class="col-lg-10">
+        <input name="contacto_con_basural" type="radio" value="Ninguno" checked="checked" /> Ninguno
+        <input name="contacto_con_basural" type="radio" value="Esporadico" /> Esporadico
+        <input name="contacto_con_basural" type="radio" value="Frecuente" /> Frecuente
+      </div>
+      {% elif contacto_con_basural == "Esporadico" %}
+      <div class="col-lg-10">
+        <input name="contacto_con_basural" type="radio" value="Ninguno"  /> Ninguno
+        <input name="contacto_con_basural" type="radio" value="Esporadico" checked="checked"/> Esporadico
+        <input name="contacto_con_basural" type="radio" value="Frecuente" /> Frecuente
+      </div>
+      {% else %}
+      <div class="col-lg-10">
+        <input name="contacto_con_basural" type="radio" value="Ninguno"  /> Ninguno
+        <input name="contacto_con_basural" type="radio" value="Esporadico" /> Esporadico
+        <input name="contacto_con_basural" type="radio" value="Frecuente" checked="checked"/> Frecuente
+      </div>
+      {% endif %}
+    </div>    
+    <div class="form-group">
+      <label for="caza" class="col-lg-2 control-label">Comportamiento de caza</label>
+      {% if caza == "No" %}
+      <div class="col-lg-10">
+        <input name="caza" type="radio" value="No" checked="checked" /> No
+        <input name="caza" type="radio" value="Si" /> Si
+      </div>
+      {% else %}
+      <div class="col-lg-10">
+        <input name="caza" type="radio" value="No"  /> No
+        <input name="caza" type="radio" value="Si" checked="checked"/> Si
+      </div>
+      {% endif %}
+    </div>
+    <div class="form-group">
+      <label for="caza_roedores" class="col-lg-2 control-label">Caza roedores</label>
+      {% if caza_roedores == "No" %}
+      <div class="col-lg-10">
+        <input name="caza_roedores" type="radio" value="No" checked="checked" /> No
+        <input name="caza_roedores" type="radio" value="Si" /> Si
+      </div>
+      {% else %}
+      <div class="col-lg-10">
+        <input name="caza_roedores" type="radio" value="No"  /> No
+        <input name="caza_roedores" type="radio" value="Si" checked="checked"/> Si
+      </div>
+    {% endif %}
+    </div>
+    <div class="form-group">
+      <label for="observacion_roedores" class="col-lg-2 control-label">Observacion roedores</label>
+      {% if observacion_roedores == "No" %}
+      <div class="col-lg-10">
+        <input name="observacion_roedores" type="radio" value="No" checked="checked"/> No
+        <input name="observacion_roedores" type="radio" value="Esporadico" /> Esporadico
+        <input name="observacion_roedores" type="radio" value="Frecuente" /> Frecuente
+      </div>
+      {% elif observacion_roedores == "Esporadico" %}
+      <div class="col-lg-10">
+        <input name="observacion_roedores" type="radio" value="No" /> No
+        <input name="observacion_roedores" type="radio" value="Esporadico" checked="checked"/> Esporadico
+        <input name="observacion_roedores" type="radio" value="Frecuente" /> Frecuente
+      </div>
+      {% else %}
+      <div class="col-lg-10">
+        <input name="observacion_roedores" type="radio" value="No" /> No
+        <input name="observacion_roedores" type="radio" value="Esporadico" /> Esporadico
+        <input name="observacion_roedores" type="radio" value="Frecuente" checked="checked"/> Frecuente
+      </div>
+      {% endif %}
+    </div>
+    <div class="form-group">
+      <label for="vacunado_contra_leptospirosis" class="col-lg-2 control-label">Vacunado contra leptospirosis</label>
+      {% if vacunado_contra_leptospirosis == "No" %}
+      <div class="col-lg-10">
+        <input name="vacunado_contra_leptospirosis" type="radio" value="No" checked="checked"/> No
+        <input name="vacunado_contra_leptospirosis" type="radio" value="Si" /> Si
+        <input name="vacunado_contra_leptospirosis" type="radio" value="Desconoce" /> Desconoce
+      </div>
+      {% elif vacunado_contra_leptospirosis == "Si" %}
+      <div class="col-lg-10">
+        <input name="vacunado_contra_leptospirosis" type="radio" value="No" /> No
+        <input name="vacunado_contra_leptospirosis" type="radio" value="Si" checked="checked"/> Si
+        <input name="vacunado_contra_leptospirosis" type="radio" value="Desconoce" /> Desconoce
+      </div>
+      {% else %}
+      <div class="col-lg-10">
+        <input name="vacunado_contra_leptospirosis" type="radio" value="No" /> No
+        <input name="vacunado_contra_leptospirosis" type="radio" value="Si" /> Si
+        <input name="vacunado_contra_leptospirosis" type="radio" value="Desconoce" checked="checked"/> Desconoce
+      </div>
+      {% endif%}
+    </div>
+    <div class="form-group">
+      <label for="desparasitado" class="col-lg-2 control-label">Desparasitado</label>
+      {% if desparasitado == "No" %}
+      <div class="col-lg-10">
+        <input name="desparasitado" type="radio" value="No" checked="checked" /> No
+        <input name="desparasitado" type="radio" value="Si" /> Si
+        <input name="desparasitado" type="radio" value="Desconoce" /> Desconoce
+      </div>
+      {% elif desparasitado == "Si" %}
+      <div class="col-lg-10">
+        <input name="desparasitado" type="radio" value="No"  /> No
+        <input name="desparasitado" type="radio" value="Si" checked="checked"/> Si
+        <input name="desparasitado" type="radio" value="Desconoce" /> Desconoce
+      </div>
+      {% else %}
+      <div class="col-lg-10">
+        <input name="desparasitado" type="radio" value="No"  /> No
+        <input name="desparasitado" type="radio" value="Si" /> Si
+        <input name="desparasitado" type="radio" value="Desconoce" checked="checked"/> Desconoce
+      </div>
+      {% endif %}
+    </div>
+    <div class="form-group">
+      <label for="eliminacion_de_excretas" class="col-lg-2 control-label">Eliminacion de excretas</label>
+      {% if eliminacion_de_excretas == "En la calle" %}
+      <div class="col-lg-10">
+        <input name="eliminacion_de_excretas" type="radio" value="En la calle" checked="checked" /> En la calle
+        <input name="eliminacion_de_excretas" type="radio" value="En el domicilio" /> En el domicilio
+        <input name="eliminacion_de_excretas" type="radio" value="Ambas" /> Ambas
+      </div>
+      {% elif eliminacion_de_excretas == "En el domicilio" %}
+      <div class="col-lg-10">
+        <input name="eliminacion_de_excretas" type="radio" value="En la calle"  /> En la calle
+        <input name="eliminacion_de_excretas" type="radio" value="En el domicilio" checked="checked" /> En el domicilio
+        <input name="eliminacion_de_excretas" type="radio" value="Ambas" /> Ambas
+      </div>
+      {% else %}
+      <div class="col-lg-10">
+        <input name="eliminacion_de_excretas" type="radio" value="En la calle" /> En la calle
+        <input name="eliminacion_de_excretas" type="radio" value="En el domicilio" /> En el domicilio
+        <input name="eliminacion_de_excretas" type="radio" value="Ambas" checked="checked" /> Ambas
+      </div>
+      {% endif %}
+    </div>
+    <div class="form-group">
+      <label for="habitos_alimenticios" class="col-lg-2 control-label">Habitos alimenticios</label>
+      {% if habitos_alimenticios == "Alimento balanceado" %}
+      <div class="col-lg-10">
+        <input name="habitos_alimenticios" type="radio" value="Alimento balanceado" checked="checked" /> Alimento balanceado
+        <input name="habitos_alimenticios" type="radio" value="Comida casera" /> Comida casera
+        <input name="habitos_alimenticios" type="radio" value="Ambas" /> Ambas
+      </div>
+      {% elif habitos_alimenticios == "Comida casera" %}
+      <div class="col-lg-10">
+        <input name="habitos_alimenticios" type="radio" value="Alimento balanceado"  /> Alimento balanceado
+        <input name="habitos_alimenticios" type="radio" value="Comida casera" checked="checked"/> Comida casera
+        <input name="habitos_alimenticios" type="radio" value="Ambas" /> Ambas
+      </div>
+      {% else %}
+      <div class="col-lg-10">
+        <input name="habitos_alimenticios" type="radio" value="Alimento balanceado"  /> Alimento balanceado
+        <input name="habitos_alimenticios" type="radio" value="Comida casera" /> Comida casera
+        <input name="habitos_alimenticios" type="radio" value="Ambas" checked="checked"/> Ambas
+      </div>
+      {% endif %}
+    </div>
+    <div class="form-group">
+      <label for="signos_clinicos" class="col-lg-2 control-label">Signos clinicos</label>
+      {% if signos_clinicos == "No" %}
+      <div class="col-lg-10">
+        <input name="signos_clinicos" type="radio" value="No" checked="checked" /> No
+        <input name="signos_clinicos" type="radio" value="Si" /> Si
+      </div>
+      {% else %}
+      <div class="col-lg-10">
+        <input name="signos_clinicos" type="radio" value="No"  /> No
+        <input name="signos_clinicos" type="radio" value="Si" checked="checked"/> Si
+      </div>
+      {% endif %}
+    </div>
+    <div class="form-group">
+      <label for="piel_Linfonodos" class="col-lg-2 control-label">Piel/Linfonodos</label>
+      <div class="col-lg-10">
+        <input type="text" class="form-control" id="piel_Linfonodos" placeholder="Piel/Linfonodos" name="piel_Linfonodos" value="{{piel_Linfonodos}}">
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="digestivo" class="col-lg-2 control-label">Digestivo</label>
+      <div class="col-lg-10">
+        <input type="text" class="form-control" id="digestivo" placeholder="Digestivo" name="digestivo" value="{{digestivo}}">
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="cardio_respiratorio" class="col-lg-2 control-label">Cardio/respiratorio</label>
+      <div class="col-lg-10">
+        <input type="text" class="form-control" id="cardio_respiratorio" placeholder="Cardio/respiratorio" name="cardio_respiratorio" value="{{cardio_respiratorio}}">
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="urogenital" class="col-lg-2 control-label">Urogenital</label>
+      <div class="col-lg-10">
+        <input type="text" class="form-control" id="urogenital" placeholder="Urogenital" name="urogenital" value="{{urogenital}}">
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="musculoesqueleticonervioso" class="col-lg-2 control-label">Musculoesqueleticonervioso</label>
+      <div class="col-lg-10">
+        <input type="text" class="form-control" id="musculoesqueleticonervioso" placeholder="Musculoesqueleticonervioso" name="musculoesqueleticonervioso" value="{{musculoesqueleticonervioso}}">
+      </div>
+    </div>
+      <legend>Examen fisico:</legend>
+      <div class="form-group">
+        <label for="peso" class="col-lg-2 control-label">Peso</label>
+        <div class="col-lg-10">
+          <input type="number" step="0.01" class="form-control" id="peso" placeholder="Peso" name="peso" required value="{{peso}}">
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="actitud" class="col-lg-2 control-label">Actitud</label>
+        <div class="col-lg-10">
+          <input type="text" class="form-control" id="actitud" placeholder="Actitud" name="actitud" required value="{{actitud}}">
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="mucosas" class="col-lg-2 control-label">Mucosas</label>
+        <div class="col-lg-10">
+          <input type="text" class="form-control" id="mucosas" placeholder="Mucosas" name="mucosas" required value="{{mucosas}}">
+        </div>
+      </div>
+      <div class="form-group">
+      <label for="TLC" class="col-lg-2 control-label">TLC</label>
+      <div class="col-lg-10">
+        <input type="text" class="form-control" id="TLC" placeholder="TLC" name="TLC" required value="{{TLC}}">
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="hidratacion" class="col-lg-2 control-label">Hidratacion</label>
+      <div class="col-lg-10">
+        <input type="text" class="form-control" id="hidratacion" placeholder="Hidratacion" name="hidratacion" required value="{{hidratacion}}">
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="FC" class="col-lg-2 control-label">FC</label>
+      <div class="col-lg-10">
+        <input type="text" class="form-control" id="FC" placeholder="FC" name="FC" required value="{{FC}}">
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="pulso" class="col-lg-2 control-label">Pulso</label>
+      <div class="col-lg-10">
+        <input type="text" class="form-control" id="pulso" placeholder="Pulso" name="pulso" required value="{{pulso}}">
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="FR" class="col-lg-2 control-label">FR</label>
+      <div class="col-lg-10">
+        <input type="text" class="form-control" id="FR" placeholder="FR" name="FR" required value="{{FR}}">
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="T" class="col-lg-2 control-label">T</label>
+      <div class="col-lg-10">
+        <input type="number" step="0.01" class="form-control" id="T" placeholder="T" name="T" required value="{{T}}">
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="procedimiento_realizado" class="col-lg-2 control-label">Procedimiento realizado</label>
+      {% if procedimiento_realizado == "VAR" %}
+      <div class="col-lg-10">
+        <input name="procedimiento_realizado" type="radio" value="VAR" checked="checked" /> VAR
+        <input name="procedimiento_realizado" type="radio" value="ATP" /> ATP
+        <input name="procedimiento_realizado" type="radio" value="EXTRAC" /> EXTRAC
+        <input name="procedimiento_realizado" type="radio" value="COPRO" /> COPRO
+      </div>
+      {% elif procedimiento_realizado == "ATP" %}
+      <div class="col-lg-10">
+        <input name="procedimiento_realizado" type="radio" value="VAR"  /> VAR
+        <input name="procedimiento_realizado" type="radio" value="ATP" checked="checked"/> ATP
+        <input name="procedimiento_realizado" type="radio" value="EXTRAC" /> EXTRAC
+        <input name="procedimiento_realizado" type="radio" value="COPRO" /> COPRO
+      </div>
+      {% elif procedimiento_realizado == "EXTRAC" %}
+      <div class="col-lg-10">
+        <input name="procedimiento_realizado" type="radio" value="VAR"  /> VAR
+        <input name="procedimiento_realizado" type="radio" value="ATP" /> ATP
+        <input name="procedimiento_realizado" type="radio" value="EXTRAC" checked="checked"/> EXTRAC
+        <input name="procedimiento_realizado" type="radio" value="COPRO" /> COPRO
+      </div>
+      {% else %}
+      <div class="col-lg-10">
+        <input name="procedimiento_realizado" type="radio" value="VAR" checked="checked" /> VAR
+        <input name="procedimiento_realizado" type="radio" value="ATP" /> ATP
+        <input name="procedimiento_realizado" type="radio" value="EXTRAC" /> EXTRAC
+        <input name="procedimiento_realizado" type="radio" value="COPRO" /> COPRO
+      </div>
+      {% endif%}
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="col-lg-10 col-lg-offset-2">
+        <button type="submit" class="btn btn-success">Guardar</button>
+        <button type="reset" class="btn btn-primary">Cancelar</button>
+      </div>
+    </div>
+
+  </fieldset>
+</form>
+</div>
+</div>
+</div>
+
+{% endblock %}

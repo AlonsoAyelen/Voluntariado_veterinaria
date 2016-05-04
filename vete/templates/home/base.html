@@ -12,6 +12,13 @@
     <link rel="stylesheet" href="http://bootswatch.com/flatly/bootstrap.min.css" >
     <!-- Optional theme -->
     <link rel="stylesheet" href="http://bootswatch.com/flatly/bootstrap.css" >
+    
+
+    <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.11/css/jquery.dataTables.css">
+    <script type="text/javascript" charset="utf8" src="//cdn.datatables.net/1.10.11/js/jquery.dataTables.js"></script>
+    {% block head %}
+    {% endblock %}
+
 </head>
 <body >
 <nav class="navbar navbar-default">
@@ -27,16 +34,24 @@
 
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 				      <ul class="nav navbar-nav">
-				      	 {% block nav %}
-                            <li {% block usuarios_active %}{% endblock %}><a href="#">Manejo de usuarios</a></li>
-				      	 	<li {% block caninos_active %}{% endblock %}><a href="#">Manejo de caninos</a></li>
-        					<li {% block duenios_active %}{% endblock %}><a href="info_personal.html">Manejo de dueños<span class="sr-only">(current)</span></a></li>
-        					<li {% block estadisticas_active %}{% endblock %}><a href="#">Estadisticas</a></li>
-						{% endblock%}
-				      </ul>
+				      	  {% if user.is_authenticated %}
+                    {% block nav %}
+                      {% if user.is_staff %}
+                        <li {% block usuarios_active %}{% endblock %}><a href="{% url 'usuarios_view' %}">Manejo de usuarios</a></li>
+                      {% endif %}
+    				      	 	<li {% block caninos_active %}{% endblock %}><a href="{% url 'caninos_view' %}">Manejo de caninos</a></li>
+            					<li {% block duenios_active %}{% endblock %}><a href="{% url 'duenios_view' %}">Manejo de dueños<span class="sr-only">(current)</span></a></li>
+            					<li {% block estadisticas_active %}{% endblock %}><a href="#">Estadisticas</a></li>
+  						      {% endblock%}
+				          {% endif %}
+              </ul>
 				      <ul class="nav navbar-nav navbar-right">
-                		<li><a href="#">Cerrar sesión</a></li>
-              		  </ul>
+                      {% if user.is_authenticated %}
+                		<li><a href="{% url 'logout_view' %}">Cerrar sesión</a></li>
+                      {% else %}
+                        <li><a href="{% url 'login' %}">Iniciar sesión</a></li>
+              		  {% endif %}
+                      </ul>
 				        
 				    </div>
   				</div>

@@ -56,19 +56,31 @@ class Canino(models.Model):
 	contacto_con_basural = models.CharField(max_length = 40)
 	caza = models.CharField(max_length = 40)
 	caza_roedores = models.CharField(max_length = 40)
-	observacion_roedores = models.BooleanField(default = False)
+	observacion_roedores = models.CharField(max_length = 100)
 	vacunado_contra_leptospirosis = models.CharField(max_length = 40)
 	desparasitado = models.CharField(max_length = 40)
 	eliminacion_de_excretas = models.CharField(max_length = 40)
 	habitos_alimenticios = models.CharField(max_length = 200)
-	signos_clinicos = models.BooleanField(default = False)
+	signos_clinicos = models.CharField(max_length = 100)
 	piel_Linfonodos = models.CharField(max_length = 200)
 	digestivo = models.CharField(max_length = 200)
 	cardio_respiratorio = models.CharField(max_length = 200)
 	urogenital = models.CharField(max_length = 200)
 	musculoesqueleticonervioso = models.CharField(max_length = 200)
 	procedimiento_realizado = models.CharField(max_length = 200)
+	peso = models.DecimalField(max_digits = 3,decimal_places = 2)
+	actitud = models.CharField(max_length = 40)
+	mucosas = models.CharField(max_length = 40)
+	TLC = models.CharField(max_length = 40)
+	hidratacion = models.CharField(max_length = 40)
+	FC = models.CharField(max_length = 40)
+	pulso = models.CharField(max_length = 40)
+	FR = models.CharField(max_length = 40)
+	T = models.DecimalField(max_digits = 3,decimal_places = 2)
 	status  = models.BooleanField(default = True)
+	class Meta:
+		managed = True      # add this\
+		app_label = 'vete' # & this
 
 
 class Bioquimica(models.Model):
@@ -91,21 +103,6 @@ class Bioquimica(models.Model):
 	varios = models.CharField(max_length = 200)
 	status  = models.BooleanField(default = True)
 
-
-
-class Examen_fisico(models.Model):
-	canino = models.ForeignKey(Canino)
-	fecha = models.DateField(auto_now = False)
-	peso = models.DecimalField(max_digits = 3,decimal_places = 2)
-	actitud = models.CharField(max_length = 40)
-	mucosas = models.CharField(max_length = 40)
-	TLC = models.CharField(max_length = 40)
-	hidratacion = models.CharField(max_length = 40)
-	FC = models.CharField(max_length = 40)
-	pulso = models.CharField(max_length = 40)
-	FR = models.CharField(max_length = 40)
-	T = models.DecimalField(max_digits = 3,decimal_places = 2)
-	status  = models.BooleanField(default = True)
 
 
 

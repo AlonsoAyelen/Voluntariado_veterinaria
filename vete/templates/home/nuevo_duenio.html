@@ -2,8 +2,8 @@
 {% extends 'home/base.html'%}
 
 {% block section %}
-    {% if mensaje %}
-        <legend align="center">{{mensaje}}</legend>
+    {% if error %}
+        <legend align="center">{{error}}</legend>
     {% endif %}
     <div class="container">
 <div class="col-lg-8 control-label">
@@ -11,202 +11,436 @@
 <form class="form-horizontal" method='post' action=''>{% csrf_token %}
   <fieldset>
     <legend>Agregar duenio</legend>
+    <legend>Datos personales:</legend>
     <div class="form-group">
       <label for="nombreDuenio" class="col-lg-2 control-label">Nombre</label>
       <div class="col-lg-10">
-        <input type="text" class="form-control" id="nombreDuenio" placeholder="Nombre" name="nombreDuenio">
+        <input type="text" class="form-control" id="nombreDuenio" placeholder="Nombre" name="nombreDuenio" required value="{{nombre}}">
       </div>
     </div>
     <div class="form-group">
       <label for="apellido" class="col-lg-2 control-label">Apellido</label>
       <div class="col-lg-10">
-        <input type="text" class="form-control" id="apellido" placeholder="Apellido" name="apellido">
+        <input type="text" class="form-control" id="apellido" placeholder="Apellido" name="apellido" required value="{{apellido}}">
       </div>
     </div>
     <div class="form-group">
       <label for="direccion" class="col-lg-2 control-label">Direccion</label>
       <div class="col-lg-10">
-        <input type="text" class="form-control" id="direccion" placeholder="Direccion" name="direccion">
+        <input type="text" class="form-control" id="direccion" placeholder="Direccion" name="direccion" required value="{{direccion}}">
       </div>
     </div>
     <div class="form-group">
       <label for="barrio" class="col-lg-2 control-label">Barrio</label>
       <div class="col-lg-10">
-        <input type="text" class="form-control" id="barrio" placeholder="Barrio" name="barrio">
+        <input type="text" class="form-control" id="barrio" placeholder="Barrio" name="barrio" required value="{{barrio}}">
       </div>
     </div>
     <div class="form-group">
       <label for="procedencia" class="col-lg-2 control-label">Procedencia</label>
       <div class="col-lg-10">
-        <input type="text" class="form-control" id="procedencia" placeholder="Procedencia" name="procedencia">
+        <input type="text" class="form-control" id="procedencia" placeholder="Procedencia" name="procedencia" required value="{{procedencia}}">
       </div>
     </div>
     <div class="form-group">
       <label for="telefono" class="col-lg-2 control-label">Telefono</label>
       <div class="col-lg-10">
-        <input type="text" class="form-control" id="telefono" placeholder="Telefono" name="telefono">
+        <input type="text" class="form-control" id="telefono" placeholder="Telefono" name="telefono" required value="{{telefono}}">
       </div>
     </div>
     <div class="form-group">
       <label for="edad" class="col-lg-2 control-label">Edad</label>
       <div class="col-lg-10">
-        <input type="number" class="form-control" id="edad" placeholder="Edad" name="edad">
+        <input type="number" class="form-control" id="edad" placeholder="Edad" name="edad" required value="{{edad}}">
       </div>
     </div>
     <div class="form-group">
       <label for="grado_de_instruccion" class="col-lg-2 control-label">Grado de instruccion</label>
       <div class="col-lg-10">
-        <input type="text" class="form-control" id="grado_de_instruccion" placeholder="Grado de instruccion" name="grado_de_instruccion">
+        <input type="text" class="form-control" id="grado_de_instruccion" placeholder="Grado de instruccion" name="grado_de_instruccion" required value="{{instruccion}}">
       </div>
     </div>
     <div class="form-group">
       <label for="ocupacion" class="col-lg-2 control-label">Ocupacion</label>
       <div class="col-lg-10">
-        <input type="text" class="form-control" id="ocupacion" placeholder="Ocupacion" name="ocupacion">
+        <input type="text" class="form-control" id="ocupacion" placeholder="Ocupacion" name="ocupacion" required value="{{ocupacion}}">
       </div>
     </div>    
     <div class="form-group">
       <label for="convivientes_adultos" class="col-lg-2 control-label">Adultos</label>
       <div class="col-lg-10">
-        <input type="number" class="form-control" id="convivientes_adultos" placeholder="Convivientes adultos" name="convivientes_adultos">
+        <input type="number" class="form-control" id="convivientes_adultos" placeholder="Convivientes adultos" name="convivientes_adultos" required value="{{adultos}}">
       </div>
     </div>
     <div class="form-group">
       <label for="convivientes_ninios" class="col-lg-2 control-label">Ninios</label>
       <div class="col-lg-10">
-        <input type="number" class="form-control" id="convivientes_ninios" placeholder="Convivientes ninios" name="convivientes_ninios">
+        <input type="number" class="form-control" id="convivientes_ninios" placeholder="Convivientes ninios" name="convivientes_ninios" required value="{{ninios}}">
       </div>
     </div>
-
-
-
-
-
-
     <div class="form-group">
       <label for="en_edad_escolar" class="col-lg-2 control-label">En edad escolar</label>
       <div class="col-lg-10">
-        <input type="number" class="form-control" id="en_edad_escolar" placeholder="En edad escolar" name="en_edad_escolar">
+        <input type="number" class="form-control" id="en_edad_escolar" placeholder="En edad escolar" name="en_edad_escolar" required value="{{escolar}}">
       </div>
     </div>
     <div class="form-group">
       <label for="mascotas" class="col-lg-2 control-label">Mascotas</label>
+      {% if mascotas == "1" %}
       <div class="col-lg-10">
-        <input type="number" class="form-control" id="mascotas" placeholder="Mascotas" name="mascotas">
+        <input name="mascotas" type="radio" value="1" checked="checked" /> 1
+        <input name="mascotas" type="radio" value="2" /> 2
+        <input name="mascotas" type="radio" value="3" /> 3
+        <input name="mascotas" type="radio" value="mas de 3" /> Mas de 3
       </div>
+      {% elif mascotas = 2 %}
+      <div class="col-lg-10">
+        <input name="mascotas" type="radio" value="1"  /> 1
+        <input name="mascotas" type="radio" value="2" checked="checked"/> 2
+        <input name="mascotas" type="radio" value="3" /> 3
+        <input name="mascotas" type="radio" value="mas de 3" /> Mas de 3
+      </div>
+      {% elif mascotas = 3 %}
+      <div class="col-lg-10">
+        <input name="mascotas" type="radio" value="1"  /> 1
+        <input name="mascotas" type="radio" value="2" /> 2
+        <input name="mascotas" type="radio" value="3" checked="checked"/> 3
+        <input name="mascotas" type="radio" value="mas de 3" /> Mas de 3
+      </div>
+      {% else %}
+      <div class="col-lg-10">
+        <input name="mascotas" type="radio" value="1"  /> 1
+        <input name="mascotas" type="radio" value="2" /> 2
+        <input name="mascotas" type="radio" value="3" /> 3
+        <input name="mascotas" type="radio" value="mas de 3" checked="checked"/> Mas de 3
+      </div>
+      {% endif %}
     </div>
     <div class="form-group">
       <label for="tipos" class="col-lg-2 control-label">Tipos de mascotas</label>
       <div class="col-lg-10">
-        <input type="text" class="form-control" id="tipos" placeholder="Tipos de mascotas" name="tipos">
+        <input type="text" class="form-control" id="tipos" placeholder="Tipos de mascotas" name="tipos" required value="{{tipos}}">
       </div>
     </div>
+    <legend>Datos habitacionales:</legend>
     <div class="form-group">
       <label for="vivienda" class="col-lg-2 control-label">Vivienda</label>
+      {% if vivienda == "propia" %}
       <div class="col-lg-10">
-        <input type="text" class="form-control" id="vivienda" placeholder="Vivienda" name="vivienda">
+        <input name="vivienda" type="radio" value="propia" checked="checked" /> Propia
+        <input name="vivienda" type="radio" value="alquila" /> Alquila
+        <input name="vivienda" type="radio" value="asentamiento" /> Asentamiento
+        <input name="vivienda" type="radio" value="otros" /> Otros
       </div>
+      {% elif vivienda == "alquila" %}
+      <div class="col-lg-10">
+        <input name="vivienda" type="radio" value="propia"  /> Propia
+        <input name="vivienda" type="radio" value="alquila" checked="checked"/> Alquila
+        <input name="vivienda" type="radio" value="asentamiento" /> Asentamiento
+        <input name="vivienda" type="radio" value="otros" /> Otros
+      </div>
+      {% elif vivienda == "asentamiento" %}
+      <div class="col-lg-10">
+        <input name="vivienda" type="radio" value="propia"  /> Propia
+        <input name="vivienda" type="radio" value="alquila" /> Alquila
+        <input name="vivienda" type="radio" value="asentamiento" checked="checked"/> Asentamiento
+        <input name="vivienda" type="radio" value="otros" /> Otros
+      </div>
+      {% else %}
+      <div class="col-lg-10">
+        <input name="vivienda" type="radio" value="propia" /> Propia
+        <input name="vivienda" type="radio" value="alquila" /> Alquila
+        <input name="vivienda" type="radio" value="asentamiento" /> Asentamiento
+        <input name="vivienda" type="radio" value="otros"  checked="checked"/> Otros
+      </div>
+      {% endif %}
     </div>
     <div class="form-group">
       <label for="material" class="col-lg-2 control-label">Material</label>
+      {% if material == "carton" %}
       <div class="col-lg-10">
-        <input type="text" class="form-control" id="material" placeholder="Material" name="material">
+        <input name="material" type="radio" value="carton" checked="checked" /> Carton
+        <input name="material" type="radio" value="madera" /> Madera
+        <input name="material" type="radio" value="chapa" /> Chapa
+        <input name="material" type="radio" value="ladrillo" /> Ladrillo
+        <input name="material" type="radio" value="otros" /> Otros
       </div>
+      {% elif material == "madera" %}
+      <div class="col-lg-10">
+        <input name="material" type="radio" value="carton"  /> Carton
+        <input name="material" type="radio" value="madera" checked="checked"/> Madera
+        <input name="material" type="radio" value="chapa" /> Chapa
+        <input name="material" type="radio" value="ladrillo" /> Ladrillo
+        <input name="material" type="radio" value="otros" /> Otros
+      </div>
+      {% if material == "chapa" %}
+      <div class="col-lg-10">
+        <input name="material" type="radio" value="carton"  /> Carton
+        <input name="material" type="radio" value="madera" /> Madera
+        <input name="material" type="radio" value="chapa" checked="checked"/> Chapa
+        <input name="material" type="radio" value="ladrillo" /> Ladrillo
+        <input name="material" type="radio" value="otros" /> Otros
+      </div>
+      {% if material == "ladrillo" %}
+      <div class="col-lg-10">
+        <input name="material" type="radio" value="carton"  /> Carton
+        <input name="material" type="radio" value="madera" /> Madera
+        <input name="material" type="radio" value="chapa" /> Chapa
+        <input name="material" type="radio" value="ladrillo" checked="checked"/> Ladrillo
+        <input name="material" type="radio" value="otros" /> Otros
+      </div>
+      {% else %}
+      <div class="col-lg-10">
+        <input name="material" type="radio" value="carton" /> Carton
+        <input name="material" type="radio" value="madera" /> Madera
+        <input name="material" type="radio" value="chapa" /> Chapa
+        <input name="material" type="radio" value="ladrillo" /> Ladrillo
+        <input name="material" type="radio" value="otros" checked="checked" /> Otros
+      </div>
+      {% endif %}
     </div>
     <div class="form-group">
       <label for="ambientes" class="col-lg-2 control-label">Ambientes</label>
       <div class="col-lg-10">
-        <input type="number" class="form-control" id="ambientes" placeholder="Ambientes" name="ambientes">
+        <input type="number" class="form-control" id="ambientes" placeholder="Ambientes" name="ambientes" required value="{{ambientes}}">
       </div>
     </div>
     <div class="form-group">
-      <label for="agujeros" class="col-lg-2 control-label">Agujeros</label>
+      <label for="agujeros" class="col-lg-2 control-label">Agujeros en la vivienda</label>
+      {% if agujeros == "no" %}
       <div class="col-lg-10">
-        <input type="text" class="form-control" id="agujeros" placeholder="Agujeros" name="agujeros">
+        <input name="agujeros" type="radio" value="no" checked="checked" /> No
+        <input name="agujeros" type="radio" value="si" /> Si
       </div>
+      {% else %}
+      <div class="col-lg-10">
+        <input name="agujeros" type="radio" value="no"  /> No
+        <input name="agujeros" type="radio" value="si" checked="checked"/> Si
+      </div>
+      {% endif %}
     </div>
     <div class="form-group">
-      <label for="agua" class="col-lg-2 control-label">Agua</label>
+      <label for="agua" class="col-lg-2 control-label">Provision de agua</label>
+      {% if agua == "red" %}
       <div class="col-lg-10">
-        <input type="text" class="form-control" id="agua" placeholder="Agua" name="agua">
+        <input name="agua" type="radio" value="red" checked="checked" /> Red
+        <input name="agua" type="radio" value="pozo" /> Pozo
+        <input name="agua" type="radio" value="bomba" /> Bomba de inmersion
+        <input name="agua" type="radio" value="otros" /> Otros
       </div>
+      {% elif agua == "pozo" %}
+      <div class="col-lg-10">
+        <input name="agua" type="radio" value="red"  /> Red
+        <input name="agua" type="radio" value="pozo" checked="checked"/> Pozo
+        <input name="agua" type="radio" value="bomba" /> Bomba de inmersion
+        <input name="agua" type="radio" value="otros" /> Otros
+      </div>
+      {% elif agua == "bomba" %}
+      <div class="col-lg-10">
+        <input name="agua" type="radio" value="red" /> Red
+        <input name="agua" type="radio" value="pozo" /> Pozo
+        <input name="agua" type="radio" value="bomba" checked="checked"/> Bomba de inmersion
+        <input name="agua" type="radio" value="otros" /> Otros
+      </div>
+      {% else %}
+      <div class="col-lg-10">
+        <input name="agua" type="radio" value="red" /> Red
+        <input name="agua" type="radio" value="pozo" /> Pozo
+        <input name="agua" type="radio" value="bomba" /> Bomba de inmersion
+        <input name="agua" type="radio" value="otros" checked="checked"/> Otros
+      </div>
+      {% endif %}
     </div>
     <div class="form-group">
       <label for="excretas" class="col-lg-2 control-label">Excretas</label>
+      {% if excretas == "cloaca" %}
       <div class="col-lg-10">
-        <input type="text" class="form-control" id="excretas" placeholder="Excretas" name="excretas">
+        <input name="excretas" type="radio" value="cloaca" checked="checked" /> Cloacas
+        <input name="excretas" type="radio" value="pozo" /> Pozo
       </div>
+      {% else %}
+      <div class="col-lg-10">
+        <input name="excretas" type="radio" value="cloaca" /> Cloacas
+        <input name="excretas" type="radio" value="pozo"  checked="checked"/> Pozo
+      </div>
+      {% endif %}
     </div>
     <div class="form-group">
       <label for="residuos_domiciliarios" class="col-lg-2 control-label">Residuos domiciliarios</label>
+      {% if residuos_domiciliarios == "tachos con tapa dentro de la vivienda" %}
       <div class="col-lg-10">
-        <input type="text" class="form-control" id="residuos_domiciliarios" placeholder="Residuos domiciliarios" name="residuos_domiciliarios">
+        <input name="residuos_domiciliarios" type="radio" value="tachos con tapa dentro de la vivienda" checked="checked" /> Tachos con tapa dentro de la vivienda
+        <input name="residuos_domiciliarios" type="radio" value="tachos sin tapa dentro de la vivienda" /> Tachos sin tapa dentro de la vivienda
+        <br>
+        <input name="residuos_domiciliarios" type="radio" value="tachos con tapa fuera de la vivienda" /> Tachos con tapa fuera de la vivienda
+        <input name="residuos_domiciliarios" type="radio" value="tachos sin tapa fuera de la vivienda" /> Tachos sin tapa fuera de la vivienda
       </div>
+      {% elif residuos_domiciliarios == "tachos sin tapa dentro de la vivienda" %}
+      <div class="col-lg-10">
+        <input name="residuos_domiciliarios" type="radio" value="tachos con tapa dentro de la vivienda"  /> Tachos con tapa dentro de la vivienda
+        <input name="residuos_domiciliarios" type="radio" value="tachos sin tapa dentro de la vivienda" checked="checked"/> Tachos sin tapa dentro de la vivienda
+        <br>
+        <input name="residuos_domiciliarios" type="radio" value="tachos con tapa fuera de la vivienda" /> Tachos con tapa fuera de la vivienda
+        <input name="residuos_domiciliarios" type="radio" value="tachos sin tapa fuera de la vivienda" /> Tachos sin tapa fuera de la vivienda
+      </div>
+      {% elif residuos_domiciliarios == "tachos con tapa fuera de la vivienda" %}
+      <div class="col-lg-10">
+        <input name="residuos_domiciliarios" type="radio" value="tachos con tapa dentro de la vivienda" /> Tachos con tapa dentro de la vivienda
+        <input name="residuos_domiciliarios" type="radio" value="tachos sin tapa dentro de la vivienda" /> Tachos sin tapa dentro de la vivienda
+        <br>
+        <input name="residuos_domiciliarios" type="radio" value="tachos con tapa fuera de la vivienda"  checked="checked"/> Tachos con tapa fuera de la vivienda
+        <input name="residuos_domiciliarios" type="radio" value="tachos sin tapa fuera de la vivienda" /> Tachos sin tapa fuera de la vivienda
+      </div>
+      {% else %}
+      <div class="col-lg-10">
+        <input name="residuos_domiciliarios" type="radio" value="tachos con tapa dentro de la vivienda" /> Tachos con tapa dentro de la vivienda
+        <input name="residuos_domiciliarios" type="radio" value="tachos sin tapa dentro de la vivienda" /> Tachos sin tapa dentro de la vivienda
+        <br>
+        <input name="residuos_domiciliarios" type="radio" value="tachos con tapa fuera de la vivienda" /> Tachos con tapa fuera de la vivienda
+        <input name="residuos_domiciliarios" type="radio" value="tachos sin tapa fuera de la vivienda" checked="checked" /> Tachos sin tapa fuera de la vivienda
+      </div>
+      {% endif %}
     </div>
     <div class="form-group">
       <label for="recoleccion_de_residuos" class="col-lg-2 control-label">Recoleccion de residuos</label>
+      {% if recoleccion_de_residuos == "diaria" %}
       <div class="col-lg-10">
-        <input type="text" class="form-control" id="recoleccion_de_residuos" placeholder="Recoleccion de residuos" name="recoleccion_de_residuos">
+        <input name="recoleccion_de_residuos" type="radio" value="diaria" checked="checked" /> Diaria
+        <input name="recoleccion_de_residuos" type="radio" value="dos o 3 veces semanales" /> Dos o 3 veces semanales
+        <input name="recoleccion_de_residuos" type="radio" value="semanal" checked="checked" /> Semanal
+        <input name="recoleccion_de_residuos" type="radio" value="nunca" /> Nunca
       </div>
+      {% elif recoleccion_de_residuos == "dos o 3 veces semanales" %}
+      <div class="col-lg-10">
+        <input name="recoleccion_de_residuos" type="radio" value="diaria"  /> Diaria
+        <input name="recoleccion_de_residuos" type="radio" value="dos o 3 veces semanales" checked="checked"/> Dos o 3 veces semanales
+        <input name="recoleccion_de_residuos" type="radio" value="semanal" /> Semanal
+        <input name="recoleccion_de_residuos" type="radio" value="nunca" /> Nunca
+      </div>
+      {% elif recoleccion_de_residuos == "semanal" %}
+      <div class="col-lg-10">
+        <input name="recoleccion_de_residuos" type="radio" value="diaria" /> Diaria
+        <input name="recoleccion_de_residuos" type="radio" value="dos o 3 veces semanales" /> Dos o 3 veces semanales
+        <input name="recoleccion_de_residuos" type="radio" value="semanal" checked="checked" /> Semanal
+        <input name="recoleccion_de_residuos" type="radio" value="nunca" /> Nunca
+      </div>
+      {% else %}
+      <div class="col-lg-10">
+        <input name="recoleccion_de_residuos" type="radio" value="diaria" /> Diaria
+        <input name="recoleccion_de_residuos" type="radio" value="dos o 3 veces semanales" /> Dos o 3 veces semanales
+        <input name="recoleccion_de_residuos" type="radio" value="semanal"/> Semanal
+        <input name="recoleccion_de_residuos" type="radio" value="nunca" checked="checked"/> Nunca
+      </div>
+      {% endif %}
+    </div>
+    <legend>Datos regionales:</legend>
+    <div class="form-group">
+      <label for="basural" class="col-lg-2 control-label">Cercania de basurales</label>
+      {% if basural == "no" %}
+      <div class="col-lg-10">
+        <input name="basural" type="radio" value="no" checked="checked" /> No
+        <input name="basural" type="radio" value="si" /> Si
+      </div>
+      {% else %}
+      <div class="col-lg-10">
+        <input name="basural" type="radio" value="no" /> No
+        <input name="basural" type="radio" value="si" checked="checked" /> Si
+      </div>
+      {% endif %}
     </div>
     <div class="form-group">
-      <label for="basural" class="col-lg-2 control-label">Basural</label>
+      <label for="roedores" class="col-lg-2 control-label">Presencia de roedores</label>
+      {% if roedores == "no" %}
       <div class="col-lg-10">
-        <input type="text" class="form-control" id="basural" placeholder="Basural" name="basural">
+        <input name="roedores" type="radio" value="no" checked="checked" /> No
+        <input name="roedores" type="radio" value="si" /> Si
       </div>
+      {% else %}
+      <div class="col-lg-10">
+        <input name="roedores" type="radio" value="no" /> No
+        <input name="roedores" type="radio" value="si" checked="checked" /> Si
+      </div>
+      {% endif %}
     </div>
     <div class="form-group">
-      <label for="roedores" class="col-lg-2 control-label">Roedores</label>
+      <label for="agua_servida" class="col-lg-2 control-label">Cercania de aguas servidas</label>
+      {% if agua_servida == "no" %}
       <div class="col-lg-10">
-        <input type="text" class="form-control" id="roedores" placeholder="Roedores" name="roedores">
+        <input name="agua_servida" type="radio" value="no" checked="checked" /> No
+        <input name="agua_servida" type="radio" value="si" /> Si
       </div>
-    </div>
-    <div class="form-group">
-      <label for="agua_servida" class="col-lg-2 control-label">Agua servida</label>
+      {% else %}
       <div class="col-lg-10">
-        <input type="text" class="form-control" id="agua_servida" placeholder="Agua servida" name="agua_servida">
+        <input name="agua_servida" type="radio" value="no"  /> No
+        <input name="agua_servida" type="radio" value="si" checked="checked"/> Si
       </div>
+      {% endif %}
     </div>
     <div class="form-group">
       <label for="inundaciones" class="col-lg-2 control-label">Inundaciones</label>
+      {% if inundaciones == "no" %}
       <div class="col-lg-10">
-        <input type="text" class="form-control" id="inundaciones" placeholder="Inundaciones" name="inundaciones">
+        <input name="inundaciones" type="radio" value="no" checked="checked" /> No
+        <input name="inundaciones" type="radio" value="si" /> Si
       </div>
+      {% else %}
+      <div class="col-lg-10">
+        <input name="inundaciones" type="radio" value="no" /> No
+        <input name="inundaciones" type="radio" value="si" checked="checked"/> Si
+      </div>
+      {% endif %}
     </div>
     <div class="form-group">
       <label for="ultima_inundacion" class="col-lg-2 control-label">Ultima inundacion</label>
       <div class="col-lg-10">
-        <input type="date" class="form-control" id="ultima_inundacion" placeholder="Ultima inundacion" name="ultima_inundacion">
+        <input type="date" class="form-control" id="ultima_inundacion" placeholder="Ultima inundacion" name="ultima_inundacion" required value="{{ultima}}">
       </div>
     </div>
+    <legend>Datos clínicos positivos en algún integrante de la familia:</legend>
     <div class="form-group">
       <label for="integrante" class="col-lg-2 control-label">Integrante</label>
       <div class="col-lg-10">
-        <input type="text" class="form-control" id="integrante" placeholder="Integrante" name="integrante">
+        <input type="text" class="form-control" id="integrante" placeholder="Integrante" name="integrante" required value="{{integrante}}">
       </div>
     </div>
     <div class="form-group">
       <label for="sintomas" class="col-lg-2 control-label">Sintomas</label>
       <div class="col-lg-10">
-        <input type="text" class="form-control" id="sintomas" placeholder="Sintomas" name="sintomas">
+        <input name="sintomas" type="radio" value="fiebre" checked="checked" /> Fiebre
+        <input name="sintomas" type="radio" value="escalofrios" /> Escalofrios
+        <input name="sintomas" type="radio" value="astenia" /> Astenia
+        <input name="sintomas" type="radio" value="mialgias" /> Mialgias
+        <input name="sintomas" type="radio" value="cefalea" /> Cefalea
+        <input name="sintomas" type="radio" value="conjuntivitis" /> Conjuntivitis
+        <input name="sintomas" type="radio" value="disminución visual" /> Disminución visual
+        <input name="sintomas" type="radio" value="afeccion respiratoria" /> Afección respiratoria
+        <input name="sintomas" type="radio" value="hemorragias cutaneas" /> Hemorragias cutáneas
+        <input name="sintomas" type="radio" value="ictericia" /> Ictericia
+        <input name="sintomas" type="radio" value="prurito" /> Prurito
+        <input name="sintomas" type="radio" value="exantema" /> Exantema
+        <input name="sintomas" type="radio" value="perdida de peso" /> Pérdida de peso
+        <input name="sintomas" type="radio" value="dolor abdominal" /> Dolor abdominal
+        <input name="sintomas" type="radio" value="anorexia" /> Anorexia
+        <input name="sintomas" type="radio" value="nauseas" /> Nauseas
+        <input name="sintomas" type="radio" value="vomitos" /> Vómitos
       </div>
     </div>
     <div class="form-group">
       <label for="aclaracion" class="col-lg-2 control-label">Aclaracion</label>
       <div class="col-lg-10">
-        <input type="text" class="form-control" id="aclaracion" placeholder="Aclaracion" name="aclaracion">
+        <input type="text" class="form-control" id="aclaracion" placeholder="Aclaracion" name="aclaracion" value="{{aclaracion}}">
       </div>
     </div>
     <div class="form-group">
       <div class="col-lg-10 col-lg-offset-2">
-        <button type="reset" class="btn btn-default">Cancel</button>
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="submit" class="btn btn-success">Guardar</button>
+        <button type="reset" class="btn btn-primary">Cancelar</button>
       </div>
     </div>
   </fieldset>
 </form>
 </div>
-</div>
+</div>  
 </div>
 
 {% endblock %}

@@ -25,7 +25,7 @@ SECRET_KEY = 'kh+!yju$7a6$wgi@9%lfj%18t=gc)a8er6=_$-(k$1w9420@qy'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -113,7 +113,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/1.9/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'es-us'
 
 TIME_ZONE = 'UTC'
 
@@ -127,4 +127,14 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.9/howto/static-files/
 
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATIC_URL = '/static/'
+
+MEDIA_ROOT= os.path.join(BASE_DIR,'media')
+MEDIA_URL='/media/'
+
+STATICFILES_DIRS=(
+    (os.path.join(BASE_DIR,'vete/static')),
+    "/home/aye/Escritorio/Voluntariado Veterinaria/vete/vete/static/",
+)
+print STATICFILES_DIRS

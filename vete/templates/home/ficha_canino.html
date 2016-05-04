@@ -1,0 +1,204 @@
+
+
+{% extends 'home/base.html' %}
+
+{% block section %}
+
+<div class="panel panel-info">
+    <div class="panel-heading">
+      <h4 class="panel-title">Datos del canino</h4>
+    </div>
+  <div class="panel-body">
+  <div class="col-md-4">  
+    <blockquote>
+      <u>Propietario: </u>{{propietario.nombre}}
+    </blockquote>
+  </div>
+  <div class="col-md-4">
+    <blockquote>
+      <u>Nombre: </u>{{nombre}}
+    </blockquote>
+  </div>
+  <div class="col-md-4">
+    <blockquote>
+      <u>Especie: </u>{{especie}}
+    </blockquote>
+  </div>
+  <div class="col-md-4">
+    <blockquote>
+      <u>Sexo: </u>{{sexo}}
+    </blockquote>
+  </div>
+  <div class="col-md-4">
+    <blockquote>
+      <u>Raza: </u>{{raza}}
+    </blockquote>
+  </div>
+  <div class="col-md-4">
+    <blockquote>
+      <u>Edad: </u>{{edad}}
+    </blockquote>
+  </div>
+  <div class="col-md-4">
+    <blockquote>
+      <u>Motivo de consulta: </u>{{motivo_de_consulta}}
+    </blockquote>
+  </div>
+  </div>
+  </div>
+  <div class="panel panel-info">
+    <div class="panel-heading">
+      <h4 class="panel-title">Anamnesis</h4>
+    </div>
+  <div class="panel-body">
+  <div class="col-md-4"> 
+    <blockquote>
+      <u>Uso de la mascota: </u>{{uso_de_la_mascota}}
+    </blockquote>
+  </div>
+  <div class="col-md-4">  
+    <blockquote>
+      <u>Habitos: </u>{{habitos}}
+    </blockquote>    
+  </div>
+  <div class="col-md-4">
+    <blockquote>
+      <u>Contacto con basural: </u>{{contacto_con_basural}}
+    </blockquote>
+  </div>
+  <div class="col-md-4">
+    <blockquote>
+      <u>Caza: </u>{{caza}}
+    </blockquote>
+  </div>
+  <div class="col-md-4">
+    <blockquote>
+      <u>Caza roedores: </u>{{caza_roedores}}
+    </blockquote>
+  </div>
+  <div class="col-md-4">
+    <blockquote>
+      <u>Observacion roedores: </u>{{observacion_roedores}}
+    </blockquote>
+  </div>
+  <div class="col-md-4">
+    <blockquote>
+      <u>Vacunado contra leptospirosis: </u>{{vacunado_contra_leptospirosis}}
+    </blockquote>
+  </div>
+  <div class="col-md-4">
+    <blockquote>
+      <u>Desparasitado: </u>{{desparasitado}}
+    </blockquote>
+  </div>
+  <div class="col-md-4">
+    <blockquote>
+      <u>Eliminacion de excretas: </u>{{eliminacion_de_excretas}}
+    </blockquote>
+  </div>
+  <div class="col-md-4">
+    <blockquote>
+      <u>Habitos alimenticios: </u>{{habitos_alimenticios}}
+    </blockquote>
+  </div>
+  </div>
+  </div>
+  <div class="panel panel-info">
+    <div class="panel-heading">
+      <h4 class="panel-title">Examen fisico</h4>
+    </div>
+  <div class="panel-body">
+  <div class="col-md-4">
+    <blockquote>
+      <u>Signos clinicos: </u>{{signos_clinicos}}
+    </blockquote>
+  </div>
+  <div class="col-md-4">
+    <blockquote>
+      <u>Piel/Linfonodos: </u>{{piel_Linfonodos}}
+    </blockquote>
+  </div>
+  <div class="col-md-4">
+    <blockquote>
+      <u>Digestivo: </u>{{digestivo}}
+    </blockquote>
+  </div>
+  <div class="col-md-4">
+    <blockquote>
+      <u>Cardio/Respiratorio: </u>{{cardio_respiratorio}}
+    </blockquote>
+  </div>
+  <div class="col-md-4">
+    <blockquote>
+      <u>Urogenital: </u>{{urogenital}}
+    </blockquote>
+  </div>
+  <div class="col-md-4">
+    <blockquote>
+      <u>Musculoesqueleticonervioso: </u>{{musculoesqueleticonervioso}}
+    </blockquote>
+  </div>
+  <div class="col-md-4">
+    <blockquote>
+      <u>Procedimiento realizado: </u>{{procedimiento_realizado}}
+    </blockquote>
+  </div>
+  <div class="col-md-4">
+    <blockquote>
+      <u>Peso: </u>{{peso}}
+    </blockquote>
+  </div>
+  <div class="col-md-4">
+    <blockquote>
+      <u>Actitud: </u>{{actitud}}
+    </blockquote>
+  </div>
+  <div class="col-md-4">
+    <blockquote>
+      <u>Mucosas: </u>{{mucosas}}
+    </blockquote>
+  </div>
+  <div class="col-md-4">
+    <blockquote>
+      <u>TLC: </u>{{TLC}}
+    </blockquote>
+  </div>
+  <div class="col-md-4">
+    <blockquote>
+      <u>Hidratacion: </u>{{hidratacion}}
+    </blockquote>
+  </div>
+  <div class="col-md-4">
+    <blockquote>
+      <u>FC: </u>{{FC}}
+    </blockquote>
+  </div>
+  <div class="col-md-4">
+    <blockquote>
+      <u>Pulso: </u>{{pulso}}
+    </blockquote>
+  </div>
+  <div class="col-md-4">
+    <blockquote>
+      <u>FR: </u>{{FR}}
+    </blockquote>
+  </div>
+  <div class="col-md-4">
+    <blockquote>
+      <u>T: </u>{{T}}
+    </blockquote>
+  </div>
+  </div>
+  </div>
+    </div>
+  </div>
+<form action="caninos" method="POST">{% csrf_token %}
+      <div class="col-lg-10 col-lg-offset-2">
+        <button type="submit" class="btn btn-primary">Volver</button>
+      </div>
+    </form>
+
+
+
+
+{% endblock %}

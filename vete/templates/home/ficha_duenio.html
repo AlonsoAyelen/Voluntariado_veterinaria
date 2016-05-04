@@ -1,0 +1,201 @@
+
+
+{% extends 'home/base.html' %}
+
+{% block section %}
+
+  <div class="panel panel-info">
+    <div class="panel-heading">
+      <h4 class="panel-title">Datos personales</h4>
+    </div>
+  <div class="panel-body">
+  <div class="col-md-4">
+    <blockquote>
+      <u>Nombre: </u>{{nombre}}
+    </blockquote>
+  </div>
+  <div class="col-md-4">
+    <blockquote>
+      <u>Apellido: </u>{{apellido}}
+    </blockquote>
+  </div>
+  <div class="col-md-4">
+    <blockquote>
+      <u>Direccion: </u>{{direccion}}
+    </blockquote>
+  </div>
+  <div class="col-md-4">
+    <blockquote>
+      <u>Barrio: </u>{{barrio}}
+    </blockquote>
+  </div>
+  <div class="col-md-4">
+    <blockquote>
+      <u>Procedencia: </u>{{procedencia}}
+    </blockquote>
+  </div>
+  <div class="col-md-4">
+    <blockquote>
+      <u>Telefono: </u>{{telefono}}
+    </blockquote>
+  </div>
+  <div class="col-md-4">
+    <blockquote>
+      <u>Edad: </u>{{edad}}
+    </blockquote>
+  </div>
+  <div class="col-md-4">
+    <blockquote>
+      <u>Grado de instruccion: </u>{{instruccion}}
+    </blockquote>
+  </div>
+  <div class="col-md-4">  
+    <blockquote>
+      <u>Ocupacion: </u>{{ocupacion}}
+    </blockquote>    
+  </div>
+  <div class="col-md-4">
+    <blockquote>
+      <u>Convivientes adultos: </u>{{adultos}}
+    </blockquote>
+  </div>
+  <div class="col-md-4">
+    <blockquote>
+      <u>Convivientes ninios: </u>{{ninios}}
+    </blockquote>
+  </div>
+  <div class="col-md-4">
+    <blockquote>
+      <u>En edad escolar: </u>{{escolar}}
+    </blockquote>
+  </div>
+  <div class="col-md-4">
+    <blockquote>
+      <u>Cantidad de mascotas: </u>{{mascotas}}
+    </blockquote>
+  </div>
+  <div class="col-md-4">
+    <blockquote>
+      <u>Tipos de mascotas: </u>{{tipos}}
+    </blockquote>
+  </div>
+  </div>
+  </div>
+  <div class="panel panel-info">
+    <div class="panel-heading">
+      <h4 class="panel-title">Datos habitacionales</h4>
+    </div>
+  <div class="panel-body">
+  <div class="col-md-12">
+  <div class="col-md-4">
+    <blockquote>
+      <u>Vivienda: </u>{{vivienda}}
+    </blockquote>
+  </div>
+  <div class="col-md-4">
+    <blockquote>
+      <u>Material: </u>{{material}}
+    </blockquote>
+  </div>
+  <div class="col-md-4">
+    <blockquote>
+      <u>Cantidad de ambientes: </u>{{ambientes}}
+    </blockquote>
+  </div>
+  <div class="col-md-4">
+    <blockquote>
+      <u>Agujeros en la vivienda: </u>{{agujeros}}
+    </blockquote>
+  </div>
+  <div class="col-md-4">
+    <blockquote>
+      <u>Provisiones de agua: </u>{{agua}}
+    </blockquote>
+  </div>
+  <div class="col-md-4">
+    <blockquote>
+      <u>Excretas: </u>{{excretas}}
+    </blockquote>
+  </div>
+  <div class="col-md-4">
+    <blockquote>
+      <u>Residuos domiciliarios: </u>{{residuos}}
+    </blockquote>
+  </div>
+  <div class="col-md-4">
+    <blockquote>
+      <u>Recoleccion de residuos: </u>{{recoleccion}}
+    </blockquote>
+  </div>
+  </div>
+  </div>
+  </div>
+  <div class="panel panel-info">
+    <div class="panel-heading">
+      <h4 class="panel-title">Datos regionales</h4>
+    </div>
+  <div class="panel-body">
+  <div class="col-md-12">
+  <div class="col-md-4">
+    <blockquote>
+      <u>Cercania con basurales: </u>{{basural}}
+    </blockquote>
+  </div>
+  <div class="col-md-4">
+    <blockquote>
+      <u>Presencia de roedores: </u>{{roedores}}
+    </blockquote>
+  </div>
+  <div class="col-md-4">
+    <blockquote>
+      <u>Cercania de aguas servidas: </u>{{agua_servida}}
+    </blockquote>
+  </div>
+  <div class="col-md-4">
+    <blockquote>
+      <u>Inundaciones: </u>{{inundaciones}}
+    </blockquote>
+  </div>
+  <div class="col-md-4">
+    <blockquote>
+      <u>Ultima inundacion: </u>{{ultima}}
+    </blockquote>
+  </div>
+  </div>
+  </div>
+  </div>
+  <div class="panel panel-info">
+    <div class="panel-heading">
+      <h4 class="panel-title">Datos clínicos positivos</h4>
+    </div>
+  <div class="panel-body">
+  <div class="col-md-12">
+  <div class="col-md-4">
+    <blockquote>
+      <u>Integrante con sintomas: </u>{{integrante}}
+    </blockquote>
+  </div>
+  <div class="col-md-4">
+    <blockquote>
+      <u>Sintomas: </u>{{sintomas}}
+    </blockquote>
+  </div>
+  <div class="col-md-4">
+    <blockquote>
+      <u>Aclaracion: </u>{{aclaracion}}
+    </blockquote>
+  </div>
+    </div>
+  </div>
+  </div>
+  </div>
+<form action="duenios" method="POST">{% csrf_token %}
+      <div class="col-lg-10 col-lg-offset-2">
+        <button type="submit" class="btn btn-primary">Volver</button>
+      </div>
+    </form>
+
+
+
+
+{% endblock %}

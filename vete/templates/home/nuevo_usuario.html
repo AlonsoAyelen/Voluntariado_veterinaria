@@ -14,21 +14,25 @@
     <div class="form-group">
       <label for="nombre" class="col-lg-2 control-label">Nombre</label>
       <div class="col-lg-10">
-        <input type="text" class="form-control" id="nombre" placeholder="Nombre" name="nombre">
+        <input type="text" class="form-control" id="nombre" placeholder="Nombre" name="nombre" value="{{nombre}}">
       </div>
     </div>
+    {% if not clave %}
     <div class="form-group">
       <label for="clave" class="col-lg-2 control-label">Clave</label>
       <div class="col-lg-10">
         <input type="password" class="form-control" id="clave" placeholder="Clave" name="clave">
       </div>
     </div>
+    {% endif %}
+    {% if not clave %}
     <div class="form-group">
       <label for="clave_conf" class="col-lg-2 control-label">Repetir clave</label>
       <div class="col-lg-10">
         <input type="password" class="form-control" id="clave_conf" placeholder="Clave" name="clave_conf">
       </div>
     </div>
+    {% endif %}
      <div class="form-group">
       <label for="select" class="col-lg-2 control-label">Tipo de usuario</label>
       <div class="col-lg-10">
@@ -41,8 +45,8 @@
 
     <div class="form-group">
       <div class="col-lg-10 col-lg-offset-2">
-        <button type="reset" class="btn btn-default">Cancel</button>
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="submit" class="btn btn-success">Guardar</button>
+        <button type="reset" class="btn btn-primary">Cancelar</button>
       </div>
     </div>
   </fieldset>
