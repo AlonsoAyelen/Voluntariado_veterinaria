@@ -89,12 +89,10 @@ function eliminarCanino(idform){
         </form>
       </div>
       <div class="col-md-3">
-        <form id= "modificar" action="caninos" method="POST">{% csrf_token %}
-        <button type="submit" value='{{canino.id}}' name="modificar" id="modificar" class="btn btn-xs btn-success" aria-label="Left Align">
+        <a href="{% url 'actualizar_canino' pk=canino.id %}"   class="btn btn-xs btn-success" aria-label="Left Align">
           <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
-        </button>
-      </form>
-    </div>
+        </a> 
+        </div>
     <div class="col-md-3">  
       <form id= "mas" action="detalles_canino" method="POST">{% csrf_token %}
         <button type="submit" value='{{canino.id}}' name="mas" id="mas" class="btn btn-xs btn-success" aria-label="Left Align">

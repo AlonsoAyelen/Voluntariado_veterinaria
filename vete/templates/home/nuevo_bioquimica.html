@@ -1,0 +1,120 @@
+
+{% extends 'home/base.html'%}
+
+{% block section %}
+<div class="container">
+<div class="col-lg-8 control-label">
+<div class="well bs-component">
+<form class="form-horizontal" method='post' action=''>{% csrf_token %}
+  <fieldset>
+    <legend>Bioquimica</legend>
+    <div class="form-group">
+      <label for="fecha" class="col-lg-2 control-label">Fecha</label>
+      <div class="col-lg-10">
+        <input type="date" class="form-control" id="fecha" placeholder="Fecha" name="fecha" required value="{{fecha}}">
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="perfil" class="col-lg-2 control-label">Perfil</label>
+      <div class="col-lg-10">
+        <input type="text" class="form-control" id="perfil" placeholder="Perfil" name="perfil" required value="{{perfil}}">
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="urea" class="col-lg-2 control-label">Urea</label>
+      <div class="col-lg-10">
+        <input type="number" step="0.01" class="form-control" id="urea" placeholder="Urea" name="urea" required value="{{urea}}">
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="crea" class="col-lg-2 control-label">Crea</label>
+      <div class="col-lg-10">
+        <input type="number" step="0.01" class="form-control" id="crea" placeholder="Crea" name="crea" required value="{{crea}}">
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="ALT" class="col-lg-2 control-label">ALT</label>
+      <div class="col-lg-10">
+        <input type="number" step="0.01" class="form-control" id="ALT" placeholder="ALT" name="ALT" required value="{{ALT}}">
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="AST" class="col-lg-2 control-label">AST</label>
+      <div class="col-lg-10">
+        <input type="number" step="0.01" class="form-control" id="AST" placeholder="AST" name="AST" required value="{{AST}}">
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="PT" class="col-lg-2 control-label">PT</label>
+      <div class="col-lg-10">
+        <input type="number" step="0.01" class="form-control" id="PT" placeholder="PT" name="PT" required value="{{PT}}">
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="alb" class="col-lg-2 control-label">Alb</label>
+      <div class="col-lg-10">
+        <input type="number" step="0.01" class="form-control" id="alb" placeholder="alb" name="alb" required value="{{alb}}">
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="FAS" class="col-lg-2 control-label">FAS</label>
+      <div class="col-lg-10">
+        <input type="number" step="0.01" class="form-control" id="FAS" placeholder="FAS" name="FAS" required value="{{FAS}}">
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="GGT" class="col-lg-2 control-label">GGT</label>
+      <div class="col-lg-10">
+        <input type="number" step="0.01" class="form-control" id="GGT" placeholder="GGT" name="GGT" required value="{{GGT}}">
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="CPK" class="col-lg-2 control-label">CPK</label>
+      <div class="col-lg-10">
+        <input type="number" step="0.01" class="form-control" id="CPK" placeholder="CPK" name="CPK" required value="{{CPK}}">
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="col" class="col-lg-2 control-label">Col</label>
+      <div class="col-lg-10">
+        <input type="number" step="0.01" class="form-control" id="col" placeholder="col" name="col" required value="{{col}}">
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="bil_t" class="col-lg-2 control-label">Bil_t</label>
+      <div class="col-lg-10">
+        <input type="number" step="0.01" class="form-control" id="bil_t" placeholder="bil_t" name="bil_t" required value="{{bil_t}}">
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="bil_d" class="col-lg-2 control-label">Bil_d</label>
+      <div class="col-lg-10">
+        <input type="number" step="0.01" class="form-control" id="bil_d" placeholder="bil_d" name="bil_d" required value="{{bil_d}}">
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="trig" class="col-lg-2 control-label">Trig</label>
+      <div class="col-lg-10">
+        <input type="number" step="0.01" class="form-control" id="trig" placeholder="trig" name="trig" required value="{{trig}}">
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="varios" class="col-lg-2 control-label">Varios</label>
+      <div class="col-lg-10">
+        <input type="text" step="0.01" class="form-control" id="varios" placeholder="varios" name="varios" required value="{{varios}}">
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="col-lg-10 col-lg-offset-2">
+        <button type="submit" class="btn btn-success">Guardar</button>
+        <button type="reset" class="btn btn-primary">Cancelar</button>
+      </div>
+    </div>
+
+  </fieldset>
+</form>
+</div>
+</div>
+</div>
+
+{% endblock %}

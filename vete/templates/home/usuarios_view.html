@@ -77,13 +77,11 @@ function eliminarUsuario(idform){
           </button>
         </form>
       </div>
-      <div class="col-md-1">
-        <form id= "modificar" action="usuarios" method="POST">{% csrf_token %}
-        <button type="submit" value='{{usuario.id}}' name="modificar" id="modificar" class="btn btn-xs btn-success" aria-label="Left Align">
+       <div class="col-md-3">
+        <a href="{% url 'actualizar_usuario' pk=usuario.id %}"   class="btn btn-xs btn-success" aria-label="Left Align">
           <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
-        </button>
-      </form>
-    </div>
+        </a> 
+        </div>
       </td>
     </tr>
     {% endfor %}
