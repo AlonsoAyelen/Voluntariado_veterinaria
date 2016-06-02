@@ -1,5 +1,5 @@
 from django.conf.urls import patterns, url, include
-from views import  nuevo_usuario , login , duenios_view , nuevo_duenio_view ,nuevo_canino_view , caninos_view , usuarios_view , logout , detalles_duenio_view , detalles_canino_view,actualizar_duenio_view,actualizar_canino_view,actualizar_usuario_view,nuevo_bioquimica_view,nuevo_hemograma_view
+from views import  nuevo_usuario , login , duenios_view , nuevo_duenio_view ,nuevo_canino_view , caninos_view , usuarios_view , logout , detalles_duenio_view , detalles_canino_view,actualizar_duenio_view,actualizar_canino_view,actualizar_usuario_view,nuevo_bioquimica_view,nuevo_hemograma_view,bioquimicas_view,hemogramas_view
 
 urlpatterns = patterns('vete.apps.home.views',
 	url(r'^usuario/nuevo$','nuevo_usuario',name='nuevo_usuario'),
@@ -16,8 +16,10 @@ urlpatterns = patterns('vete.apps.home.views',
 	url(r'^usuarios$','usuarios_view',name='usuarios_view'),
 	url(r'^duenio/detalles_duenio$','detalles_duenio_view',name='detalles_duenio_view'),
 	url(r'^detalles_canino$','detalles_canino_view',name='detalles_canino_view'),
-	url(r'^nuevo_bioquimica$','nuevo_bioquimica_view',name='nuevo_bioquimica_view'),
-	url(r'^nuevo_hemograma$','nuevo_hemograma_view',name='nuevo_hemograma_view'),
+	url(r'^nuevo_bioquimica/$','nuevo_bioquimica_view',name='nuevo_bioquimica_view'),
+	url(r'^nuevo_hemograma/$','nuevo_hemograma_view',name='nuevo_hemograma_view'),
+	url(r'^hemogramas/$','hemogramas_view',name='hemogramas'),
+	url(r'^bioquimicas/$','bioquimicas_view',name='bioquimicas'),
 )
 
 

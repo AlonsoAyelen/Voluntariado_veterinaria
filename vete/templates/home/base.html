@@ -42,6 +42,8 @@
     				      	 	<li {% block caninos_active %}{% endblock %}><a href="{% url 'caninos_view' %}">Manejo de caninos</a></li>
             					<li {% block duenios_active %}{% endblock %}><a href="{% url 'duenios_view' %}">Manejo de dueños<span class="sr-only">(current)</span></a></li>
             					<li {% block estadisticas_active %}{% endblock %}><a href="#">Estadisticas</a></li>
+                      <li {% block bioquimicas_active %}{% endblock %}><a href="{% url 'bioquimicas_view' %}">Bioquimicas</a></li>
+                      <li {% block hemogramas_active %}{% endblock %}><a href="{% url 'hemogramas_view' %}">Hemogramas</a></li>
   						      {% endblock%}
 				          {% endif %}
               </ul>

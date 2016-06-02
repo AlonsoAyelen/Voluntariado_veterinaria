@@ -8,6 +8,10 @@ from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_protect
 from vete.apps.vete.models import Propietario
 from vete.apps.vete.models import Canino
+from vete.apps.vete.models import Hemograma
+from vete.apps.vete.models import Bioquimica
+
+
 
 
 @csrf_protect
@@ -330,7 +334,7 @@ def actualizar_duenio_view(request,pk):
 		
 
 def nuevo_canino_view(request):
-	contexto = {'titulo':'','url_action':'','error':'','propietario':'' , 'nombre':'' ,'especie':'', 'sexo':'','raza':'','edad':'','motivo_de_consulta':'', 'uso_de_la_mascota':'1','habitos':'' , 'contacto_con_basural':'' , 'caza':'','caza_roedores':'' ,	'observacion_roedores':'', 'vacunado_contra_leptospirosis':'','desparasitado':'' , 'eliminacion_de_excretas':'',	'habitos_alimenticios':'','signos_clinicos':'','piel_Linfonodos':'','digestivo':'','cardio_respiratorio':'','urogenital':'','musculoesqueleticonervioso':'','procedimiento_realizado':''}
+	contexto = {'titulo':'','url_action':'','error':'','propietario':'' , 'nombre':'' ,'especie':'', 'sexo':'','raza':'','edad':'','motivo_de_consulta':'', 'uso_de_la_mascota':'','habitos':'' , 'contacto_con_basural':'' , 'caza':'','caza_roedores':'' ,	'observacion_roedores':'', 'vacunado_contra_leptospirosis':'','desparasitado':'' , 'eliminacion_de_excretas':'',	'habitos_alimenticios':'','signos_clinicos':'','piel_Linfonodos':'','digestivo':'','cardio_respiratorio':'','urogenital':'','musculoesqueleticonervioso':'','procedimiento_realizado':''}
 	if not request.user.is_authenticated():
 		return redirect('login')
 	else:
@@ -409,7 +413,7 @@ def nuevo_canino_view(request):
 			else:
 				canino = Canino(propietario = propietario , nombre = nombre, especie = especie , sexo=sexo , raza = raza , edad=edad , motivo_de_consulta = motivo_de_consulta, uso_de_la_mascota=uso_de_la_mascota , habitos = habitos , contacto_con_basural = contacto_con_basural , caza = caza , caza_roedores = caza_roedores , observacion_roedores = observacion_roedores , vacunado_contra_leptospirosis = vacunado_contra_leptospirosis , desparasitado = desparasitado , eliminacion_de_excretas = eliminacion_de_excretas , habitos_alimenticios = habitos_alimenticios , signos_clinicos = signos_clinicos , piel_Linfonodos = piel_Linfonodos , digestivo = digestivo , cardio_respiratorio = cardio_respiratorio , urogenital = urogenital , musculoesqueleticonervioso = musculoesqueleticonervioso ,peso = peso,actitud = actitud,mucosas = mucosas,TLC = TLC,hidratacion = hidratacion, FC = FC, pulso = pulso, FR = FR,T = T, procedimiento_realizado = procedimiento_realizado , status = True)
 				canino.save()	
-		duenios = Propietario.objects.filter()
+		duenios = Propietario.objects.all()
 		contexto['duenios'] = duenios
 		return render_to_response('home/nuevo_canino.html' ,contexto ,context_instance=RequestContext(request))		
 
@@ -460,9 +464,144 @@ def actualizar_canino_view(request,pk):
 		return render_to_response('home/nuevo_canino.html' ,{'canino':canino[0],'duenios':duenios,'titulo':'Modificar canino', 'url_action':request.get_full_path()}, context_instance=RequestContext(request))
 
 def nuevo_bioquimica_view(request):
-	pass
+	contexto = {'titulo':'','url_action':'','canino':'','fecha':'' , 'perfil':'' ,'urea':'', 'crea':'','ALT':'','AST':'','PT':'', 'alb':'','FAS':'' , 'GGT':'' , 'CPK':'','col':'' ,'bil_t':'', 'bil_d':'','trig':'' , 'varios':''}
+	if not request.user.is_authenticated():
+		return redirect('login')
+	else:
+		contexto['titulo'] = 'Agregar Bioquimica'
+		contexto['url_action'] = request.get_full_path()
+		if(request.method == 'POST'):
+			canino = Canino.objects.filter(id = int(request.POST.get('canino')))[0]
+			fecha = request.POST.get('fecha')
+			perfil = request.POST.get('perfil')
+			urea = request.POST.get('urea')
+			crea = request.POST.get('crea')
+			ALT = request.POST.get('ALT')
+			AST = request.POST.get('AST')
+			PT = request.POST.get('PT')
+			alb = request.POST.get('alb')
+			FAS = request.POST.get('FAS')
+			GGT = request.POST.get('GGT')
+			CPK = request.POST.get('CPK')
+			col = request.POST.get('col')
+			bil_t = request.POST.get('bil_t')
+			bil_d = request.POST.get('bil_d')
+			trig = request.POST.get('trig')
+			varios = request.POST.get('varios')
+			if(len(Canino.objects.filter(canino=canino , fecha=fecha , perfil=perfil))>0):
+				contexto['error'] = "El analisis bioquimico ya existe"
+				contexto['canino'] = canino
+				contexto['fecha'] = fecha
+				contexto['perfil'] = perfil
+				contexto['urea'] = urea
+				contexto['crea'] = crea
+				contexto['ALT'] = ALT
+				contexto['AST'] = AST
+				contexto['PT'] = PT
+				contexto['alb'] = alb
+				contexto['FAS'] = FAS
+				contexto['GGT'] = GGT
+				contexto['CPK'] = CPK
+				contexto['col'] = col
+				contexto['bil_t'] = bil_t
+				contexto['bil_d'] = bil_d
+				contexto['trig'] = trig
+				contexto['varios'] = varios
+			else:
+				bioquimica = Bioquimica(canino=canino,fecha=fecha , perfil=perfil ,urea=urea, crea=crea,ALT=ALT , AST = AST, PT=PT, alb=alb,FAS=FAS ,GGT=GGT, CPK=CPK,col=col ,bil_t=bil_t, bil_d=bil_d,trig=trig ,varios=varios)
+				bioquimica.save()
+	caninos = Canino.objects.all()
+	contexto['caninos'] = caninos
 	return render_to_response('home/nuevo_bioquimica.html' , context_instance=RequestContext(request))
 
 def nuevo_hemograma_view(request):
-	pass
+	contexto = {'titulo':'','url_action':'','canino':'','fecha':'' , 'HTO':'' ,'s_o_l':'', 'GR':'','Hb':'','plaquetas':'','GB':'', 'VCM':'','HCM':'' , 'ChCM':'' , 'FLR_NB':'','FLR_NS':'' ,'FLR_E':'', 'FLR_B':'','FLR_L':'' , 'FLR_M':'','FLA_REF':'','FLA_NB':'','FLA_NS':'','FLA_E':'','FLA_B':'','FLA_L':'','FLA_M':'','observaciones':''}
+	if not request.user.is_authenticated():
+		return redirect('login')
+	else:
+		contexto['titulo'] = 'Agregar hemograma'
+		contexto['url_action'] = request.get_full_path()
+		if(request.method == 'POST'):
+			canino = Canino.objects.filter(id = int(request.POST.get('canino')))[0]
+			fecha = request.POST.get('fecha')
+			HTO = request.POST.get('HTO')
+			s_o_l = request.POST.get('s_o_l')
+			GR = request.POST.get('GR')
+			Hb = request.POST.get('Hb')
+			plaquetas = request.POST.get('plaquetas')
+			GB = request.POST.get('GB')
+			VCM = request.POST.get('VCM')
+			HCM = request.POST.get('HCM')
+			ChCM = request.POST.get('ChCM')
+			FLR_NB = request.POST.get('FLR_NB')
+			FLR_NS = request.POST.get('FLR_NS')
+			FLR_E = request.POST.get('FLR_E')
+			FLR_B = request.POST.get('FLR_B')
+			FLR_L = request.POST.get('FLR_L')
+			FLR_M = request.POST.get('FLR_M')
+			FLA_REF = request.POST.get('FLA_REF')
+			FLA_NB = request.POST.get('FLA_NB')
+			FLA_NS = request.POST.get('FLA_NS')
+			FLA_E = request.POST.get('FLA_E')
+			FLA_B = request.POST.get('FLA_B')
+			FLA_L = request.POST.get('FLA_L')
+			FLA_M = request.POST.get('FLA_M')
+			observaciones = request.POST.get('observaciones')
+			if(len(Canino.objects.filter(canino=canino , fecha=fecha ))>0):
+				contexto['error'] = "El hemograma ya existe"
+				contexto['canino'] = canino
+				contexto['HTO'] = HTO
+				contexto['s_o_l'] = s_o_l
+				contexto['GR'] = GR
+				contexto['Hb'] = Hb
+				contexto['plaquetas'] = plaquetas
+				contexto['GB'] = GB
+				contexto['VCM'] = VCM
+				contexto['HCM'] = HCM
+				contexto['ChCM'] = ChCM
+				contexto['FLR_NB'] = FLR_NB
+				contexto['FLR_NS'] = FLR_NS
+				contexto['FLR_E'] = FLR_E
+				contexto['FLR_B'] = FLR_B
+				contexto['FLR_L'] = FLR_L
+				contexto['FLR_M'] = FLR_M
+				contexto['FLA_REF'] = FLA_REF
+				contexto['FLA_NB'] = FLA_NB
+				contexto['FLA_NS'] = FLA_NS
+				contexto['FLA_E'] = FLA_E
+				contexto['FLA_B'] = FLA_B
+				contexto['FLA_L'] = FLA_L
+				contexto['FLA_M'] = FLA_M
+				contexto['observaciones'] = observaciones				
+			else:
+				hemograma = Hemograma(canino=canino,fecha=fecha ,HTO=HTO ,s_o_l=s_o_l,GR=GR,Hb=Hb,plaquetas=plaquetas,GB=GB, VCM=VCM,HCM=HCM ,ChCM=ChCM , FLR_NB=FLR_NB,FLR_NS=FLR_NS ,FLR_E=FLR_E, FLR_B=FLR_B,FLR_L=FLR_L ,FLR_M=FLR_M,FLA_REF=FLA_REF,FLA_NB=FLA_NB,FLA_NS=FLA_NS,FLA_E=FLA_E,FLA_B=FLA_B,FLA_L=FLA_L,FLA_M=FLA_M,observaciones=observaciones)
+				hemograma.save()
+	caninos = Canino.objects.all()
+	contexto['caninos'] = caninos
 	return render_to_response('home/nuevo_hemograma.html' , context_instance=RequestContext(request))
+
+def bioquimicas_view(request):
+	if not request.user.is_authenticated():
+		return redirect('login')
+	else:
+		bioquimicas = Bioquimica.objects.all()
+		contexto = {'bioquimicas':bioquimicas}
+		if(len(request.POST.getlist('eliminar'))> 0):
+			bioquimica = Bioquimica.objects.filter(id = int(request.POST.getlist('eliminar')[0]))
+			bioquimica.delete()
+			bioquimicas = Bioquimica.objects.filter()
+			contexto = {'bioquimicas':bioquimicas}
+	return render_to_response('home/bioquimicas_view.html' ,contexto, context_instance=RequestContext(request))
+
+def hemogramas_view(request):
+	if not request.user.is_authenticated():
+		return redirect('login')
+	else:
+		hemogramas = Hemograma.objects.all()
+		contexto = {'hemogramas':hemogramas}
+		if(len(request.POST.getlist('eliminar'))> 0):
+			hemograma = Hemograma.objects.filter(id = int(request.POST.getlist('eliminar')[0]))
+			hemograma.delete()
+			hemogramas = Hemograma.objects.filter()
+			contexto = {'hemogramas':hemogramas}
+	return render_to_response('home/hemogramas_view.html' ,contexto, context_instance=RequestContext(request))

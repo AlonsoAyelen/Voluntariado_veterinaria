@@ -9,6 +9,16 @@
   <fieldset>
     <legend>Hemograma</legend>
     <div class="form-group">
+      <label for="canino" class="col-lg-2 control-label">Canino</label>
+      <div class="col-lg-10">
+       <select value="{{canino.id}}" id="canino" placeholder="Canino" name="canino" required value="{{canino.nombre}}"> 
+        {% for canino in caninos %}
+          <option value="{{canino.id}}" id="canino" placeholder="Canino" name="canino" required>{{canino.nombre}} </option>
+        {% endfor%}
+      </select>
+      </div>
+    </div>
+    <div class="form-group">
       <label for="fecha" class="col-lg-2 control-label">Fecha</label>
       <div class="col-lg-10">
         <input type="date" class="form-control" id="fecha" placeholder="Fecha" name="fecha" required value="{{fecha}}">

@@ -39,7 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.admindocs',
-    'bootstrap3',
+    #'bootstrap3',
     
 ]
 
@@ -84,7 +84,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'sistema_veterinaria',
 	'USER': 'root',
-	'PASSWORD': 'root',
+	'PASSWORD': '',
 	'HOST': '',
 	'PORT': '',
     }
@@ -135,6 +135,6 @@ MEDIA_URL='/media/'
 
 STATICFILES_DIRS=(
     (os.path.join(BASE_DIR,'vete/static')),
-    "/home/aye/Escritorio/Voluntariado Veterinaria/vete/vete/static/",
+    "/home/ayelen/backup/voluntariadoVeterinaria/vete/vete/static/",
 )
 print STATICFILES_DIRS
