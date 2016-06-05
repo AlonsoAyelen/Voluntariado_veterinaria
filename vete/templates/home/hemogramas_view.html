@@ -1,0 +1,154 @@
+
+
+{% extends 'home/base.html' %}
+{% load staticfiles %}
+{% block head %}
+  <link rel="stylesheet" type="text/css" href="{% static 'datatables/css/jquery.dataTables.min.css' %}"/>
+  <link rel="stylesheet" type="text/css" href="{% static 'datatables/css/responsive.dataTables.min.css' %}"/>
+  <link rel="stylesheet" type="text/css" href="{% static 'datatables/css/scroller.dataTables.min.css' %}"/> 
+  <script type="text/javascript" src="{% static 'datatables/js/jquery-2.1.4.min.js'%}"></script>
+  <script type="text/javascript" src="{% static 'datatables/js/jquery.dataTables.min.js'%}"></script>
+  <script type="text/javascript" src="{% static 'datatables/js/dataTables.responsive.min.js'%}"></script>
+  <script type="text/javascript" src="https://cdn.datatables.net/scroller/1.4.0/js/dataTables.scroller.min.js"></script>
+{% endblock %}
+
+{% block section %}
+
+<div align="center">
+  <legend>Manejo de hemogramas</legend>
+</div>
+<div class="col-lg-2 control-label">
+ <a type="button" class="btn btn-primary " href="{% url 'nuevo_hemograma' %}">Agregar hemograma</a>
+</div> 
+<style>
+      .table-striped>tbody>tr:nth-child(odd)>td, 
+      .table-striped>tbody>tr:nth-child(odd)>th {
+       
+      }
+      .table-striped>tbody>tr:nth-child(even)>td, 
+      .table-striped>tbody>tr:nth-child(even)>th {
+       background-color: #CFD8DC;
+      }
+      .table-striped>thead>tr>th {
+         background-color: #eee;
+      }
+    </style>
+     {% if hemogramas %}
+
+<script>
+function eliminarHemograma(idform){
+    
+    var r = confirm("Eliminar?");
+    if (r == true) {
+        document.getElementById(idform).submit();
+    }
+    
+  }
+</script>
+
+
+
+
+<div class="row">
+<div class="col-lg-8 ">
+<div class="well bs-component">
+<div class="table-responsive">
+<table id="hemogramas" class="table table-striped table-hover ">
+  <thead>
+    <tr>
+      <th>Canino</th>
+      <th>Fecha</th>
+      <th>Operacion</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for hemograma in hemogramas %}
+    <tr>
+      <td>{{hemograma.canino}}</td>
+      <td>{{hemograma.fecha}}</td>
+      <td>
+      <div class="col-md-1">
+        <form id="eliminar{{hemograma.id}}" action="{% url 'hemogramas' %}" method="POST">
+          {% csrf_token %}
+          <input type="hidden" name="eliminar" value="{{hemograma.id}}"/>
+          <button type="button"  class="btn btn-xs" style="background-color:#f44336;color:#fff;" onclick="eliminarHemograma('eliminar{{hemograma.id}}')">
+            <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+          </button>
+        </form>
+      </div>
+      <div class="col-md-1">
+        <a href="{#% url 'actualizar_hemograma' pk=hemograma.id %#}"   class="btn btn-xs " style="background-color:#FF8F00;color:#fff;" aria-label="Left Align">
+          <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+        </a> 
+        </div>
+    <div class="col-md-1">  
+      <form id= "mas" action="detalles_hemograma" method="POST">{% csrf_token %}
+        <button type="submit" value='{{hemograma.id}}' name="mas" id="mas" class="btn btn-xs btn-success" aria-label="Left Align">
+          <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+        </button>
+      </form>
+    </div>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+</div>
+
+{% else %}
+  <legend>No hay hemogramas para mostrar</legend>
+{% endif %}
+
+
+
+
+</div>
+</div>
+
+</div>
+
+
+
+<script>
+  $(document).ready(function(){
+    $('#hemogramas').dataTable({
+      "paging": true,
+      "lengthChange": true,
+      "searching": true,
+      "ordering": true,
+      "info": true,
+      "autoWidth": false,
+      "select": true,
+          
+      "language":{
+        "decimal":        "",
+        "emptyTable":     "datos no encontrados",
+        "info":           "mostrando  _END_ de _TOTAL_ entradas",
+        "infoEmpty":      "mostrando 0 de 0 filas",
+        "infoFiltered":   "(filtrado desde _MAX_ filas",
+        "infoPostFix":    "",
+        "thousands":      ",",
+        "lengthMenu":     "mostrando _MENU_ filas",
+        "faceoadingRecords": "cargando...",
+        "processing":     "procesando...",
+        "search":         "buscar: ",
+        "zeroRecords":    "0 resultados",
+        "paginate": {
+          "first":      "primero",
+          "last":       "ultimo",
+          "next":       "siguiente",
+          "previous":   "anterior"
+        },
+        "aria": {
+          "sortAscending":  ": activate to sort column ascending",
+          "sortDescending": ": activate to sort column descending"
+          }
+        }
+          
+          
+        });
+      });
+</script>
+
+
+{% endblock %}

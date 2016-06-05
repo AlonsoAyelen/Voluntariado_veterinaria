@@ -6,16 +6,21 @@
     <!-- CDN Bootstrap -->
     <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css">-->
+    {% load staticfiles %}
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+    <!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>-->
+    <script type="text/javascript" src="{% static 'bootstrap/js/bootstrap.min.js'%}"></script>
     <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="http://bootswatch.com/flatly/bootstrap.min.css" >
+    <!--<link rel="stylesheet" href="http://bootswatch.com/flatly/bootstrap.min.css" >-->
+    <link rel="stylesheet" type="text/css" href="{% static 'bootstrap/css/bootstrap.min.css' %}"/>
     <!-- Optional theme -->
-    <link rel="stylesheet" href="http://bootswatch.com/flatly/bootstrap.css" >
+    <!--<link rel="stylesheet" href="http://bootswatch.com/flatly/bootstrap.css" >-->
+    <link rel="stylesheet" type="text/css" href="{% static 'bootstrap/css/bootstrap.css' %}"/>
+
     
 
-    <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.11/css/jquery.dataTables.css">
-    <script type="text/javascript" charset="utf8" src="//cdn.datatables.net/1.10.11/js/jquery.dataTables.js"></script>
+
+
     {% block head %}
     {% endblock %}
 
@@ -32,7 +37,7 @@
       </button>
     </div>
 
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1" >
 				      <ul class="nav navbar-nav">
 				      	  {% if user.is_authenticated %}
                     {% block nav %}
@@ -42,14 +47,14 @@
     				      	 	<li {% block caninos_active %}{% endblock %}><a href="{% url 'caninos_view' %}">Manejo de caninos</a></li>
             					<li {% block duenios_active %}{% endblock %}><a href="{% url 'duenios_view' %}">Manejo de dueños<span class="sr-only">(current)</span></a></li>
             					<li {% block estadisticas_active %}{% endblock %}><a href="#">Estadisticas</a></li>
-                      <li {% block bioquimicas_active %}{% endblock %}><a href="{% url 'bioquimicas_view' %}">Bioquimicas</a></li>
-                      <li {% block hemogramas_active %}{% endblock %}><a href="{% url 'hemogramas_view' %}">Hemogramas</a></li>
+                      <li {% block bioquimicas_active %}{% endblock %}><a href="{% url 'bioquimicas' %}">Bioquimicas</a></li>
+                      <li {% block hemogramas_active %}{% endblock %}><a href="{% url 'hemogramas' %}">Hemogramas</a></li>
   						      {% endblock%}
 				          {% endif %}
               </ul>
 				      <ul class="nav navbar-nav navbar-right">
                       {% if user.is_authenticated %}
-                		<li><a href="{% url 'logout_view' %}">Cerrar sesión</a></li>
+                		<li><a href="{% url 'logout' %}">Cerrar sesión</a></li>
                       {% else %}
                         <li><a href="{% url 'login' %}">Iniciar sesión</a></li>
               		  {% endif %}

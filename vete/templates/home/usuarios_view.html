@@ -33,12 +33,11 @@ function eliminarUsuario(idform){
 <style>
       .table-striped>tbody>tr:nth-child(odd)>td, 
       .table-striped>tbody>tr:nth-child(odd)>th {
-       background-color: #fff;
-       color: #2c3e50;
+       
       }
       .table-striped>tbody>tr:nth-child(even)>td, 
       .table-striped>tbody>tr:nth-child(even)>th {
-       background-color: #2c3e50;
+       background-color: #CFD8DC;
       }
       .table-striped>thead>tr>th {
          background-color: #eee;
@@ -60,7 +59,7 @@ function eliminarUsuario(idform){
   <tbody>
  
   {% for usuario in usuarios %}
-    <tr class="success">
+    <tr >
       <td>{{usuario.username}}</td>
       {% if usuario.is_staff %}
         <td>Clinico</td>
@@ -72,13 +71,13 @@ function eliminarUsuario(idform){
       <form id="eliminar{{usuario.id}}" action="usuarios" method="POST">
           {% csrf_token %}
           <input type="hidden" name="eliminar" value="{{usuario.id}}">
-          <button type="button"  class="btn btn-xs btn-default" onclick="eliminarUsuario('eliminar{{usuario.id}}')">
+          <button type="button"  class="btn btn-xs " onclick="eliminarUsuario('eliminar{{usuario.id}}')" style="background-color:#f44336;color:#fff;">
             <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
           </button>
         </form>
       </div>
        <div class="col-md-3">
-        <a href="{% url 'actualizar_usuario' pk=usuario.id %}"   class="btn btn-xs btn-default" aria-label="Left Align">
+        <a href="{% url 'actualizar_usuario' pk=usuario.id %}"   class="btn btn-xs " aria-label="Left Align" style="background-color:#FF8F00;color:#fff;">
           <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
         </a> 
         </div>

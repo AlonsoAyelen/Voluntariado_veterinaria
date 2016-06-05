@@ -23,12 +23,11 @@
 <style>
       .table-striped>tbody>tr:nth-child(odd)>td, 
       .table-striped>tbody>tr:nth-child(odd)>th {
-       background-color: #fff;
-       color: #2c3e50;
+       
       }
       .table-striped>tbody>tr:nth-child(even)>td, 
       .table-striped>tbody>tr:nth-child(even)>th {
-       background-color: #18bc9c;
+       background-color: #CFD8DC;
       }
       .table-striped>thead>tr>th {
          background-color: #eee;
@@ -70,7 +69,7 @@ function eliminarCanino(idform){
   <tbody>
  
   {% for canino in caninos %}
-    <tr class="success">
+    <tr >
       <td>{{canino.propietario.nombre}}</td>
       <td>{{canino.nombre}}</td>
       <td>{{canino.especie}}</td>
@@ -83,13 +82,13 @@ function eliminarCanino(idform){
         <form id="eliminar{{canino.id}}" action="caninos" method="POST">
           {% csrf_token %}
           <input type="hidden" name="eliminar" value="{{canino.id}}">
-          <button type="button"  class="btn btn-xs btn-success" onclick="eliminarCanino('eliminar{{canino.id}}')">
+          <button type="button"  class="btn btn-xs " style="background-color:#f44336;color:#fff;" onclick="eliminarCanino('eliminar{{canino.id}}')">
             <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
           </button>
         </form>
       </div>
       <div class="col-md-3">
-        <a href="{% url 'actualizar_canino' pk=canino.id %}"   class="btn btn-xs btn-success" aria-label="Left Align">
+        <a href="{% url 'actualizar_canino' pk=canino.id %}"   class="btn btn-xs" style="background-color:#FF8F00;color:#fff;" aria-label="Left Align">
           <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
         </a> 
         </div>

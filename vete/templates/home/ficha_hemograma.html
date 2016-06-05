@@ -1,0 +1,148 @@
+
+
+{% extends 'home/base.html' %}
+
+{% block section %}
+
+<div class="panel panel-info">
+    <div class="panel-heading">
+      <h4 class="panel-title">Datos del hemograma</h4>
+    </div>
+  <div class="panel-body">
+  <div class="col-md-4">
+    <blockquote>
+      <u>Canino: </u>{{canino}}
+    </blockquote>
+  </div>
+  <div class="col-md-4">
+    <blockquote>
+      <u>Fecha: </u>{{fecha}}
+    </blockquote>
+  </div>
+  <div class="col-md-4">
+    <blockquote>
+      <u>HTO: </u>{{HTO}}
+    </blockquote>
+  </div>
+  <div class="col-md-4">
+    <blockquote>
+      <u>s_o_l: </u>{{s_o_l}}
+    </blockquote>
+  </div>
+  <div class="col-md-4">
+    <blockquote>
+      <u>GR: </u>{{GR}}
+    </blockquote>
+  </div>
+  <div class="col-md-4">
+    <blockquote>
+      <u>Hb: </u>{{Hb}}
+    </blockquote>
+  </div>
+  <div class="col-md-4">
+    <blockquote>
+      <u>plaquetas: </u>{{plaquetas}}
+    </blockquote>
+  </div>
+  <div class="col-md-4">
+    <blockquote>
+      <u>GB: </u>{{GB}}
+    </blockquote>
+  </div>
+  <div class="col-md-4">
+    <blockquote>
+      <u>VCM: </u>{{VCM}}
+    </blockquote>
+  </div>
+  <div class="col-md-4">
+    <blockquote>
+      <u>HCM: </u>{{HCM}}
+    </blockquote>
+  </div>
+  <div class="col-md-4">
+    <blockquote>
+      <u>ChCM: </u>{{ChCM}}
+    </blockquote>
+  </div>
+  <div class="col-md-4">
+    <blockquote>
+      <u>FLR_NB: </u>{{FLR_NB}}
+    </blockquote>
+  </div>
+  <div class="col-md-4">
+    <blockquote>
+      <u>FLR_NS: </u>{{FLR_NS}}
+    </blockquote>
+  </div>
+  <div class="col-md-4">
+    <blockquote>
+      <u>FLR_E: </u>{{FLR_E}}
+    </blockquote>
+  </div>
+  <div class="col-md-4">
+    <blockquote>
+      <u>FLR_B: </u>{{FLR_B}}
+    </blockquote>
+  </div>
+  <div class="col-md-4">
+    <blockquote>
+      <u>FLR_L: </u>{{FLR_L}}
+    </blockquote>
+  </div>
+  <div class="col-md-4">
+    <blockquote>
+      <u>FLR_M: </u>{{FLR_M}}
+    </blockquote>
+  </div>
+  <div class="col-md-4">
+    <blockquote>
+      <u>FLA_REF: </u>{{FLA_REF}}
+    </blockquote>
+  </div>
+  <div class="col-md-4">
+    <blockquote>
+      <u>FLA_NB: </u>{{FLA_NB}}
+    </blockquote>
+  </div>
+  <div class="col-md-4">
+    <blockquote>
+      <u>FLA_NS: </u>{{FLA_NS}}
+    </blockquote>
+  </div>
+  <div class="col-md-4">
+    <blockquote>
+      <u>FLA_E: </u>{{FLA_E}}
+    </blockquote>
+  </div>
+  <div class="col-md-4">
+    <blockquote>
+      <u>FLA_B: </u>{{FLA_B}}
+    </blockquote>
+  </div>
+  <div class="col-md-4">
+    <blockquote>
+      <u>FLA_L: </u>{{FLA_L}}
+    </blockquote>
+  </div>
+  <div class="col-md-4">
+    <blockquote>
+      <u>FLA_M: </u>{{FLA_M}}
+    </blockquote>
+  </div>
+  <div class="col-md-4">
+    <blockquote>
+      <u>observaciones: </u>{{observaciones}}
+    </blockquote>
+  </div>
+  </div>
+  </div>
+<form action="{% url 'hemogramas' %}" method="POST">{% csrf_token %}
+      <div class="col-lg-10 col-lg-offset-2">
+        <button type="submit" class="btn btn-primary">Volver</button>
+      </div>
+    </form>
+
+
+
+
+{% endblock %}

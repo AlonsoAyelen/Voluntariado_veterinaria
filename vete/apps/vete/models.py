@@ -43,6 +43,7 @@ class Propietario(models.Model):
 	class Meta:
 		managed = True      # add this\
 		app_label = 'vete' # & this
+	def __unicode__(self):return self.nombre
 class Canino(models.Model):
 	propietario = models.ForeignKey(Propietario)
 	nombre = models.CharField(max_length = 80)
@@ -81,7 +82,7 @@ class Canino(models.Model):
 	class Meta:
 		managed = True      # add this\
 		app_label = 'vete' # & this
-
+	def __unicode__(self):return self.nombre + '-' + str(self.propietario)
 
 class Bioquimica(models.Model):
 	canino = models.ForeignKey(Canino)

@@ -192,7 +192,7 @@
   </div>
     </div>
   </div>
-<form action="caninos" method="POST">{% csrf_token %}
+<form action="{% url 'caninos'% }" method="POST">{% csrf_token %}
       <div class="col-lg-10 col-lg-offset-2">
         <button type="submit" class="btn btn-primary">Volver</button>
       </div>

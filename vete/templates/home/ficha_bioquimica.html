@@ -1,0 +1,108 @@
+
+
+{% extends 'home/base.html' %}
+
+{% block section %}
+
+<div class="panel panel-info">
+    <div class="panel-heading">
+      <h4 class="panel-title">Datos del hemograma</h4>
+    </div>
+  <div class="panel-body">
+  <div class="col-md-4">
+    <blockquote>
+      <u>Canino: </u>{{canino}}
+    </blockquote>
+  </div>
+  <div class="col-md-4">
+    <blockquote>
+      <u>Fecha: </u>{{fecha}}
+    </blockquote>
+  </div>
+  <div class="col-md-4">
+    <blockquote>
+      <u>perfil: </u>{{perfil}}
+    </blockquote>
+  </div>
+  <div class="col-md-4">
+    <blockquote>
+      <u>urea: </u>{{urea}}
+    </blockquote>
+  </div>
+  <div class="col-md-4">
+    <blockquote>
+      <u>crea: </u>{{crea}}
+    </blockquote>
+  </div>
+  <div class="col-md-4">
+    <blockquote>
+      <u>ALT: </u>{{ALT}}
+    </blockquote>
+  </div>
+  <div class="col-md-4">
+    <blockquote>
+      <u>AST: </u>{{AST}}
+    </blockquote>
+  </div>
+  <div class="col-md-4">
+    <blockquote>
+      <u>PT: </u>{{PT}}
+    </blockquote>
+  </div>
+  <div class="col-md-4">
+    <blockquote>
+      <u>alb: </u>{{alb}}
+    </blockquote>
+  </div>
+  <div class="col-md-4">
+    <blockquote>
+      <u>FAS: </u>{{FAS}}
+    </blockquote>
+  </div>
+  <div class="col-md-4">
+    <blockquote>
+      <u>GGT: </u>{{GGT}}
+    </blockquote>
+  </div>
+  <div class="col-md-4">
+    <blockquote>
+      <u>CPK: </u>{{CPK}}
+    </blockquote>
+  </div>
+  <div class="col-md-4">
+    <blockquote>
+      <u>col: </u>{{col}}
+    </blockquote>
+  </div>
+  <div class="col-md-4">
+    <blockquote>
+      <u>bil_t: </u>{{bil_t}}
+    </blockquote>
+  </div>
+  <div class="col-md-4">
+    <blockquote>
+      <u>bil_d: </u>{{bil_d}}
+    </blockquote>
+  </div>
+  <div class="col-md-4">
+    <blockquote>
+      <u>trig: </u>{{trig}}
+    </blockquote>
+  </div>
+  <div class="col-md-4">
+    <blockquote>
+      <u>varios: </u>{{varios}}
+    </blockquote>
+  </div>
+  </div>
+  </div>
+<form action="{% url 'bioquimicas' %}" method="POST">{% csrf_token %}
+      <div class="col-lg-10 col-lg-offset-2">
+        <button type="submit" class="btn btn-primary">Volver</button>
+      </div>
+    </form>
+
+
+
+
+{% endblock %}

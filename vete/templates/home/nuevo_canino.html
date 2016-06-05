@@ -14,7 +14,7 @@
     <div class="form-group">
       <label for="duenio" class="col-lg-2 control-label">Duenio</label>
       <div class="col-lg-10">
-       <select value="{{duenio.id}}" id="duenio" placeholder="Duenio" name="duenio" required value="{{duenio.nombre}}"> 
+       <select value="{{duenio.id}}" id="duenio" placeholder="Duenio" name="duenio" required value="{{duenio.nombre}}" class="form-control"> 
         {% for duenio in duenios %}
           <option value="{{duenio.id}}" id="duenio" placeholder="Duenio" name="duenio" required>{{duenio.nombre}} </option>
         {% endfor%}
@@ -405,17 +405,21 @@
       <label for="procedimiento_realizado" class="col-lg-2 control-label">Procedimiento realizado</label>
       {% if canino.procedimiento_realizado == "VAR" %}
       <div class="col-lg-10">
+        <div class="radio">
         <input name="procedimiento_realizado" type="radio" value="VAR" checked="checked" /> VAR
         <input name="procedimiento_realizado" type="radio" value="ATP" /> ATP
         <input name="procedimiento_realizado" type="radio" value="EXTRAC" /> EXTRAC
         <input name="procedimiento_realizado" type="radio" value="COPRO" /> COPRO
+        </div>
       </div>
       {% elif canino.procedimiento_realizado == "ATP" %}
       <div class="col-lg-10">
+        <div class="radio">
         <input name="procedimiento_realizado" type="radio" value="VAR"  /> VAR
         <input name="procedimiento_realizado" type="radio" value="ATP" checked="checked"/> ATP
         <input name="procedimiento_realizado" type="radio" value="EXTRAC" /> EXTRAC
         <input name="procedimiento_realizado" type="radio" value="COPRO" /> COPRO
+        </div>
       </div>
       {% elif canino.procedimiento_realizado == "EXTRAC" %}
       <div class="col-lg-10">
@@ -426,10 +430,18 @@
       </div>
       {% else %}
       <div class="col-lg-10">
-        <input name="procedimiento_realizado" type="radio" value="VAR" checked="checked" /> VAR
-        <input name="procedimiento_realizado" type="radio" value="ATP" /> ATP
-        <input name="procedimiento_realizado" type="radio" value="EXTRAC" /> EXTRAC
-        <input name="procedimiento_realizado" type="radio" value="COPRO" /> COPRO
+        <div class="radio-inline">
+          <input name="procedimiento_realizado" type="radio" value="VAR" /> VAR
+        </div>
+        <div class="radio-inline">
+          <input name="procedimiento_realizado" type="radio" value="ATP" /> ATP
+        </div>
+        <div class="radio-inline">
+          <input name="procedimiento_realizado" type="radio" value="EXTRAC" /> EXTRAC
+        </div>
+        <div class="radio-inline">
+          <input name="procedimiento_realizado" type="radio" value="COPRO" checked="checked" /> COPRO
+        </div>
       </div>
       {% endif%}
       </div>

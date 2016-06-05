@@ -159,6 +159,69 @@ def detalles_canino_view(request):
 			contexto['T'] = canino[0].T
 		return render_to_response('home/ficha_canino.html' ,contexto, context_instance=RequestContext(request))
 
+def detalles_hemograma_view(request):
+	if not request.user.is_authenticated():
+		return redirect('login')
+	else:
+		contexto = {'titulo':'','url_action':'','canino':'','fecha':'' , 'HTO':'' ,'s_o_l':'', 'GR':'','Hb':'','plaquetas':'','GB':'', 'VCM':'','HCM':'' , 'ChCM':'' , 'FLR_NB':'','FLR_NS':'' ,'FLR_E':'', 'FLR_B':'','FLR_L':'' , 'FLR_M':'','FLA_REF':'','FLA_NB':'','FLA_NS':'','FLA_E':'','FLA_B':'','FLA_L':'','FLA_M':'','observaciones':''}
+		if(len(request.POST.getlist('mas'))> 0):
+			hemograma = Hemograma.objects.filter(id = int(request.POST.getlist('mas')[0]))
+			contexto['canino'] = hemograma[0].canino
+			contexto['fecha'] = hemograma[0].fecha
+			contexto['HTO'] = hemograma[0].HTO
+			contexto['s_o_l'] = hemograma[0].s_o_l
+			contexto['GR'] = hemograma[0].GR
+			contexto['Hb'] = hemograma[0].Hb
+			contexto['plaquetas'] = hemograma[0].plaquetas
+			contexto['GB'] = hemograma[0].GB
+			contexto['VCM'] = hemograma[0].VCM
+			contexto['HCM'] = hemograma[0].HCM
+			contexto['ChCM'] = hemograma[0].ChCM
+			contexto['FLR_NB'] = hemograma[0].FLR_NB
+			contexto['FLR_NS'] = hemograma[0].FLR_NS
+			contexto['FLR_E'] = hemograma[0].FLR_E
+			contexto['FLR_B'] = hemograma[0].FLR_B
+			contexto['FLR_L'] = hemograma[0].FLR_L
+			contexto['FLR_M'] = hemograma[0].FLR_M
+			contexto['FLA_REF'] = hemograma[0].FLA_REF
+			contexto['FLA_NB'] = hemograma[0].FLA_NB
+			contexto['FLA_NS'] = hemograma[0].FLA_NS
+			contexto['FLA_E'] = hemograma[0].FLA_E
+			contexto['FLA_B'] = hemograma[0].FLA_B
+			contexto['FLA_L'] = hemograma[0].FLA_L
+			contexto['FLA_M'] = hemograma[0].FLA_M
+			contexto['observaciones'] = hemograma[0].observaciones
+		return render_to_response('home/ficha_hemograma.html' ,contexto, context_instance=RequestContext(request))
+	
+
+def detalles_bioquimica_view(request):
+	if not request.user.is_authenticated():
+		return redirect('login')
+	else:
+		contexto = {'titulo':'','url_action':'','canino':'','fecha':'' , 'perfil':'' ,'urea':'', 'crea':'','ALT':'','AST':'','PT':'', 'alb':'','FAS':'' , 'GGT':'' , 'CPK':'','col':'' ,'bil_t':'', 'bil_d':'','trig':'' , 'varios':''}
+		if(len(request.POST.getlist('mas'))> 0):
+			bioquimica = Bioquimica.objects.filter(id = int(request.POST.getlist('mas')[0]))
+			contexto['canino'] = bioquimica[0].canino
+			contexto['fecha'] = bioquimica[0].fecha
+			contexto['perfil'] = bioquimica[0].perfil
+			contexto['urea'] = bioquimica[0].urea
+			contexto['crea'] = bioquimica[0].crea
+			contexto['ALT'] = bioquimica[0].ALT
+			contexto['AST'] = bioquimica[0].AST
+			contexto['PT'] = bioquimica[0].PT
+			contexto['alb'] = bioquimica[0].alb
+			contexto['FAS'] = bioquimica[0].FAS
+			contexto['GGT'] = bioquimica[0].GGT
+			contexto['CPK'] = bioquimica[0].CPK
+			contexto['col'] = bioquimica[0].col
+			contexto['bil_t'] = bioquimica[0].bil_t
+			contexto['bil_d'] = bioquimica[0].bil_d
+			contexto['trig'] = bioquimica[0].trig
+			contexto['varios'] = bioquimica[0].varios
+		return render_to_response('home/ficha_bioquimica.html' ,contexto, context_instance=RequestContext(request))
+
+
+
 
 def caninos_view(request):
 	if not request.user.is_authenticated():
@@ -488,7 +551,8 @@ def nuevo_bioquimica_view(request):
 			bil_d = request.POST.get('bil_d')
 			trig = request.POST.get('trig')
 			varios = request.POST.get('varios')
-			if(len(Canino.objects.filter(canino=canino , fecha=fecha , perfil=perfil))>0):
+			
+			if(len(Bioquimica.objects.filter(canino=canino , fecha=fecha , perfil=perfil))>0):
 				contexto['error'] = "El analisis bioquimico ya existe"
 				contexto['canino'] = canino
 				contexto['fecha'] = fecha
@@ -512,7 +576,7 @@ def nuevo_bioquimica_view(request):
 				bioquimica.save()
 	caninos = Canino.objects.all()
 	contexto['caninos'] = caninos
-	return render_to_response('home/nuevo_bioquimica.html' , context_instance=RequestContext(request))
+	return render_to_response('home/nuevo_bioquimica.html' ,contexto, context_instance=RequestContext(request))
 
 def nuevo_hemograma_view(request):
 	contexto = {'titulo':'','url_action':'','canino':'','fecha':'' , 'HTO':'' ,'s_o_l':'', 'GR':'','Hb':'','plaquetas':'','GB':'', 'VCM':'','HCM':'' , 'ChCM':'' , 'FLR_NB':'','FLR_NS':'' ,'FLR_E':'', 'FLR_B':'','FLR_L':'' , 'FLR_M':'','FLA_REF':'','FLA_NB':'','FLA_NS':'','FLA_E':'','FLA_B':'','FLA_L':'','FLA_M':'','observaciones':''}
@@ -547,9 +611,10 @@ def nuevo_hemograma_view(request):
 			FLA_L = request.POST.get('FLA_L')
 			FLA_M = request.POST.get('FLA_M')
 			observaciones = request.POST.get('observaciones')
-			if(len(Canino.objects.filter(canino=canino , fecha=fecha ))>0):
+			if(len(Hemograma.objects.filter(canino=canino , fecha=fecha ))>0):
 				contexto['error'] = "El hemograma ya existe"
 				contexto['canino'] = canino
+				contexto['fecha'] = fecha
 				contexto['HTO'] = HTO
 				contexto['s_o_l'] = s_o_l
 				contexto['GR'] = GR
@@ -578,7 +643,7 @@ def nuevo_hemograma_view(request):
 				hemograma.save()
 	caninos = Canino.objects.all()
 	contexto['caninos'] = caninos
-	return render_to_response('home/nuevo_hemograma.html' , context_instance=RequestContext(request))
+	return render_to_response('home/nuevo_hemograma.html' ,contexto, context_instance=RequestContext(request))
 
 def bioquimicas_view(request):
 	if not request.user.is_authenticated():
