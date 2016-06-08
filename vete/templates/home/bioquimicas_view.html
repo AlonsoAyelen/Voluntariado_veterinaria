@@ -79,7 +79,7 @@ function eliminarBioquimica(idform){
         </form>
       </div>
       <div class="col-md-1">
-        <a href="{#% url 'actualizar_bioquimica' pk=bioquimica.id %#}"   class="btn btn-xs" style="background-color:#FF8F00;color:#fff;" aria-label="Left Align">
+        <a href="{% url 'actualizar_bioquimica' pk=bioquimica.id %}"   class="btn btn-xs" style="background-color:#FF8F00;color:#fff;" aria-label="Left Align">
           <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
         </a> 
         </div>

@@ -10,7 +10,8 @@ from vete.apps.vete.models import Propietario
 from vete.apps.vete.models import Canino
 from vete.apps.vete.models import Hemograma
 from vete.apps.vete.models import Bioquimica
-
+from reportlab.pdfgen import canvas
+from django.http import HttpResponse
 
 
 
@@ -578,6 +579,38 @@ def nuevo_bioquimica_view(request):
 	contexto['caninos'] = caninos
 	return render_to_response('home/nuevo_bioquimica.html' ,contexto, context_instance=RequestContext(request))
 
+
+def actualizar_bioquimica_view(request,pk):
+	if not request.user.is_authenticated():
+		return redirect('login')
+	else:
+		bioquimicas = Bioquimica.objects.all()
+		bioquimica = Bioquimica.objects.filter(id = int(pk))
+		if(request.method == 'POST'):
+			canino = Canino.objects.filter(id = int(request.POST.get('canino')))[0]
+			fecha = request.POST.get('fecha')
+			perfil = request.POST.get('perfil')
+			urea = request.POST.get('urea')
+			crea = request.POST.get('crea')
+			ALT = request.POST.get('ALT')
+			AST = request.POST.get('AST')
+			PT = request.POST.get('PT')
+			alb = request.POST.get('alb')
+			FAS = request.POST.get('FAS')
+			GGT = request.POST.get('GGT')
+			CPK = request.POST.get('CPK')
+			col = request.POST.get('col')
+			bil_t = request.POST.get('bil_t')
+			bil_d = request.POST.get('bil_d')
+			trig = request.POST.get('trig')
+			varios = request.POST.get('varios')
+			bioquimica.update(canino=canino,fecha=fecha , perfil=perfil ,urea=urea, crea=crea,ALT=ALT , AST = AST, PT=PT, alb=alb,FAS=FAS ,GGT=GGT, CPK=CPK,col=col ,bil_t=bil_t, bil_d=bil_d,trig=trig ,varios=varios)
+			return render_to_response('home/bioquimica_view.html' ,{'bioquimicas':bioquimicas}, context_instance=RequestContext(request))
+		caninos = Canino.objects.filter()	    
+		return render_to_response('home/nuevo_bioquimica.html' ,{'bioquimica':bioquimica[0],'caninos':caninos,'titulo':'Modificar bioquimica', 'url_action':request.get_full_path()}, context_instance=RequestContext(request))
+
+
+
 def nuevo_hemograma_view(request):
 	contexto = {'titulo':'','url_action':'','canino':'','fecha':'' , 'HTO':'' ,'s_o_l':'', 'GR':'','Hb':'','plaquetas':'','GB':'', 'VCM':'','HCM':'' , 'ChCM':'' , 'FLR_NB':'','FLR_NS':'' ,'FLR_E':'', 'FLR_B':'','FLR_L':'' , 'FLR_M':'','FLA_REF':'','FLA_NB':'','FLA_NS':'','FLA_E':'','FLA_B':'','FLA_L':'','FLA_M':'','observaciones':''}
 	if not request.user.is_authenticated():
@@ -645,6 +678,48 @@ def nuevo_hemograma_view(request):
 	contexto['caninos'] = caninos
 	return render_to_response('home/nuevo_hemograma.html' ,contexto, context_instance=RequestContext(request))
 
+
+def actualizar_hemograma_view(request,pk):
+	if not request.user.is_authenticated():
+		return redirect('login')
+	else:
+		hemogramas = Hemograma.objects.all()
+		hemograma = Hemograma.objects.filter(id = int(pk))
+		if(request.method == 'POST'):
+			canino = Canino.objects.filter(id = int(request.POST.get('canino')))[0]
+			fecha = request.POST.get('fecha')
+			HTO = request.POST.get('HTO')
+			s_o_l = request.POST.get('s_o_l')
+			GR = request.POST.get('GR')
+			Hb = request.POST.get('Hb')
+			plaquetas = request.POST.get('plaquetas')
+			GB = request.POST.get('GB')
+			VCM = request.POST.get('VCM')
+			HCM = request.POST.get('HCM')
+			ChCM = request.POST.get('ChCM')
+			FLR_NB = request.POST.get('FLR_NB')
+			FLR_NS = request.POST.get('FLR_NS')
+			FLR_E = request.POST.get('FLR_E')
+			FLR_B = request.POST.get('FLR_B')
+			FLR_L = request.POST.get('FLR_L')
+			FLR_M = request.POST.get('FLR_M')
+			FLA_REF = request.POST.get('FLA_REF')
+			FLA_NB = request.POST.get('FLA_NB')
+			FLA_NS = request.POST.get('FLA_NS')
+			FLA_E = request.POST.get('FLA_E')
+			FLA_B = request.POST.get('FLA_B')
+			FLA_L = request.POST.get('FLA_L')
+			FLA_M = request.POST.get('FLA_M')
+			observaciones = request.POST.get('observaciones')
+			hemograma.update(canino=canino,fecha=fecha ,HTO=HTO ,s_o_l=s_o_l,GR=GR,Hb=Hb,plaquetas=plaquetas,GB=GB, VCM=VCM,HCM=HCM ,ChCM=ChCM , FLR_NB=FLR_NB,FLR_NS=FLR_NS ,FLR_E=FLR_E, FLR_B=FLR_B,FLR_L=FLR_L ,FLR_M=FLR_M,FLA_REF=FLA_REF,FLA_NB=FLA_NB,FLA_NS=FLA_NS,FLA_E=FLA_E,FLA_B=FLA_B,FLA_L=FLA_L,FLA_M=FLA_M,observaciones=observaciones)
+			return render_to_response('home/hemogramas_view.html' ,{'hemogramas':hemogramas}, context_instance=RequestContext(request))
+		caninos = Canino.objects.filter()	    
+		return render_to_response('home/nuevo_hemograma.html' ,{'hemograma':hemograma[0],'caninos':caninos,'titulo':'Modificar hemograma', 'url_action':request.get_full_path()}, context_instance=RequestContext(request))
+
+
+
+
+
 def bioquimicas_view(request):
 	if not request.user.is_authenticated():
 		return redirect('login')
@@ -670,3 +745,26 @@ def hemogramas_view(request):
 			hemogramas = Hemograma.objects.filter()
 			contexto = {'hemogramas':hemogramas}
 	return render_to_response('home/hemogramas_view.html' ,contexto, context_instance=RequestContext(request))
+
+
+
+def generar_pdf_view(request):
+    # Create the HttpResponse object with the appropriate PDF headers.
+    response = HttpResponse(content_type='application/pdf')
+    response['Content-Disposition'] = 'attachment; filename="somefilename.pdf"'
+
+    # Create the PDF object, using the response object as its "file."
+    p = canvas.Canvas(response)
+
+    # Draw things on the PDF. Here's where the PDF generation happens.
+    # See the ReportLab documentation for the full list of functionality.
+    p.drawString(1, 800, "Hello world.")
+
+    # Close the PDF object cleanly, and we're done.
+    p.showPage()
+    p.save()
+    return response	
+
+def estadisticas_view(request):
+	pass
+	return render_to_response('home/estadisticas_view.html' , context_instance=RequestContext(request))
