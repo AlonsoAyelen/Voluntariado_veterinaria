@@ -12,13 +12,17 @@
   <script type="text/javascript" src="https://cdn.datatables.net/scroller/1.4.0/js/dataTables.scroller.min.js"></script>
 {% endblock %}
 
+{% block bioquimicas_active %}class = "active"{% endblock %}
+
+{% block title%} Bioquimicas {% endblock %}
+
 {% block section %}
 
 <div align="center">
-  <legend>Manejo de bioquimicas</legend>
+  <legend>Manejo de Bioquimicas</legend>
 </div>
 <div class="col-lg-2 control-label">
- <a type="button" class="btn btn-primary " href="{% url 'nuevo_bioquimica' %}">Agregar bioquimica</a>
+ <a type="button" class="btn btn-primary " href="{% url 'nuevo_bioquimica' %}"><i class="fa fa-plus" aria-hidden="true"></i> Agregar Bioquimica</a>
 </div> 
 <style>
       .table-striped>tbody>tr:nth-child(odd)>td, 
@@ -58,7 +62,6 @@ function eliminarBioquimica(idform){
     <tr>
       <th>Canino</th>
       <th>Fecha</th>
-      <th>Perfil</th>
       <th>Operacion</th>
     </tr>
   </thead>
@@ -67,7 +70,6 @@ function eliminarBioquimica(idform){
     <tr >
       <td>{{bioquimica.canino}}</td>
       <td>{{bioquimica.fecha}}</td>
-      <td>{{bioquimica.perfil}}</td>
       <td>
       <div class="col-md-1">
         <form id="eliminar{{bioquimica.id}}" action="{% url 'bioquimicas' %}" method="POST">
@@ -84,11 +86,31 @@ function eliminarBioquimica(idform){
         </a> 
         </div>
     <div class="col-md-1">  
-      <form id= "mas" action="detalles_bioquimica" method="POST">{% csrf_token %}
-        <button type="submit" value='{{bioquimica.id}}' name="mas" id="mas" class="btn btn-xs btn-success" aria-label="Left Align">
+      
+        <button type="button" value='{{bioquimica.id}}' name="mas" id="mas" class="btn btn-xs btn-success" aria-label="Left Align" data-toggle="modal" data-target="#modal{{bioquimica.id}}">
           <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
         </button>
-      </form>
+        <!-- Modal -->
+        <div id="modal{{bioquimica.id}}" class="modal  fade" role="dialog">
+          <div class="modal-dialog modal-lg">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Detalle de bioquimica</h4>
+              </div>
+              <div class="modal-body">
+                {% include 'home/ficha_bioquimica.html'%}
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      
     </div>
       </td>
     </tr>
@@ -98,7 +120,12 @@ function eliminarBioquimica(idform){
 </div>
 
 {% else %}
-  <legend>No hay analisis bioquimicos para mostrar</legend>
+<div class="col-md-8" align="center">
+  <div class="alert alert-dismissible alert-danger">
+    <button type="button" class="close" data-dismiss="alert">&times;</button>
+    <strong>No hay analisis bioquimicos para mostrar!</strong> 
+  </div>
+</div>
 {% endif %}
 
 

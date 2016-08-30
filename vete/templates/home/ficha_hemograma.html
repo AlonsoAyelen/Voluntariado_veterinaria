@@ -1,8 +1,6 @@
 
 
-{% extends 'home/base.html' %}
 
-{% block section %}
 
 <div class="panel panel-info">
     <div class="panel-heading">
@@ -11,138 +9,128 @@
   <div class="panel-body">
   <div class="col-md-4">
     <blockquote>
-      <u>Canino: </u>{{canino}}
+      <u>Canino: </u>{{hemograma.canino}}
     </blockquote>
   </div>
   <div class="col-md-4">
     <blockquote>
-      <u>Fecha: </u>{{fecha}}
+      <u>Fecha: </u>{{hemograma.fecha}}
     </blockquote>
   </div>
   <div class="col-md-4">
     <blockquote>
-      <u>HTO: </u>{{HTO}}
+      <u>HTO: </u>{{hemograma.HTO}}
     </blockquote>
   </div>
   <div class="col-md-4">
     <blockquote>
-      <u>s_o_l: </u>{{s_o_l}}
+      <u>s_o_l: </u>{{hemograma.s_o_l}}
     </blockquote>
   </div>
   <div class="col-md-4">
     <blockquote>
-      <u>GR: </u>{{GR}}
+      <u>GR: </u>{{hemograma.GR}}
     </blockquote>
   </div>
   <div class="col-md-4">
     <blockquote>
-      <u>Hb: </u>{{Hb}}
+      <u>Hb: </u>{{hemograma.Hb}}
     </blockquote>
   </div>
   <div class="col-md-4">
     <blockquote>
-      <u>plaquetas: </u>{{plaquetas}}
+      <u>plaquetas: </u>{{hemograma.plaquetas}}
     </blockquote>
   </div>
   <div class="col-md-4">
     <blockquote>
-      <u>GB: </u>{{GB}}
+      <u>GB: </u>{{hemograma.GB}}
     </blockquote>
   </div>
   <div class="col-md-4">
     <blockquote>
-      <u>VCM: </u>{{VCM}}
+      <u>VCM: </u>{{hemograma.VCM}}
     </blockquote>
   </div>
   <div class="col-md-4">
     <blockquote>
-      <u>HCM: </u>{{HCM}}
+      <u>HCM: </u>{{hemograma.HCM}}
     </blockquote>
   </div>
   <div class="col-md-4">
     <blockquote>
-      <u>ChCM: </u>{{ChCM}}
+      <u>ChCM: </u>{{hemograma.ChCM}}
     </blockquote>
   </div>
   <div class="col-md-4">
     <blockquote>
-      <u>FLR_NB: </u>{{FLR_NB}}
+      <u>FLR_NB: </u>{{hemograma.FLR_NB}}
     </blockquote>
   </div>
   <div class="col-md-4">
     <blockquote>
-      <u>FLR_NS: </u>{{FLR_NS}}
+      <u>FLR_NS: </u>{{hemograma.FLR_NS}}
     </blockquote>
   </div>
   <div class="col-md-4">
     <blockquote>
-      <u>FLR_E: </u>{{FLR_E}}
+      <u>FLR_E: </u>{{hemograma.FLR_E}}
     </blockquote>
   </div>
   <div class="col-md-4">
     <blockquote>
-      <u>FLR_B: </u>{{FLR_B}}
+      <u>FLR_B: </u>{{hemograma.FLR_B}}
     </blockquote>
   </div>
   <div class="col-md-4">
     <blockquote>
-      <u>FLR_L: </u>{{FLR_L}}
+      <u>FLR_L: </u>{{hemograma.FLR_L}}
     </blockquote>
   </div>
   <div class="col-md-4">
     <blockquote>
-      <u>FLR_M: </u>{{FLR_M}}
+      <u>FLR_M: </u>{{hemograma.FLR_M}}
     </blockquote>
   </div>
   <div class="col-md-4">
     <blockquote>
-      <u>FLA_REF: </u>{{FLA_REF}}
+      <u>FLA_REF: </u>{{hemograma.FLA_REF}}
     </blockquote>
   </div>
   <div class="col-md-4">
     <blockquote>
-      <u>FLA_NB: </u>{{FLA_NB}}
+      <u>FLA_NB: </u>{{hemograma.FLA_NB}}
     </blockquote>
   </div>
   <div class="col-md-4">
     <blockquote>
-      <u>FLA_NS: </u>{{FLA_NS}}
+      <u>FLA_NS: </u>{{hemograma.FLA_NS}}
     </blockquote>
   </div>
   <div class="col-md-4">
     <blockquote>
-      <u>FLA_E: </u>{{FLA_E}}
+      <u>FLA_E: </u>{{hemograma.FLA_E}}
     </blockquote>
   </div>
   <div class="col-md-4">
     <blockquote>
-      <u>FLA_B: </u>{{FLA_B}}
+      <u>FLA_B: </u>{{hemograma.FLA_B}}
     </blockquote>
   </div>
   <div class="col-md-4">
     <blockquote>
-      <u>FLA_L: </u>{{FLA_L}}
+      <u>FLA_L: </u>{{hemograma.FLA_L}}
     </blockquote>
   </div>
   <div class="col-md-4">
     <blockquote>
-      <u>FLA_M: </u>{{FLA_M}}
+      <u>FLA_M: </u>{{hemograma.FLA_M}}
     </blockquote>
   </div>
   <div class="col-md-4">
     <blockquote>
-      <u>observaciones: </u>{{observaciones}}
+      <u>observaciones: </u>{{hemograma.observaciones}}
     </blockquote>
   </div>
   </div>
   </div>
-<form action="{% url 'hemogramas' %}" method="POST">{% csrf_token %}
-      <div class="col-lg-10 col-lg-offset-2">
-        <button type="submit" class="btn btn-primary">Volver</button>
-      </div>
-    </form>
-
-
-
-
-{% endblock %}

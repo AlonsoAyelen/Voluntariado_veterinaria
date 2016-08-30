@@ -12,6 +12,10 @@
   <script type="text/javascript" src="https://cdn.datatables.net/scroller/1.4.0/js/dataTables.scroller.min.js"></script>
 {% endblock %}
 
+{% block duenios_active %}class = "active"{% endblock %}
+
+{% block title%} Dueños {% endblock %}
+
 {% block section %}
 <script>
 function eliminarDuenio(idform){
@@ -24,10 +28,10 @@ function eliminarDuenio(idform){
   }
 </script>
 <div align="center">
-  <legend>Manejo de dueños</legend>
+  <legend>Manejo de Dueños</legend>
 </div>
 <div class="col-lg-2 control-label">
- <a type="button" class="btn btn-primary " href="{% url 'nuevo_duenio' %}">Agregar dueño</a>
+ <a type="button" class="btn btn-primary " href="{% url 'nuevo_duenio' %}"><i class="fa fa-plus" aria-hidden="true"></i> Agregar Dueño</a>
 </div> 
 <style>
       .table-striped>tbody>tr:nth-child(odd)>td, 
@@ -71,7 +75,7 @@ function eliminarDuenio(idform){
       <td>{{duenio.telefono}}</td>
       <td>
       <div class="col-md-2">
-        <form id="eliminar{{duenio.id}}" action="duenios" method="POST">
+        <form id="eliminar{{duenio.id}}" action="{% url 'duenios_view' %}" method="POST">
           {% csrf_token %}
           <input type="hidden" name="eliminar" value="{{duenio.id}}">
           <button type="button"  class="btn btn-xs" style="background-color:#f44336;color:#fff;" onclick="eliminarDuenio('eliminar{{duenio.id}}')">
@@ -84,26 +88,50 @@ function eliminarDuenio(idform){
           <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
         </a> 
         </div>
-        <div class="col-md-2">
-        <form id= "mas" action="detalles_duenio" method="POST">{% csrf_token %}
-        <button type="submit" value='{{duenio.id}}' name="mas" id="mas" class="btn btn-xs btn-success" aria-label="Left Align">
+        <div class="col-md-2">  
+      
+        <button type="button" value='{{duenio.id}}' name="mas" id="mas" class="btn btn-xs btn-success" aria-label="Left Align" data-toggle="modal" data-target="#modal{{duenio.id}}">
           <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
         </button>
-      </form>
-      </div>
+        <!-- Modal -->
+        <div id="modal{{duenio.id}}" class="modal  fade" role="dialog">
+          <div class="modal-dialog modal-lg">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Detalle del duenio:{{duenio.nombre}}</h4>
+              </div>
+              <div class="modal-body">
+                {% include 'home/ficha_duenio.html'%}
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      
+    </div>
       </td>
     </tr>
     {% endfor %}
   </tbody>
 </table>
-</div>
 
 {% else %}
-  <legend>No hay duenios</legend>
+  <div class="col-md-8" align="center">
+  <div class="alert alert-dismissible alert-danger">
+    <button type="button" class="close" data-dismiss="alert">&times;</button>
+    <strong>No hay dueños para mostrar!</strong> 
+  </div>
+</div>
 {% endif %}
 
 
-
+</div>
 
 </div>
 </div>

@@ -12,13 +12,17 @@
   <script type="text/javascript" src="https://cdn.datatables.net/scroller/1.4.0/js/dataTables.scroller.min.js"></script>
 {% endblock %}
 
+{% block title%} Hemogramas {% endblock %}
+
+{% block hemogramas_active %}class = "active"{% endblock %}
+
 {% block section %}
 
 <div align="center">
-  <legend>Manejo de hemogramas</legend>
+  <legend>Manejo de Hemogramas</legend>
 </div>
 <div class="col-lg-2 control-label">
- <a type="button" class="btn btn-primary " href="{% url 'nuevo_hemograma' %}">Agregar hemograma</a>
+ <a type="button" class="btn btn-primary " href="{% url 'nuevo_hemograma' %}"><i class="fa fa-plus" aria-hidden="true"></i> Agregar Hemograma</a>
 </div> 
 <style>
       .table-striped>tbody>tr:nth-child(odd)>td, 
@@ -82,11 +86,31 @@ function eliminarHemograma(idform){
         </a> 
         </div>
     <div class="col-md-1">  
-      <form id= "mas" action="detalles_hemograma" method="POST">{% csrf_token %}
-        <button type="submit" value='{{hemograma.id}}' name="mas" id="mas" class="btn btn-xs btn-success" aria-label="Left Align">
+      
+        <button type="button" value='{{hemograma.id}}' name="mas" id="mas" class="btn btn-xs btn-success" aria-label="Left Align" data-toggle="modal" data-target="#modal{{hemograma.id}}">
           <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
         </button>
-      </form>
+        <!-- Modal -->
+        <div id="modal{{hemograma.id}}" class="modal  fade" role="dialog">
+          <div class="modal-dialog modal-lg">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Detalle de hemograma</h4>
+              </div>
+              <div class="modal-body">
+                {% include 'home/ficha_hemograma.html'%}
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      
     </div>
       </td>
     </tr>
@@ -96,7 +120,12 @@ function eliminarHemograma(idform){
 </div>
 
 {% else %}
-  <legend>No hay hemogramas para mostrar</legend>
+<div class="col-md-8" align="center">
+  <div class="alert alert-dismissible alert-danger">
+    <button type="button" class="close" data-dismiss="alert">&times;</button>
+    <strong>No hay hemogramas para mostrar!</strong> 
+  </div>
+</div>
 {% endif %}
 
 

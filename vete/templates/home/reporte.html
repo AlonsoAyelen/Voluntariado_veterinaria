@@ -1,0 +1,164 @@
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <!-- CDN Bootstrap -->
+    <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css">-->
+    {% load staticfiles %}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>-->
+    <script type="text/javascript" src="{% static 'bootstrap/js/bootswatch.min.js'%}"></script>
+    <!-- Latest compiled and minified CSS -->
+    <!--<link rel="stylesheet" href="http://bootswatch.com/flatly/bootstrap.min.css" >-->
+    <link rel="stylesheet" type="text/css" href="{% static 'bootstrap/css/bootstrap.min.css' %}"/>
+    <!-- Optional theme -->
+    <!--<link rel="stylesheet" href="http://bootswatch.com/flatly/bootstrap.css" >-->
+    <link rel="stylesheet" type="text/css" href="{% static 'bootstrap/css/bootstrap.css' %}"/>
+    <!--<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">-->
+
+
+<style>
+table, th, td {
+    border: 2px solid black;
+}
+th, td {
+    padding: 5px;
+    text-align: left;
+}
+body  {
+  font: 130% sans-serif;
+}
+.col-md-4{
+	width: 30%;
+    position:absolute;
+}
+
+
+ @page {
+    margin: 1cm;
+    margin-bottom: 2.5cm;
+    @frame footer {
+      -pdf-frame-content: footerFirst;
+      
+      bottom: 0.5cm;
+      margin-left: 1cm;
+      margin-right: 1cm;
+      height: 2cm;
+   }
+ }
+
+</style>
+</head>
+<body>
+
+	<div align="center"> 
+	<center> 
+	<table> 
+	<tr> 
+	<td><img  width="150" height="90" src="vete/static/images/facultad.jpg"  ></td> 
+	<td><img  width="180" height="90" src="vete/static/images/unlp.jpg"  ></td> 
+	<td><img  width="180" height="70" src="vete/static/images/punta_indio.jpg"  ></td> 
+	</tr> 
+	</table> 
+	</center> 
+	</div> 
+
+	<div align="left">
+    	
+    </div>
+    <div align="center">
+    	
+    </div>
+    <div align="right">
+    
+    </div>
+    <h3 align="center">Servicio Central de Laboratorio FCV-UNLP</h3>
+    <h3 align="center">Area de Diagnostico de Leptospirosis</h3>
+    <div >
+
+
+
+    </div>
+
+
+    <div class="col-md-4">
+    	<b>Historia clínica: </b>{{canino.analisis.historia_clinica}}
+    </div>
+    <div class="col-md-4">
+    	<b>Protocolo: </b>{{canino.protocolo}}
+    </div>
+    <div class="col-md-4">
+    	<b>Fecha: </b>{{canino.analisis.fecha}}
+    </div>
+    <div class="col-md-4">
+    	<b>Propietario: </b>{{canino.propietario}}
+    </div>
+    <div class="col-md-4">
+    	<b>Paciente: </b>{{canino.nombre}}
+    </div>
+    <div class="col-md-4">
+    	<b>Dirección: </b>{{canino.propietario.direccion}}
+    </div>
+    <div class="col-md-4">
+    	<b>Especie: </b>{{canino.especie}}
+    </div>
+    <div class="col-md-4">
+    	<b>Raza: </b>{{canino.raza}}
+    </div>
+    <div class="col-md-4">
+    	<b>Sexo: </b>{{canino.sexo}}
+    </div>
+    <div class="col-md-4">
+    	<b>Edad: </b>{{canino.edad}}
+    </div>
+    {{canino.analisis.dilucion_inicial}}
+    {{canino.analisis.reactivo}}
+
+
+
+
+
+
+<table WIDTH=80% align="center" style="background-color:#CFD8DC;">
+  <thead>
+    <tr>
+      <th>Serogrupo</th>
+      <th>Serovar</th>
+      <th>Cepa</th>
+      <th>Especie</th>
+    </tr>
+  </thead>
+  <tbody>
+ 
+  {% for serovar in serovares %}
+    <tr >
+      <td>{{serovar.serogrupo}}</td>
+      <td>{{serovar.serovar}}</td>
+      <td>{{serovar.cepa}}</td>
+      <td>{{serovar.especie}}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+<div id="footerFirst">
+    <div style="width:58px; height: 100%;float:left;">
+        <a>arauz@fcv.unlp.edu.ar</a>
+    </div>
+    <div style="width:58px; height: 100%;float:left;">
+        <a>plmartin@fcv.unlp.edu.ar</a>
+    </div>
+    <div style="width:58px; height: 100%;float:left;">
+        <a>stanchi@fcv.unlp.edu.ar</a>
+    </div>
+</div>
+</body>
+</html>

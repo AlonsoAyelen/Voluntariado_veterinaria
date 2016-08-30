@@ -909,7 +909,7 @@ a {
 }
 a:hover,
 a:focus {
-  color: #97310e;
+  color: #fff;
   text-decoration: underline;
 }
 a:focus {
@@ -2762,8 +2762,8 @@ fieldset[disabled] .btn {
 }
 .btn-default {
   color: #ffffff;
-  background-color: #aea79f;
-  border-color: #aea79f;
+  background-color: #0e7497;
+  border-color: #0e7497;
 }
 .btn-default:hover,
 .btn-default:focus,
@@ -2803,8 +2803,9 @@ fieldset[disabled] .btn-default.active {
 }
 .btn-primary {
   color: #ffffff;
-  background-color: #dd4814;
-  border-color: #dd4814;
+  background-color: #0e7497;
+  border-color: #1086ae; 
+  
 }
 .btn-primary:hover,
 .btn-primary:focus,
@@ -2812,8 +2813,8 @@ fieldset[disabled] .btn-default.active {
 .btn-primary.active,
 .open > .dropdown-toggle.btn-primary {
   color: #ffffff;
-  background-color: #ae3910;
-  border-color: #a5360f;
+  background-color: #0a5068;
+  border-color: #083e51;
 }
 .btn-primary:active,
 .btn-primary.active,
@@ -2844,8 +2845,8 @@ fieldset[disabled] .btn-primary.active {
 }
 .btn-success {
   color: #ffffff;
-  background-color: #38b44a;
-  border-color: #38b44a;
+  background-color: #009688;
+  border-color: #009688;
 }
 .btn-success:hover,
 .btn-success:focus,
@@ -2853,8 +2854,8 @@ fieldset[disabled] .btn-primary.active {
 .btn-success.active,
 .open > .dropdown-toggle.btn-success {
   color: #ffffff;
-  background-color: #2c8d3a;
-  border-color: #298537;
+  background-color: #004D40;
+  border-color: #004D40;
 }
 .btn-success:active,
 .btn-success.active,
@@ -3028,7 +3029,7 @@ fieldset[disabled] .btn-link {
 }
 .btn-link:hover,
 .btn-link:focus {
-  color: #97310e;
+  color: #073848;
   text-decoration: underline;
   background-color: transparent;
 }
@@ -4079,8 +4080,8 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   }
 }
 .navbar-default {
-  background-color: #01579B;
-  border-color: #bf3e11;
+  background-color: #0e7497;
+  border-color: #1086ae;
 }
 .navbar-default .navbar-brand {
   color: #ffffff;
@@ -4099,13 +4100,13 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 .navbar-default .navbar-nav > li > a:hover,
 .navbar-default .navbar-nav > li > a:focus {
   color: #ffffff;
-  background-color: #97310e;
+  background-color: #0a5068;
 }
 .navbar-default .navbar-nav > .active > a,
 .navbar-default .navbar-nav > .active > a:hover,
 .navbar-default .navbar-nav > .active > a:focus {
   color: #ffffff;
-  background-color: #ae3910;
+  background-color: #073848;
 }
 .navbar-default .navbar-nav > .disabled > a,
 .navbar-default .navbar-nav > .disabled > a:hover,
@@ -4114,18 +4115,18 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   background-color: transparent;
 }
 .navbar-default .navbar-toggle {
-  border-color: #97310e;
+  border-color: #073848;
 }
 .navbar-default .navbar-toggle:hover,
 .navbar-default .navbar-toggle:focus {
-  background-color: #97310e;
+  background-color: #073848;
 }
 .navbar-default .navbar-toggle .icon-bar {
   background-color: #ffffff;
 }
 .navbar-default .navbar-collapse,
 .navbar-default .navbar-form {
-  border-color: #bf3e11;
+  border-color: #073848;
 }
 .navbar-default .navbar-nav > .open > a,
 .navbar-default .navbar-nav > .open > a:hover,
@@ -4140,7 +4141,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   .navbar-default .navbar-nav .open .dropdown-menu > li > a:hover,
   .navbar-default .navbar-nav .open .dropdown-menu > li > a:focus {
     color: #ffffff;
-    background-color: #97310e;
+    background-color: #073848;
   }
   .navbar-default .navbar-nav .open .dropdown-menu > .active > a,
   .navbar-default .navbar-nav .open .dropdown-menu > .active > a:hover,
@@ -4330,12 +4331,12 @@ fieldset[disabled] .navbar-inverse .btn-link:focus {
 .pagination > li > span:hover,
 .pagination > li > a:focus,
 .pagination > li > span:focus {
-  color: #97310e;
+  color: #073848;
   background-color: #eeeeee;
   border-color: #dddddd;
 }
 .pagination > .active > a,
-.pagination > .active > span,
+.pagination > .active > span,#b43864
 .pagination > .active > a:hover,
 .pagination > .active > span:hover,
 .pagination > .active > a:focus,

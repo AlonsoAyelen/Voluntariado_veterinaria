@@ -1,126 +1,113 @@
  
 {% extends 'home/base.html'%}
 
+{% block title%} Agregar bioquimica {% endblock %}
+
+{% block bioquimicas_active %}class = "active"{% endblock %}
+
 {% block section %}
    {% if mensaje %}
         <legend align="center">{{mensaje}}</legend>
     {% endif %}
 <div class="container">
-<div class="col-lg-8 control-label">
+<div class="col-lg-12 control-label">
 <div class="well bs-component">
 <form class="form-horizontal" method='post' action=''>{% csrf_token %}
   <fieldset>
     <legend>{{titulo}}</legend>
     <div class="form-group">
       <label for="canino" class="col-lg-2 control-label">Canino</label>
-      <div class="col-lg-10">
-       <select value="{{canino.id}}" id="canino" placeholder="Canino" name="canino" required value="{{canino.nombre}}"> 
+      <div class="col-lg-4">
+       <select value="{{canino.id}}" id="canino" placeholder="Canino" name="canino" required value="{{canino.nombre}}" class="form-control"> 
         {% for canino in caninos %}
           <option value="{{canino.id}}" id="canino" placeholder="Canino" name="canino" required>{{canino.nombre}} </option>
         {% endfor%}
       </select>
       </div>
-    </div>
-    <div class="form-group">
       <label for="fecha" class="col-lg-2 control-label">Fecha</label>
-      <div class="col-lg-10">
-        <input type="date" class="form-control" id="fecha" placeholder="Fecha" name="fecha" required value="{{bioquimica.fecha|date}}">
+      <div class="col-lg-4">
+        <input type="date" class="form-control" id="fecha" placeholder="Fecha" name="fecha" required value="{{bioquimica.fecha|date:"Y-m-d"}}">
       </div>
     </div>
     <div class="form-group">
-      <label for="perfil" class="col-lg-2 control-label">Perfil</label>
-      <div class="col-lg-10">
-        <input type="text" class="form-control" id="perfil" placeholder="Perfil" name="perfil" required value="{{bioquimica.perfil}}">
+    <label for="urea" class="col-lg-2 control-label">Urea</label>
+      <div class="col-lg-4">
+        <input type="number" step="0.01" class="form-control" id="urea" placeholder="Urea" name="urea" required value="{{bioquimica.urea|stringformat:"f"}}">
       </div>
-    </div>
-    <div class="form-group">
-      <label for="urea" class="col-lg-2 control-label">Urea</label>
-      <div class="col-lg-10">
-        <input type="number" step="0.01" class="form-control" id="urea" placeholder="Urea" name="urea" required value="{{bioquimica.urea}}">
-      </div>
-    </div>
-    <div class="form-group">
       <label for="crea" class="col-lg-2 control-label">Crea</label>
-      <div class="col-lg-10">
-        <input type="number" step="0.01" class="form-control" id="crea" placeholder="Crea" name="crea" required value="{{bioquimica.crea}}">
+      <div class="col-lg-4">
+        <input type="number" step="0.01" class="form-control" id="crea" placeholder="Crea" name="crea" required value="{{bioquimica.crea|stringformat:"f"}}">
       </div>
     </div>
     <div class="form-group">
-      <label for="ALT" class="col-lg-2 control-label">ALT</label>
-      <div class="col-lg-10">
-        <input type="number" step="0.01" class="form-control" id="ALT" placeholder="ALT" name="ALT" required value="{{bioquimica.ALT}}">
+    <label for="ALT" class="col-lg-2 control-label">ALT</label>
+      <div class="col-lg-4">
+        <input type="number" step="0.01" class="form-control" id="ALT" placeholder="ALT" name="ALT" required value="{{bioquimica.ALT|stringformat:"f"}}">
       </div>
-    </div>
-    <div class="form-group">
       <label for="AST" class="col-lg-2 control-label">AST</label>
-      <div class="col-lg-10">
-        <input type="number" step="0.01" class="form-control" id="AST" placeholder="AST" name="AST" required value="{{bioquimica.AST}}">
+      <div class="col-lg-4">
+        <input type="number" step="0.01" class="form-control" id="AST" placeholder="AST" name="AST" required value="{{bioquimica.AST|stringformat:"f"}}">
       </div>
-    </div>
-    <div class="form-group">
-      <label for="PT" class="col-lg-2 control-label">PT</label>
-      <div class="col-lg-10">
-        <input type="number" step="0.01" class="form-control" id="PT" placeholder="PT" name="PT" required value="{{bioquimica.PT}}">
+     </div>
+     <div class="form-group">
+    <label for="PT" class="col-lg-2 control-label">PT</label>
+      <div class="col-lg-4">
+        <input type="number" step="0.01" class="form-control" id="PT" placeholder="PT" name="PT" required value="{{bioquimica.PT|stringformat:"f"}}">
       </div>
-    </div>
-    <div class="form-group">
       <label for="alb" class="col-lg-2 control-label">Alb</label>
-      <div class="col-lg-10">
-        <input type="number" step="0.01" class="form-control" id="alb" placeholder="alb" name="alb" required value="{{bioquimica.alb}}">
+      <div class="col-lg-4">
+        <input type="number" step="0.01" class="form-control" id="alb" placeholder="alb" name="alb" required value="{{bioquimica.alb|stringformat:"f"}}">
       </div>
     </div>
     <div class="form-group">
-      <label for="FAS" class="col-lg-2 control-label">FAS</label>
-      <div class="col-lg-10">
-        <input type="number" step="0.01" class="form-control" id="FAS" placeholder="FAS" name="FAS" required value="{{bioquimica.FAS}}">
+    <label for="FAS" class="col-lg-2 control-label">FAS</label>
+      <div class="col-lg-4">
+        <input type="number" step="0.01" class="form-control" id="FAS" placeholder="FAS" name="FAS" required value="{{bioquimica.FAS|stringformat:"f"}}">
       </div>
-    </div>
-    <div class="form-group">
-      <label for="GGT" class="col-lg-2 control-label">GGT</label>
-      <div class="col-lg-10">
-        <input type="number" step="0.01" class="form-control" id="GGT" placeholder="GGT" name="GGT" required value="{{bioquimica.GGT}}">
+     <label for="GGT" class="col-lg-2 control-label">GGT</label>
+      <div class="col-lg-4">
+        <input type="number" step="0.01" class="form-control" id="GGT" placeholder="GGT" name="GGT" required value="{{bioquimica.GGT|stringformat:"f"}}">
       </div>
     </div>
     <div class="form-group">
       <label for="CPK" class="col-lg-2 control-label">CPK</label>
-      <div class="col-lg-10">
-        <input type="number" step="0.01" class="form-control" id="CPK" placeholder="CPK" name="CPK" required value="{{bioquimica.CPK}}">
+      <div class="col-lg-4">
+        <input type="number" step="0.01" class="form-control" id="CPK" placeholder="CPK" name="CPK" required value="{{bioquimica.CPK|stringformat:"f"}}">
       </div>
-    </div>
-    <div class="form-group">
       <label for="col" class="col-lg-2 control-label">Col</label>
-      <div class="col-lg-10">
-        <input type="number" step="0.01" class="form-control" id="col" placeholder="col" name="col" required value="{{bioquimica.col}}">
+      <div class="col-lg-4">
+        <input type="number" step="0.01" class="form-control" id="col" placeholder="col" name="col" required value="{{bioquimica.col|stringformat:"f"}}">
       </div>
     </div>
     <div class="form-group">
-      <label for="bil_t" class="col-lg-2 control-label">Bil_t</label>
-      <div class="col-lg-10">
-        <input type="number" step="0.01" class="form-control" id="bil_t" placeholder="bil_t" name="bil_t" required value="{{bioquimica.bil_t}}">
+    <label for="bil_t" class="col-lg-2 control-label">Bil_t</label>
+      <div class="col-lg-4">
+        <input type="number" step="0.01" class="form-control" id="bil_t" placeholder="bil_t" name="bil_t" required value="{{bioquimica.bil_t|stringformat:"f"}}">
       </div>
-    </div>
-    <div class="form-group">
       <label for="bil_d" class="col-lg-2 control-label">Bil_d</label>
-      <div class="col-lg-10">
-        <input type="number" step="0.01" class="form-control" id="bil_d" placeholder="bil_d" name="bil_d" required value="{{bioquimica.bil_d}}">
+      <div class="col-lg-4">
+        <input type="number" step="0.01" class="form-control" id="bil_d" placeholder="bil_d" name="bil_d" required value="{{bioquimica.bil_d|stringformat:"f"}}">
       </div>
     </div>
     <div class="form-group">
-      <label for="trig" class="col-lg-2 control-label">Trig</label>
-      <div class="col-lg-10">
-        <input type="number" step="0.01" class="form-control" id="trig" placeholder="trig" name="trig" required value="{{bioquimica.trig}}">
+    <label for="trig" class="col-lg-2 control-label">Trig</label>
+      <div class="col-lg-4">
+        <input type="number" step="0.01" class="form-control" id="trig" placeholder="trig" name="trig" required value="{{bioquimica.trig|stringformat:"f"}}">
       </div>
-    </div>
-    <div class="form-group">
       <label for="varios" class="col-lg-2 control-label">Varios</label>
-      <div class="col-lg-10">
-        <input type="text" step="0.01" class="form-control" id="varios" placeholder="varios" name="varios" value="{{bioquimica.varios}}">
+      <div class="col-lg-4">
+        <input type="text" class="form-control" id="varios" placeholder="varios" name="varios" value="{{bioquimica.varios}}">
       </div>
     </div>
+  </div>
     <div class="form-group">
-      <div class="col-lg-10 col-lg-offset-2">
-        <button type="submit" class="btn btn-success">Guardar</button>
-        <button type="reset" class="btn btn-primary">Cancelar</button>
+      <div class="col-lg-12 col-lg-offset-1">
+        <div class="col-lg-5">
+          <button type="submit" class="btn btn-success btn-block">Guardar</button>
+        </div>
+        <div class="col-lg-5">
+          <a type="button" class="btn btn-primary btn-block" href="{% url 'bioquimicas' %}">Cancelar</a>
+        </div>
       </div>
     </div>
 

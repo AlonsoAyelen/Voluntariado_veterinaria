@@ -2,21 +2,21 @@
 <HTML lang='es'>
 <head>
     <meta charset="UTF-8">
-    <title>Home</title>
+    <title>{% block title%} {% endblock %}</title>
     <!-- CDN Bootstrap -->
     <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css">-->
     {% load staticfiles %}
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>-->
-    <script type="text/javascript" src="{% static 'bootstrap/js/bootstrap.min.js'%}"></script>
+    <script type="text/javascript" src="{% static 'bootstrap/js/bootswatch.min.js'%}"></script>
     <!-- Latest compiled and minified CSS -->
     <!--<link rel="stylesheet" href="http://bootswatch.com/flatly/bootstrap.min.css" >-->
     <link rel="stylesheet" type="text/css" href="{% static 'bootstrap/css/bootstrap.min.css' %}"/>
     <!-- Optional theme -->
     <!--<link rel="stylesheet" href="http://bootswatch.com/flatly/bootstrap.css" >-->
     <link rel="stylesheet" type="text/css" href="{% static 'bootstrap/css/bootstrap.css' %}"/>
-
+    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
     
 
 
@@ -42,22 +42,20 @@
 				      	  {% if user.is_authenticated %}
                     {% block nav %}
                       {% if user.is_staff %}
-                        <li {% block usuarios_active %}{% endblock %}><a href="{% url 'usuarios_view' %}">Manejo de usuarios</a></li>
+                        <li {% block usuarios_active %}{% endblock %}><a href="{% url 'usuarios_view' %}"><i class="fa fa-users" aria-hidden="true"></i> Manejo de Usuarios</a></li>
                       {% endif %}
-    				      	 	<li {% block caninos_active %}{% endblock %}><a href="{% url 'caninos_view' %}">Manejo de caninos</a></li>
-            					<li {% block duenios_active %}{% endblock %}><a href="{% url 'duenios_view' %}">Manejo de dueños<span class="sr-only">(current)</span></a></li>
-            					<li {% block estadisticas_active %}{% endblock %}><a href="{% url 'estadisticas' %}">Estadisticas</a></li>
-                      <li {% block bioquimicas_active %}{% endblock %}><a href="{% url 'bioquimicas' %}">Bioquimicas</a></li>
-                      <li {% block hemogramas_active %}{% endblock %}><a href="{% url 'hemogramas' %}">Hemogramas</a></li>
+    				      	 	<li {% block caninos_active %}{% endblock %}><a href="{% url 'caninos_view' %}"><i class="fa fa-paw fa-2" aria-hidden="true"></i> Manejo de Caninos</a></li>
+            					<li {% block duenios_active %}{% endblock %}><a href="{% url 'duenios_view' %}"><i class="fa fa-user" aria-hidden="true"></i> Manejo de Dueños<span class="sr-only">(current)</span></a></li>
+            					<li {% block estadisticas_active %}{% endblock %}><a href="{% url 'estadisticas' %}"><i class="fa fa-line-chart" aria-hidden="true"></i> Estadisticas</a></li>
+                      <li {% block bioquimicas_active %}{% endblock %}><a href="{% url 'bioquimicas' %}"><i class="fa fa-wpforms" aria-hidden="true"></i><i class="fa fa-file-text" aria-hidden="true"></i> Bioquimicas</a></li>
+                      <li {% block hemogramas_active %}{% endblock %}><a href="{% url 'hemogramas' %}"><i class="fa fa-tint" aria-hidden="true"></i> Hemogramas</a></li>
   						      {% endblock%}
 				          {% endif %}
               </ul>
 				      <ul class="nav navbar-nav navbar-right">
                       {% if user.is_authenticated %}
-                		<li><a href="{% url 'logout' %}">Cerrar sesión</a></li>
-                      {% else %}
-                        <li><a href="{% url 'login' %}">Iniciar sesión</a></li>
-              		  {% endif %}
+                		<li><a href="{% url 'logout' %}"><i class="fa fa-power-off" aria-hidden="true"></i>   Cerrar sesión</a></li>
+                    {% endif %}
                       </ul>
 				        
 				    </div>

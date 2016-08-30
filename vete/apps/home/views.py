@@ -1,3 +1,4 @@
+# -*- encoding: utf-8 -*-
 from django.shortcuts import render_to_response , redirect
 from django.template import RequestContext
 from django.contrib.auth.models import User
@@ -10,10 +11,20 @@ from vete.apps.vete.models import Propietario
 from vete.apps.vete.models import Canino
 from vete.apps.vete.models import Hemograma
 from vete.apps.vete.models import Bioquimica
-from reportlab.pdfgen import canvas
+from vete.apps.vete.models import Sintoma
+from vete.apps.vete.models import Analisis
+from vete.apps.vete.models import Serovar
 from django.http import HttpResponse
-
-
+from xhtml2pdf import pisa 
+from django.contrib.auth.decorators import login_required
+from django import http
+from django.template.loader import get_template
+from django.template import Context
+try:
+    import StringIO
+    StringIO = StringIO.StringIO
+except Exception:
+    from io import StringIO
 
 @csrf_protect
 def nuevo_usuario(request):
@@ -21,7 +32,7 @@ def nuevo_usuario(request):
 	if not request.user.is_authenticated():
 		return redirect('login')
 	else:
-		contexto['titulo'] = 'Agregar usuario'
+		contexto['titulo'] = 'Agregar Usuario'
 		contexto['url_action'] = request.get_full_path()
 		if request.method == 'POST':
 			nombre = request.POST.get('nombre')
@@ -63,7 +74,7 @@ def login_view(request):
 		return render_to_response('home/login_view.html' , context_instance=RequestContext(request))
 
 def duenios_view(request):
-	contexto = {'titulo':'' , 'nombre':'','apellido':'','direccion':'','barrio':'','procedencia':'','telefono':'','edad':'','instruccion':'','ocupacion':'','adultos':'','ninios':'','escolar':'','mascotas':'','tipos':'','vivienda':'','material':'','ambientes':'','agujeros':'','agua':'','excretas':'','residuos':'','recoleccion':'','basural':'','roedores':'','agua_servida':'','inundaciones':'','ultima':'','integrante':'','sintomas':'','aclaracion':''}
+	contexto = {'titulo':'' , 'nombre':'','apellido':'','direccion':'','barrio':'','procedencia':'','telefono':'','edad':'','instruccion':'','ocupacion':'','adultos':'','ninios':'','escolar':'','mascotas':'','tipos':'','vivienda':'','material':'','ambientes':'','agujeros':'','agua':'','excretas':'','residuos':'','recoleccion':'','basural':'','roedores':'','agua_servida':'','inundaciones':'','ultima':'','signos_clinicos':'','integrante':'','sintomas':'','aclaracion':''}
 	if not request.user.is_authenticated():
 		return redirect('login')
 	else:
@@ -82,7 +93,7 @@ def detalles_duenio_view(request):
 	if not request.user.is_authenticated():
 		return redirect('login')
 	else:
-		contexto = {'nombre':'','apellido':'','direccion':'','barrio':'','procedencia':'','telefono':'','edad':'','instruccion':'','ocupacion':'','adultos':'','ninios':'','escolar':'','mascotas':'','tipos':'','vivienda':'','material':'','ambientes':'','agujeros':'','agua':'','excretas':'','residuos':'','recoleccion':'','basural':'','roedores':'','agua_servida':'','inundaciones':'','ultima':'','integrante':'','sintomas':'','aclaracion':''}
+		contexto = {'nombre':'','apellido':'','direccion':'','barrio':'','procedencia':'','telefono':'','edad':'','instruccion':'','ocupacion':'','adultos':'','ninios':'','escolar':'','mascotas':'','tipos':'','vivienda':'','material':'','ambientes':'','agujeros':'','agua':'','excretas':'','residuos':'','recoleccion':'','basural':'','roedores':'','agua_servida':'','inundaciones':'','ultima':'','signos_clinicos':'','integrante':'','sintomas':'','aclaracion':''}
 		if(len(request.POST.getlist('mas'))> 0):
 			duenio = Propietario.objects.filter(id = int(request.POST.getlist('mas')[0]))
 			contexto['nombre'] = duenio[0].nombre
@@ -112,6 +123,7 @@ def detalles_duenio_view(request):
 			contexto['agua_servida'] = duenio[0].agua_servida
 			contexto['inundaciones'] = duenio[0].inundaciones
 			contexto['ultima'] = duenio[0].ultima_inundacion
+			contexto['signos_clinicos'] = duenio[0].signos_clinicos
 			contexto['integrante'] = duenio[0].integrante
 			contexto['sintomas'] = duenio[0].sintomas
 			contexto['aclaracion'] = duenio[0].aclaracion
@@ -122,11 +134,12 @@ def detalles_canino_view(request):
 	if not request.user.is_authenticated():
 		return redirect('login')
 	else:
-		contexto = {'propietario':'' , 'nombre':'' ,'especie':'', 'sexo':'','raza':'','edad':'','motivo_de_consulta':'', 'uso_de_la_mascota':'','habitos':'' , 'contacto_con_basural':'' , 'caza':'','caza_roedores':'' ,	'observacion_roedores':'', 'vacunado_contra_leptospirosis':'','desparasitado':'' , 'eliminacion_de_excretas':'',	'habitos_alimenticios':'','signos_clinicos':'','piel_Linfonodos':'','digestivo':'','cardio_respiratorio':'','urogenital':'','musculoesqueleticonervioso':'','procedimiento_realizado':'','peso':'','actitud':'','mucosas':'','TLC':'','hidratacion':'','FC':'','pulso':'','FR':'','T':''}
+		contexto = {'propietario':'' , 'nombre':'','protocolo':'' ,'especie':'', 'sexo':'','raza':'','edad':'','motivo_de_consulta':'', 'uso_de_la_mascota':'','habitos':'' , 'contacto_con_basural':'' , 'caza':'','caza_roedores':'' ,	'observacion_roedores':'', 'vacunado_contra_leptospirosis':'','desparasitado':'' , 'eliminacion_de_excretas':'',	'habitos_alimenticios':'','piel_Linfonodos':'','digestivo':'','cardio_respiratorio':'','urogenital':'','musculoesqueleticonervioso':'','procedimiento_realizado':'','peso':'','actitud':'','mucosas':'','TLC':'','hidratacion':'','FC':'','pulso':'','FR':'','T':''}
 		if(len(request.POST.getlist('mas'))> 0):
 			canino = Canino.objects.filter(id = int(request.POST.getlist('mas')[0]))
 			contexto['propietario'] = canino[0].propietario 
 			contexto['nombre'] = canino[0].nombre
+			contexto['protocolo'] = canino[0].protocolo
 			contexto['especie'] = canino[0].especie
 			contexto['sexo'] = canino[0].sexo
 			contexto['raza'] = canino[0].raza
@@ -142,7 +155,6 @@ def detalles_canino_view(request):
 			contexto['desparasitado'] = canino[0].desparasitado
 			contexto['eliminacion_de_excretas'] = canino[0].eliminacion_de_excretas
 			contexto['habitos_alimenticios'] = canino[0].habitos_alimenticios
-			contexto['signos_clinicos'] = canino[0].signos_clinicos
 			contexto['piel_Linfonodos'] = canino[0].piel_Linfonodos
 			contexto['digestivo'] = canino[0].digestivo
 			contexto['cardio_respiratorio'] = canino[0].cardio_respiratorio
@@ -199,12 +211,11 @@ def detalles_bioquimica_view(request):
 	if not request.user.is_authenticated():
 		return redirect('login')
 	else:
-		contexto = {'titulo':'','url_action':'','canino':'','fecha':'' , 'perfil':'' ,'urea':'', 'crea':'','ALT':'','AST':'','PT':'', 'alb':'','FAS':'' , 'GGT':'' , 'CPK':'','col':'' ,'bil_t':'', 'bil_d':'','trig':'' , 'varios':''}
+		contexto = {'titulo':'','url_action':'','canino':'','fecha':'' ,'urea':'', 'crea':'','ALT':'','AST':'','PT':'', 'alb':'','FAS':'' , 'GGT':'' , 'CPK':'','col':'' ,'bil_t':'', 'bil_d':'','trig':'' , 'varios':''}
 		if(len(request.POST.getlist('mas'))> 0):
 			bioquimica = Bioquimica.objects.filter(id = int(request.POST.getlist('mas')[0]))
 			contexto['canino'] = bioquimica[0].canino
 			contexto['fecha'] = bioquimica[0].fecha
-			contexto['perfil'] = bioquimica[0].perfil
 			contexto['urea'] = bioquimica[0].urea
 			contexto['crea'] = bioquimica[0].crea
 			contexto['ALT'] = bioquimica[0].ALT
@@ -229,7 +240,7 @@ def caninos_view(request):
 		return redirect('login')
 	else:
 		caninos = Canino.objects.all()
-		contexto = {'titulo':'','caninos':caninos,'propietario':'' , 'nombre':'' ,'especie':'', 'sexo':'','raza':'','edad':'','motivo_de_consulta':'', 'uso_de_la_mascota':'','habitos':'' , 'contacto_con_basural':'' , 'caza':'','caza_roedores':'' ,	'observacion_roedores':'', 'vacunado_contra_leptospirosis':'','desparasitado':'' , 'eliminacion_de_excretas':'',	'habitos_alimenticios':'','signos_clinicos':'','piel_Linfonodos':'','digestivo':'','cardio_respiratorio':'','urogenital':'','musculoesqueleticonervioso':'','procedimiento_realizado':'','peso':'','actitud':'','mucosas':'','TLC':'','hidratacion':'','FC':'','pulso':'','FR':'','T':''}
+		contexto = {'titulo':'','caninos':caninos,'propietario':'' , 'nombre':'' ,'especie':'', 'sexo':'','raza':'','edad':'','motivo_de_consulta':'', 'uso_de_la_mascota':'','habitos':'' , 'contacto_con_basural':'' , 'caza':'','caza_roedores':'' ,	'observacion_roedores':'', 'vacunado_contra_leptospirosis':'','desparasitado':'' , 'eliminacion_de_excretas':'',	'habitos_alimenticios':'','piel_Linfonodos':'','digestivo':'','cardio_respiratorio':'','urogenital':'','musculoesqueleticonervioso':'','procedimiento_realizado':'','peso':'','actitud':'','mucosas':'','TLC':'','hidratacion':'','FC':'','pulso':'','FR':'','T':''}
 		if(len(request.POST.getlist('eliminar'))> 0):
 			canino = Canino.objects.filter(id = int(request.POST.getlist('eliminar')[0]))
 			canino.delete()
@@ -267,7 +278,7 @@ def actualizar_usuario_view(request,pk):
 				usuario.update(username=nombre , is_staff=False)
 			return render_to_response('home/usuarios_view.html' ,{'usuarios':usuarios}, context_instance=RequestContext(request))
 		usuarios = User.objects.filter()	    
-		return render_to_response('home/nuevo_usuario.html' ,{'usuario':usuario[0],'usuarios':usuarios,'titulo':'Modificar usuario', 'url_action':request.get_full_path()}, context_instance=RequestContext(request))
+		return render_to_response('home/nuevo_usuario.html' ,{'usuario':usuario[0],'usuarios':usuarios,'titulo':'Modificar Usuario', 'url_action':request.get_full_path()}, context_instance=RequestContext(request))
 
 
 
@@ -277,13 +288,17 @@ def logout_view(request):
     return render_to_response('home/login_view.html', context_instance=RequestContext(request))
 
 def nuevo_duenio_view(request):
-	contexto = {'titulo':'','url_action':'','nombre':'','apellido':'','direccion':'','barrio':'','procedencia':'','telefono':'','edad':'','instruccion':'','ocupacion':'','adultos':'','ninios':'','escolar':'','mascotas':'','tipos':'','vivienda':'','material':'','ambientes':'','agujeros':'','agua':'','excretas':'','residuos':'','recoleccion':'','basural':'','roedores':'','agua_servida':'','inundaciones':'','ultima':'','integrante':'','sintomas':'','aclaracion':''}
+	contexto = {'titulo':'','url_action':'','caninos':'','nombre':'','apellido':'','direccion':'','barrio':'','procedencia':'','telefono':'','edad':'','instruccion':'','ocupacion':'','adultos':'','ninios':'','escolar':'','mascotas':'','tipos':'','vivienda':'','material':'','ambientes':'','agujeros':'','agua':'','excretas':'','residuos':'','recoleccion':'','basural':'','roedores':'','agua_servida':'','inundaciones':'','ultima':'','signos_clinicos':'','integrante':'','sintomas':'','aclaracion':''}
+	caninos = Canino.objects.all()
+	contexto['caninos'] = caninos
 	if not request.user.is_authenticated():
 		return redirect('login')
 	else:
-		contexto['titulo'] = 'Agregar duenio'
+		contexto['titulo'] = 'Agregar Duenio'
 		contexto['url_action'] = request.get_full_path()
 		if(request.method == 'POST'):
+			if (request.POST.get('canino') != ""):
+				canino = Canino.objects.filter(id = int(request.POST.get('canino')))
 			nombre = request.POST.get('nombreDuenio')
 			apellido = request.POST.get('apellido')
 			direccion = request.POST.get('direccion')
@@ -311,8 +326,12 @@ def nuevo_duenio_view(request):
 			agua_servida = request.POST.get('agua_servida')
 			inundaciones = request.POST.get('inundaciones')
 			ultima = request.POST.get('ultima_inundacion')
+			signos_clinicos = request.POST.get('signos_clinicos')
 			integrante = request.POST.get('integrante')
-			sintomas = request.POST.get('sintomas')
+			sintomas_ids = request.POST.getlist('sintomas')
+
+			
+
 			aclaracion = request.POST.get('aclaracion')
 			status = True
 			
@@ -345,18 +364,24 @@ def nuevo_duenio_view(request):
 				contexto['agua_servida'] = agua_servida
 				contexto['inundaciones'] = inundaciones
 				contexto['ultima'] = ultima
+				contexto['signos_clinicos'] = signos_clinicos
 				contexto['integrante'] = integrante
-				contexto['sintomas'] = sintomas
 				contexto['aclaracion'] = aclaracion	
 			else:
-				propietario = Propietario(nombre = nombre,apellido=apellido, direccion = direccion,barrio=barrio,procedencia=procedencia, telefono = telefono,edad=edad,grado_de_instruccion=instruccion ,ocupacion=ocupacion , numero_convivientes_adultos = adultos, numero_convivientes_ninios = ninios, en_edad_escolar=escolar , mascotas=mascotas , tipos = tipos , vivienda = vivienda , material = material , ambientes = ambientes , agujeros = agujeros ,agua = agua , excretas = excretas , residuos_domiciliarios = residuos , recoleccion_de_residuos = recoleccion , basural = basural , roedores = roedores ,agua_servida = agua_servida , inundaciones = inundaciones , ultima_inundacion = ultima , integrante = integrante , sintomas = sintomas , aclaracion = aclaracion , status = status)
+				propietario = Propietario(nombre = nombre,apellido=apellido, direccion = direccion,barrio=barrio,procedencia=procedencia, telefono = telefono,edad=edad,grado_de_instruccion=instruccion ,ocupacion=ocupacion , numero_convivientes_adultos = adultos, numero_convivientes_ninios = ninios, en_edad_escolar=escolar , mascotas=mascotas , tipos = tipos , vivienda = vivienda , material = material , ambientes = ambientes , agujeros = agujeros ,agua = agua , excretas = excretas , residuos_domiciliarios = residuos , recoleccion_de_residuos = recoleccion , basural = basural , roedores = roedores ,agua_servida = agua_servida , inundaciones = inundaciones , ultima_inundacion = ultima ,signos_clinicos = signos_clinicos, integrante = integrante, aclaracion = aclaracion , status = status)
 				propietario.save()
+				canino.update(propietario=propietario)
+				for ids in sintomas_ids:
+					propietario.sintomas.add(Sintoma.objects.filter(pk=ids)[0])
+		contexto['sintomas'] = Sintoma.objects.all()
 		return render_to_response('home/nuevo_duenio.html' ,contexto, context_instance=RequestContext(request))
 
 def actualizar_duenio_view(request,pk):
 	if not request.user.is_authenticated():
 		return redirect('login')
 	else:
+		sintomas = []
+		sint = Sintoma.objects.all()
 		duenios = Propietario.objects.all()
 		duenio = Propietario.objects.filter(id = int(pk))
 		if(request.method == 'POST'):
@@ -387,26 +412,38 @@ def actualizar_duenio_view(request,pk):
 			agua_servida = request.POST.get('agua_servida')
 			inundaciones = request.POST.get('inundaciones')
 			ultima = request.POST.get('ultima_inundacion')
+			signos_clinicos = request.POST.get('signos_clinicos')
 			integrante = request.POST.get('integrante')
-			sintomas = request.POST.get('sintomas')
 			aclaracion = request.POST.get('aclaracion')
-			duenio.update(nombre = nombre,apellido=apellido, direccion = direccion,barrio=barrio,procedencia=procedencia, telefono = telefono,edad=edad,grado_de_instruccion=instruccion ,ocupacion=ocupacion , numero_convivientes_adultos = adultos, numero_convivientes_ninios = ninios, en_edad_escolar=escolar , mascotas=mascotas , tipos = tipos , vivienda = vivienda , material = material , ambientes = ambientes , agujeros = agujeros ,agua = agua , excretas = excretas , residuos_domiciliarios = residuos , recoleccion_de_residuos = recoleccion , basural = basural , roedores = roedores ,agua_servida = agua_servida , inundaciones = inundaciones , ultima_inundacion = ultima , integrante = integrante , sintomas = sintomas , aclaracion = aclaracion)
-			# hacer redirect
+			sintomas_ids = request.POST.getlist('sintomas')
+			for ids in sintomas_ids:
+				sintoma = Sintoma.objects.filter(id = ids)[0]
+				sintomas.append(sintoma)
+			for sintoma in sintomas:
+				if not sintoma in duenio[0].sintomas.all():
+					duenio[0].sintomas.add(sintoma)
+			for sintoma in duenio[0].sintomas.all():
+				if not sintoma in sintomas:
+					duenio[0].sintomas.remove(sintoma)
+			duenio.update(nombre = nombre,apellido=apellido, direccion = direccion,barrio=barrio,procedencia=procedencia, telefono = telefono,edad=edad,grado_de_instruccion=instruccion ,ocupacion=ocupacion , numero_convivientes_adultos = adultos, numero_convivientes_ninios = ninios, en_edad_escolar=escolar , mascotas=mascotas , tipos = tipos , vivienda = vivienda , material = material , ambientes = ambientes , agujeros = agujeros ,agua = agua , excretas = excretas , residuos_domiciliarios = residuos , recoleccion_de_residuos = recoleccion , basural = basural , roedores = roedores ,agua_servida = agua_servida , inundaciones = inundaciones , ultima_inundacion = ultima ,signos_clinicos=signos_clinicos, integrante = integrante , aclaracion = aclaracion)
 			return render_to_response('home/duenios_view.html' ,{'duenios':duenios}, context_instance=RequestContext(request))
-	
-		return render_to_response('home/nuevo_duenio.html' ,{'duenio':duenio[0] , 'titulo':'Modificar duenio', 'url_action':request.get_full_path()}, context_instance=RequestContext(request))
+			
+		return render_to_response('home/nuevo_duenio.html' ,{'duenio':duenio[0] ,'sintomas':sint, 'titulo':'Modificar Duenio', 'url_action':request.get_full_path()}, context_instance=RequestContext(request))
 		
 
 def nuevo_canino_view(request):
-	contexto = {'titulo':'','url_action':'','error':'','propietario':'' , 'nombre':'' ,'especie':'', 'sexo':'','raza':'','edad':'','motivo_de_consulta':'', 'uso_de_la_mascota':'','habitos':'' , 'contacto_con_basural':'' , 'caza':'','caza_roedores':'' ,	'observacion_roedores':'', 'vacunado_contra_leptospirosis':'','desparasitado':'' , 'eliminacion_de_excretas':'',	'habitos_alimenticios':'','signos_clinicos':'','piel_Linfonodos':'','digestivo':'','cardio_respiratorio':'','urogenital':'','musculoesqueleticonervioso':'','procedimiento_realizado':''}
+	contexto = {'titulo':'','url_action':'','error':'','propietario':'' , 'nombre':'','protocolo':'' ,'especie':'', 'sexo':'','raza':'','edad':'','motivo_de_consulta':'', 'uso_de_la_mascota':'','habitos':'' , 'contacto_con_basural':'' , 'caza':'','caza_roedores':'' ,	'observacion_roedores':'', 'vacunado_contra_leptospirosis':'','desparasitado':'' , 'eliminacion_de_excretas':'',	'habitos_alimenticios':'','piel_Linfonodos':'','digestivo':'','cardio_respiratorio':'','urogenital':'','musculoesqueleticonervioso':'','procedimiento_realizado':''}
+	propietario = None
 	if not request.user.is_authenticated():
 		return redirect('login')
 	else:
-		contexto['titulo'] = 'Agregar canino'
+		contexto['titulo'] = 'Agregar Canino'
 		contexto['url_action'] = request.get_full_path()
 		if(request.method == 'POST'): 
-			propietario = Propietario.objects.filter(id = int(request.POST.get('duenio')))[0]
+			if (request.POST.get('duenio') != ""):
+				propietario = Propietario.objects.filter(id = int(request.POST.get('duenio')))[0]
 			nombre = request.POST.get('nombreCanino')
+			protocolo = request.POST.get('protocolo')
 			especie = request.POST.get('especie')
 			sexo = request.POST.get('sexo')
 			raza = request.POST.get('raza')
@@ -422,7 +459,6 @@ def nuevo_canino_view(request):
 			desparasitado = request.POST.get('desparasitado')
 			eliminacion_de_excretas = request.POST.get('eliminacion_de_excretas')
 			habitos_alimenticios = request.POST.get('habitos_alimenticios')
-			signos_clinicos = request.POST.get('signos_clinicos')
 			piel_Linfonodos = request.POST.get('piel_Linfonodos')
 			digestivo = request.POST.get('digestivo')
 			cardio_respiratorio = request.POST.get('cardio_respiratorio')
@@ -443,6 +479,7 @@ def nuevo_canino_view(request):
 				contexto['error'] = "El canino ya existe"
 				contexto['propietario'] = propietario 
 				contexto['nombre'] = nombre
+				contexto['protocolo'] = protocolo
 				contexto['especie'] = especie
 				contexto['sexo'] = sexo
 				contexto['raza'] = raza
@@ -458,7 +495,6 @@ def nuevo_canino_view(request):
 				contexto['desparasitado'] = desparasitado
 				contexto['eliminacion_de_excretas'] = eliminacion_de_excretas
 				contexto['habitos_alimenticios'] = habitos_alimenticios
-				contexto['signos_clinicos'] = signos_clinicos
 				contexto['piel_Linfonodos'] = piel_Linfonodos
 				contexto['digestivo'] = digestivo
 				contexto['cardio_respiratorio'] = cardio_respiratorio
@@ -475,7 +511,7 @@ def nuevo_canino_view(request):
 				contexto['T'] = T
 				contexto['procedimiento_realizado'] = procedimiento_realizado
 			else:
-				canino = Canino(propietario = propietario , nombre = nombre, especie = especie , sexo=sexo , raza = raza , edad=edad , motivo_de_consulta = motivo_de_consulta, uso_de_la_mascota=uso_de_la_mascota , habitos = habitos , contacto_con_basural = contacto_con_basural , caza = caza , caza_roedores = caza_roedores , observacion_roedores = observacion_roedores , vacunado_contra_leptospirosis = vacunado_contra_leptospirosis , desparasitado = desparasitado , eliminacion_de_excretas = eliminacion_de_excretas , habitos_alimenticios = habitos_alimenticios , signos_clinicos = signos_clinicos , piel_Linfonodos = piel_Linfonodos , digestivo = digestivo , cardio_respiratorio = cardio_respiratorio , urogenital = urogenital , musculoesqueleticonervioso = musculoesqueleticonervioso ,peso = peso,actitud = actitud,mucosas = mucosas,TLC = TLC,hidratacion = hidratacion, FC = FC, pulso = pulso, FR = FR,T = T, procedimiento_realizado = procedimiento_realizado , status = True)
+				canino = Canino(propietario = propietario , nombre = nombre,protocolo = protocolo, especie = especie , sexo=sexo , raza = raza , edad=edad , motivo_de_consulta = motivo_de_consulta, uso_de_la_mascota=uso_de_la_mascota , habitos = habitos , contacto_con_basural = contacto_con_basural , caza = caza , caza_roedores = caza_roedores , observacion_roedores = observacion_roedores , vacunado_contra_leptospirosis = vacunado_contra_leptospirosis , desparasitado = desparasitado , eliminacion_de_excretas = eliminacion_de_excretas , habitos_alimenticios = habitos_alimenticios ,  piel_Linfonodos = piel_Linfonodos , digestivo = digestivo , cardio_respiratorio = cardio_respiratorio , urogenital = urogenital , musculoesqueleticonervioso = musculoesqueleticonervioso ,peso = peso,actitud = actitud,mucosas = mucosas,TLC = TLC,hidratacion = hidratacion, FC = FC, pulso = pulso, FR = FR,T = T, procedimiento_realizado = procedimiento_realizado , status = True)
 				canino.save()	
 		duenios = Propietario.objects.all()
 		contexto['duenios'] = duenios
@@ -491,6 +527,7 @@ def actualizar_canino_view(request,pk):
 		if(request.method == 'POST'):
 			propietario = Propietario.objects.filter(id = int(request.POST.get('duenio')))[0]
 			nombre = request.POST.get('nombreCanino')
+			protocolo = request.POST.get('protocolo')
 			especie = request.POST.get('especie')
 			sexo = request.POST.get('sexo')
 			raza = request.POST.get('raza')
@@ -506,7 +543,6 @@ def actualizar_canino_view(request,pk):
 			desparasitado = request.POST.get('desparasitado')
 			eliminacion_de_excretas = request.POST.get('eliminacion_de_excretas')
 			habitos_alimenticios = request.POST.get('habitos_alimenticios')
-			signos_clinicos = request.POST.get('signos_clinicos')
 			piel_Linfonodos = request.POST.get('piel_Linfonodos')
 			digestivo = request.POST.get('digestivo')
 			cardio_respiratorio = request.POST.get('cardio_respiratorio')
@@ -522,13 +558,13 @@ def actualizar_canino_view(request,pk):
 			FR = request.POST.get('FR')
 			T = request.POST.get('T')
 			procedimiento_realizado = request.POST.get('procedimiento_realizado')
-			canino.update(propietario = propietario , nombre = nombre, especie = especie , sexo=sexo , raza = raza , edad=edad , motivo_de_consulta = motivo_de_consulta, uso_de_la_mascota=uso_de_la_mascota , habitos = habitos , contacto_con_basural = contacto_con_basural , caza = caza , caza_roedores = caza_roedores , observacion_roedores = observacion_roedores , vacunado_contra_leptospirosis = vacunado_contra_leptospirosis , desparasitado = desparasitado , eliminacion_de_excretas = eliminacion_de_excretas , habitos_alimenticios = habitos_alimenticios , signos_clinicos = signos_clinicos , piel_Linfonodos = piel_Linfonodos , digestivo = digestivo , cardio_respiratorio = cardio_respiratorio , urogenital = urogenital , musculoesqueleticonervioso = musculoesqueleticonervioso ,peso = peso,actitud = actitud,mucosas = mucosas,TLC = TLC,hidratacion = hidratacion, FC = FC, pulso = pulso, FR = FR,T = T, procedimiento_realizado = procedimiento_realizado , status = True)
+			canino.update(propietario = propietario , nombre = nombre,protocolo = protocolo, especie = especie , sexo=sexo , raza = raza , edad=edad , motivo_de_consulta = motivo_de_consulta, uso_de_la_mascota=uso_de_la_mascota , habitos = habitos , contacto_con_basural = contacto_con_basural , caza = caza , caza_roedores = caza_roedores , observacion_roedores = observacion_roedores , vacunado_contra_leptospirosis = vacunado_contra_leptospirosis , desparasitado = desparasitado , eliminacion_de_excretas = eliminacion_de_excretas , habitos_alimenticios = habitos_alimenticios , piel_Linfonodos = piel_Linfonodos , digestivo = digestivo , cardio_respiratorio = cardio_respiratorio , urogenital = urogenital , musculoesqueleticonervioso = musculoesqueleticonervioso ,peso = peso,actitud = actitud,mucosas = mucosas,TLC = TLC,hidratacion = hidratacion, FC = FC, pulso = pulso, FR = FR,T = T, procedimiento_realizado = procedimiento_realizado , status = True)
 			return render_to_response('home/caninos_view.html' ,{'caninos':caninos}, context_instance=RequestContext(request))
 		duenios = Propietario.objects.filter()	    
-		return render_to_response('home/nuevo_canino.html' ,{'canino':canino[0],'duenios':duenios,'titulo':'Modificar canino', 'url_action':request.get_full_path()}, context_instance=RequestContext(request))
+		return render_to_response('home/nuevo_canino.html' ,{'canino':canino[0],'duenios':duenios,'titulo':'Modificar Canino', 'url_action':request.get_full_path()}, context_instance=RequestContext(request))
 
 def nuevo_bioquimica_view(request):
-	contexto = {'titulo':'','url_action':'','canino':'','fecha':'' , 'perfil':'' ,'urea':'', 'crea':'','ALT':'','AST':'','PT':'', 'alb':'','FAS':'' , 'GGT':'' , 'CPK':'','col':'' ,'bil_t':'', 'bil_d':'','trig':'' , 'varios':''}
+	contexto = {'titulo':'','url_action':'','canino':'','fecha':'' , 'urea':'', 'crea':'','ALT':'','AST':'','PT':'', 'alb':'','FAS':'' , 'GGT':'' , 'CPK':'','col':'' ,'bil_t':'', 'bil_d':'','trig':'' , 'varios':''}
 	if not request.user.is_authenticated():
 		return redirect('login')
 	else:
@@ -537,7 +573,6 @@ def nuevo_bioquimica_view(request):
 		if(request.method == 'POST'):
 			canino = Canino.objects.filter(id = int(request.POST.get('canino')))[0]
 			fecha = request.POST.get('fecha')
-			perfil = request.POST.get('perfil')
 			urea = request.POST.get('urea')
 			crea = request.POST.get('crea')
 			ALT = request.POST.get('ALT')
@@ -553,11 +588,10 @@ def nuevo_bioquimica_view(request):
 			trig = request.POST.get('trig')
 			varios = request.POST.get('varios')
 			
-			if(len(Bioquimica.objects.filter(canino=canino , fecha=fecha , perfil=perfil))>0):
+			if(len(Bioquimica.objects.filter(canino=canino , fecha=fecha))>0):
 				contexto['error'] = "El analisis bioquimico ya existe"
 				contexto['canino'] = canino
 				contexto['fecha'] = fecha
-				contexto['perfil'] = perfil
 				contexto['urea'] = urea
 				contexto['crea'] = crea
 				contexto['ALT'] = ALT
@@ -573,7 +607,7 @@ def nuevo_bioquimica_view(request):
 				contexto['trig'] = trig
 				contexto['varios'] = varios
 			else:
-				bioquimica = Bioquimica(canino=canino,fecha=fecha , perfil=perfil ,urea=urea, crea=crea,ALT=ALT , AST = AST, PT=PT, alb=alb,FAS=FAS ,GGT=GGT, CPK=CPK,col=col ,bil_t=bil_t, bil_d=bil_d,trig=trig ,varios=varios)
+				bioquimica = Bioquimica(canino=canino,fecha=fecha ,urea=urea, crea=crea,ALT=ALT , AST = AST, PT=PT, alb=alb,FAS=FAS ,GGT=GGT, CPK=CPK,col=col ,bil_t=bil_t, bil_d=bil_d,trig=trig ,varios=varios)
 				bioquimica.save()
 	caninos = Canino.objects.all()
 	contexto['caninos'] = caninos
@@ -589,7 +623,6 @@ def actualizar_bioquimica_view(request,pk):
 		if(request.method == 'POST'):
 			canino = Canino.objects.filter(id = int(request.POST.get('canino')))[0]
 			fecha = request.POST.get('fecha')
-			perfil = request.POST.get('perfil')
 			urea = request.POST.get('urea')
 			crea = request.POST.get('crea')
 			ALT = request.POST.get('ALT')
@@ -604,10 +637,10 @@ def actualizar_bioquimica_view(request,pk):
 			bil_d = request.POST.get('bil_d')
 			trig = request.POST.get('trig')
 			varios = request.POST.get('varios')
-			bioquimica.update(canino=canino,fecha=fecha , perfil=perfil ,urea=urea, crea=crea,ALT=ALT , AST = AST, PT=PT, alb=alb,FAS=FAS ,GGT=GGT, CPK=CPK,col=col ,bil_t=bil_t, bil_d=bil_d,trig=trig ,varios=varios)
+			bioquimica.update(canino=canino,fecha=fecha ,urea=urea, crea=crea,ALT=ALT , AST = AST, PT=PT, alb=alb,FAS=FAS ,GGT=GGT, CPK=CPK,col=col ,bil_t=bil_t, bil_d=bil_d,trig=trig ,varios=varios)
 			return render_to_response('home/bioquimica_view.html' ,{'bioquimicas':bioquimicas}, context_instance=RequestContext(request))
 		caninos = Canino.objects.filter()	    
-		return render_to_response('home/nuevo_bioquimica.html' ,{'bioquimica':bioquimica[0],'caninos':caninos,'titulo':'Modificar bioquimica', 'url_action':request.get_full_path()}, context_instance=RequestContext(request))
+		return render_to_response('home/nuevo_bioquimica.html' ,{'bioquimica':bioquimica[0],'caninos':caninos,'titulo':'Modificar Bioquimica', 'url_action':request.get_full_path()}, context_instance=RequestContext(request))
 
 
 
@@ -616,7 +649,7 @@ def nuevo_hemograma_view(request):
 	if not request.user.is_authenticated():
 		return redirect('login')
 	else:
-		contexto['titulo'] = 'Agregar hemograma'
+		contexto['titulo'] = 'Agregar Hemograma'
 		contexto['url_action'] = request.get_full_path()
 		if(request.method == 'POST'):
 			canino = Canino.objects.filter(id = int(request.POST.get('canino')))[0]
@@ -714,7 +747,7 @@ def actualizar_hemograma_view(request,pk):
 			hemograma.update(canino=canino,fecha=fecha ,HTO=HTO ,s_o_l=s_o_l,GR=GR,Hb=Hb,plaquetas=plaquetas,GB=GB, VCM=VCM,HCM=HCM ,ChCM=ChCM , FLR_NB=FLR_NB,FLR_NS=FLR_NS ,FLR_E=FLR_E, FLR_B=FLR_B,FLR_L=FLR_L ,FLR_M=FLR_M,FLA_REF=FLA_REF,FLA_NB=FLA_NB,FLA_NS=FLA_NS,FLA_E=FLA_E,FLA_B=FLA_B,FLA_L=FLA_L,FLA_M=FLA_M,observaciones=observaciones)
 			return render_to_response('home/hemogramas_view.html' ,{'hemogramas':hemogramas}, context_instance=RequestContext(request))
 		caninos = Canino.objects.filter()	    
-		return render_to_response('home/nuevo_hemograma.html' ,{'hemograma':hemograma[0],'caninos':caninos,'titulo':'Modificar hemograma', 'url_action':request.get_full_path()}, context_instance=RequestContext(request))
+		return render_to_response('home/nuevo_hemograma.html' ,{'hemograma':hemograma[0],'caninos':caninos,'titulo':'Modificar Hemograma', 'url_action':request.get_full_path()}, context_instance=RequestContext(request))
 
 
 
@@ -748,23 +781,57 @@ def hemogramas_view(request):
 
 
 
-def generar_pdf_view(request):
-    # Create the HttpResponse object with the appropriate PDF headers.
-    response = HttpResponse(content_type='application/pdf')
-    response['Content-Disposition'] = 'attachment; filename="somefilename.pdf"'
 
-    # Create the PDF object, using the response object as its "file."
-    p = canvas.Canvas(response)
 
-    # Draw things on the PDF. Here's where the PDF generation happens.
-    # See the ReportLab documentation for the full list of functionality.
-    p.drawString(1, 800, "Hello world.")
+@login_required
+def generar_pdf_view(request,pk):
+    canino = Canino.objects.filter(id = int(pk))
+    serovares = Serovar.objects.all()
+    result = StringIO()
+    template = get_template("home/reporte.html")
+    data = {
+        'pagesize':'A4',
+        'title':'Reporte',
+        'canino':canino[0],
+        'serovares':serovares,
+    }
+    context = Context(data)
+    html  = template.render(context)
+    pdf = pisa.pisaDocument(StringIO( "{0}".format(html.encode('ascii','ignore')) ), result)
+    if not pdf.err:
+        return http.HttpResponse(
+            result.getvalue(),
+            content_type='application/pdf')
+    return http.HttpResponse('We had some errors')
 
-    # Close the PDF object cleanly, and we're done.
-    p.showPage()
-    p.save()
-    return response	
+
+
 
 def estadisticas_view(request):
 	pass
 	return render_to_response('home/estadisticas_view.html' , context_instance=RequestContext(request))
+
+
+
+def analisis_view(request,pk):
+	contexto = {'titulo':'','url_action':'','profesional':'','historia_clinica':'','fecha':'','dilucion_inicial':'','reactivo':'','observaciones':'' }
+	caninos = Canino.objects.all()
+	canino = Canino.objects.filter(id = int(pk))
+	if not request.user.is_authenticated():
+		return redirect('login')
+	else:
+		contexto['titulo'] = 'Agregar Analisis'
+		contexto['url_action'] = request.get_full_path()
+		if(request.method == 'POST'):
+			nombre_profesional = request.POST.get('profesional')
+			historia_clinica = request.POST.get('historiaClinica')
+			fecha = request.POST.get('fecha')
+			dilucion_inicial = request.POST.get('dilucion_inicial')
+			reactivo = request.POST.get('reactivo')
+			observaciones = request.POST.get('observaciones')
+			analisis = Analisis(profesional = nombre_profesional , historia_clinica = historia_clinica,fecha = fecha ,dilucion_inicial = dilucion_inicial,reactivo = reactivo, observaciones = observaciones)
+			analisis.save()
+			canino.update(analisis = analisis)
+		else:
+			return render_to_response('home/formulario_reporte.html',{'canino':canino[0] , 'caninos':caninos} , context_instance=RequestContext(request))
+	return render_to_response('home/caninos_view.html' ,{'canino':canino , 'caninos':caninos}, context_instance=RequestContext(request))

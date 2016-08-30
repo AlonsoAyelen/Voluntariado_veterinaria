@@ -1,9 +1,3 @@
-
-
-{% extends 'home/base.html' %}
-
-{% block section %}
-
   <div class="panel panel-info">
     <div class="panel-heading">
       <h4 class="panel-title">Datos personales</h4>
@@ -11,77 +5,77 @@
   <div class="panel-body">
   <div class="col-md-4">
     <blockquote>
-      <u>Nombre: </u>{{nombre}}
+      <u>Nombre: </u>{{duenio.nombre}}
     </blockquote>
   </div>
   <div class="col-md-4">
     <blockquote>
-      <u>Apellido: </u>{{apellido}}
+      <u>Apellido: </u>{{duenio.apellido}}
     </blockquote>
   </div>
   <div class="col-md-4">
     <blockquote>
-      <u>Direccion: </u>{{direccion}}
+      <u>Direccion: </u>{{duenio.direccion}}
     </blockquote>
   </div>
   <div class="col-md-4">
     <blockquote>
-      <u>Barrio: </u>{{barrio}}
+      <u>Barrio: </u>{{duenio.barrio}}
     </blockquote>
   </div>
   <div class="col-md-4">
     <blockquote>
-      <u>Procedencia: </u>{{procedencia}}
+      <u>Procedencia: </u>{{duenio.procedencia}}
     </blockquote>
   </div>
   <div class="col-md-4">
     <blockquote>
-      <u>Telefono: </u>{{telefono}}
+      <u>Telefono: </u>{{duenio.telefono}}
     </blockquote>
   </div>
   <div class="col-md-4">
     <blockquote>
-      <u>Edad: </u>{{edad}}
+      <u>Edad: </u>{{duenio.edad}}
     </blockquote>
   </div>
   <div class="col-md-4">
     <blockquote>
-      <u>Grado de instruccion: </u>{{instruccion}}
+      <u>Grado de instruccion: </u>{{duenio.grado_de_instruccion}}
     </blockquote>
   </div>
   <div class="col-md-4">  
     <blockquote>
-      <u>Ocupacion: </u>{{ocupacion}}
+      <u>Ocupacion: </u>{{duenio.ocupacion}}
     </blockquote>    
   </div>
   <div class="col-md-4">
     <blockquote>
-      <u>Convivientes adultos: </u>{{adultos}}
+      <u>Convivientes adultos: </u>{{duenio.numero_convivientes_adultos}}
     </blockquote>
   </div>
   <div class="col-md-4">
     <blockquote>
-      <u>Convivientes ninios: </u>{{ninios}}
+      <u>Convivientes ninios: </u>{{duenio.numero_convivientes_ninios}}
     </blockquote>
   </div>
   <div class="col-md-4">
     <blockquote>
-      <u>En edad escolar: </u>{{escolar}}
+      <u>En edad escolar: </u>{{duenio.en_edad_escolar}}
     </blockquote>
   </div>
   <div class="col-md-4">
     <blockquote>
-      <u>Cantidad de mascotas: </u>{{mascotas}}
+      <u>Cantidad de mascotas: </u>{{duenio.mascotas}}
     </blockquote>
   </div>
   <div class="col-md-4">
     <blockquote>
-      <u>Tipos de mascotas: </u>{{tipos}}
+      <u>Tipos de mascotas: </u>{{duenio.tipos}}
     </blockquote>
   </div>
   </div>
   </div>
-  <div class="panel panel-info">
+  <div class="panel panel-success">
     <div class="panel-heading">
       <h4 class="panel-title">Datos habitacionales</h4>
     </div>
@@ -89,48 +83,48 @@
   <div class="col-md-12">
   <div class="col-md-4">
     <blockquote>
-      <u>Vivienda: </u>{{vivienda}}
+      <u>Vivienda: </u>{{duenio.vivienda}}
     </blockquote>
   </div>
   <div class="col-md-4">
     <blockquote>
-      <u>Material: </u>{{material}}
+      <u>Material: </u>{{duenio.material}}
     </blockquote>
   </div>
   <div class="col-md-4">
     <blockquote>
-      <u>Cantidad de ambientes: </u>{{ambientes}}
+      <u>Cantidad de ambientes: </u>{{duenio.ambientes}}
     </blockquote>
   </div>
   <div class="col-md-4">
     <blockquote>
-      <u>Agujeros en la vivienda: </u>{{agujeros}}
+      <u>Agujeros en la vivienda: </u>{{duenio.agujeros}}
     </blockquote>
   </div>
   <div class="col-md-4">
     <blockquote>
-      <u>Provisiones de agua: </u>{{agua}}
+      <u>Provisiones de agua: </u>{{duenio.agua}}
     </blockquote>
   </div>
   <div class="col-md-4">
     <blockquote>
-      <u>Excretas: </u>{{excretas}}
+      <u>Excretas: </u>{{duenio.excretas}}
     </blockquote>
   </div>
   <div class="col-md-4">
     <blockquote>
-      <u>Residuos domiciliarios: </u>{{residuos}}
+      <u>Residuos domiciliarios: </u>{{duenio.residuos_domiciliarios}}
     </blockquote>
   </div>
   <div class="col-md-4">
     <blockquote>
-      <u>Recoleccion de residuos: </u>{{recoleccion}}
+      <u>Recoleccion de residuos: </u>{{duenio.recoleccion_de_residuos}}
     </blockquote>
   </div>
   </div>
   </div>
   </div>
-  <div class="panel panel-info">
+  <div class="panel panel-danger">
     <div class="panel-heading">
       <h4 class="panel-title">Datos regionales</h4>
     </div>
@@ -138,33 +132,33 @@
   <div class="col-md-12">
   <div class="col-md-4">
     <blockquote>
-      <u>Cercania con basurales: </u>{{basural}}
+      <u>Cercania con basurales: </u>{{duenio.basural}}
     </blockquote>
   </div>
   <div class="col-md-4">
     <blockquote>
-      <u>Presencia de roedores: </u>{{roedores}}
+      <u>Presencia de roedores: </u>{{duenio.roedores}}
     </blockquote>
   </div>
   <div class="col-md-4">
     <blockquote>
-      <u>Cercania de aguas servidas: </u>{{agua_servida}}
+      <u>Cercania de aguas servidas: </u>{{duenio.agua_servida}}
     </blockquote>
   </div>
   <div class="col-md-4">
     <blockquote>
-      <u>Inundaciones: </u>{{inundaciones}}
+      <u>Inundaciones: </u>{{duenio.inundaciones}}
     </blockquote>
   </div>
   <div class="col-md-4">
     <blockquote>
-      <u>Ultima inundacion: </u>{{ultima}}
+      <u>Ultima inundacion: </u>{{duenio.ultima_inundacion}}
     </blockquote>
   </div>
   </div>
   </div>
   </div>
-  <div class="panel panel-info">
+  <div class="panel panel-warning">
     <div class="panel-heading">
       <h4 class="panel-title">Datos clínicos positivos</h4>
     </div>
@@ -172,30 +166,23 @@
   <div class="col-md-12">
   <div class="col-md-4">
     <blockquote>
-      <u>Integrante con sintomas: </u>{{integrante}}
+      <u>Integrante con sintomas: </u>{{duenio.integrante}}
     </blockquote>
   </div>
   <div class="col-md-4">
     <blockquote>
-      <u>Sintomas: </u>{{sintomas}}
+      <u>Sintomas: </u>
+      {% for sintoma in duenio.sintomas.all %}
+        {{sintoma.nombre}}, 
+      {% endfor %}
     </blockquote>
   </div>
   <div class="col-md-4">
     <blockquote>
-      <u>Aclaracion: </u>{{aclaracion}}
+      <u>Aclaracion: </u>{{duenio.aclaracion}}
     </blockquote>
   </div>
     </div>
   </div>
-  </div>
-  </div>
-<form action="duenios" method="POST">{% csrf_token %}
-      <div class="col-lg-10 col-lg-offset-2">
-        <button type="submit" class="btn btn-primary">Volver</button>
-      </div>
-    </form>
 
 
-
-
-{% endblock %}

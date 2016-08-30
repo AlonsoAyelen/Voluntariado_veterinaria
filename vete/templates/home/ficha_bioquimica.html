@@ -1,108 +1,104 @@
 
 
-{% extends 'home/base.html' %}
-
-{% block section %}
-
 <div class="panel panel-info">
     <div class="panel-heading">
       <h4 class="panel-title">Datos del hemograma</h4>
     </div>
   <div class="panel-body">
+  <div class="row">
   <div class="col-md-4">
     <blockquote>
-      <u>Canino: </u>{{canino}}
+      <u>Canino: </u>{{bioquimica.canino}}
     </blockquote>
   </div>
   <div class="col-md-4">
     <blockquote>
-      <u>Fecha: </u>{{fecha}}
+      <u>Fecha: </u>{{bioquimica.fecha}}
     </blockquote>
   </div>
   <div class="col-md-4">
     <blockquote>
-      <u>perfil: </u>{{perfil}}
+      <u>urea: </u>{{bioquimica.urea}}
+    </blockquote>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-4">
+    <blockquote>
+      <u>crea: </u>{{bioquimica.crea}}
     </blockquote>
   </div>
   <div class="col-md-4">
     <blockquote>
-      <u>urea: </u>{{urea}}
+      <u>ALT: </u>{{bioquimica.ALT}}
     </blockquote>
   </div>
   <div class="col-md-4">
     <blockquote>
-      <u>crea: </u>{{crea}}
+      <u>AST: </u>{{bioquimica.AST}}
+    </blockquote>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-4">
+    <blockquote>
+      <u>PT: </u>{{bioquimica.PT}}
     </blockquote>
   </div>
   <div class="col-md-4">
     <blockquote>
-      <u>ALT: </u>{{ALT}}
+      <u>alb: </u>{{bioquimica.alb}}
     </blockquote>
   </div>
   <div class="col-md-4">
     <blockquote>
-      <u>AST: </u>{{AST}}
+      <u>FAS: </u>{{bioquimica.FAS}}
+    </blockquote>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-4">
+    <blockquote>
+      <u>GGT: </u>{{bioquimica.GGT}}
     </blockquote>
   </div>
   <div class="col-md-4">
     <blockquote>
-      <u>PT: </u>{{PT}}
+      <u>CPK: </u>{{bioquimica.CPK}}
     </blockquote>
   </div>
   <div class="col-md-4">
     <blockquote>
-      <u>alb: </u>{{alb}}
+      <u>col: </u>{{bioquimica.col}}
+    </blockquote>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-4">
+    <blockquote>
+      <u>bil_t: </u>{{bioquimica.bil_t}}
     </blockquote>
   </div>
   <div class="col-md-4">
     <blockquote>
-      <u>FAS: </u>{{FAS}}
+      <u>bil_d: </u>{{bioquimica.bil_d}}
     </blockquote>
   </div>
   <div class="col-md-4">
     <blockquote>
-      <u>GGT: </u>{{GGT}}
+      <u>trig: </u>{{bioquimica.trig}}
     </blockquote>
   </div>
+</div>
+<div class="row">
   <div class="col-md-4">
     <blockquote>
-      <u>CPK: </u>{{CPK}}
-    </blockquote>
-  </div>
-  <div class="col-md-4">
-    <blockquote>
-      <u>col: </u>{{col}}
-    </blockquote>
-  </div>
-  <div class="col-md-4">
-    <blockquote>
-      <u>bil_t: </u>{{bil_t}}
-    </blockquote>
-  </div>
-  <div class="col-md-4">
-    <blockquote>
-      <u>bil_d: </u>{{bil_d}}
-    </blockquote>
-  </div>
-  <div class="col-md-4">
-    <blockquote>
-      <u>trig: </u>{{trig}}
-    </blockquote>
-  </div>
-  <div class="col-md-4">
-    <blockquote>
-      <u>varios: </u>{{varios}}
+      <u>varios: </u>{{bioquimica.varios}}
     </blockquote>
   </div>
   </div>
   </div>
-<form action="{% url 'bioquimicas' %}" method="POST">{% csrf_token %}
-      <div class="col-lg-10 col-lg-offset-2">
-        <button type="submit" class="btn btn-primary">Volver</button>
-      </div>
-    </form>
+  </div>
 
 
 
-
-{% endblock %}

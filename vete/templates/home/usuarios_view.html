@@ -13,6 +13,10 @@
   <script type="text/javascript" src="https://cdn.datatables.net/scroller/1.4.0/js/dataTables.scroller.min.js"></script>
 {% endblock %}
 
+{% block title%} Usuarios {% endblock %}
+
+{% block usuarios_active %}class = "active"{% endblock %}
+
 {% block section %}
 <script>
 function eliminarUsuario(idform){
@@ -25,10 +29,10 @@ function eliminarUsuario(idform){
   }
 </script>
 <div align="center">
-  <legend>Manejo de usuarios</legend>
+  <legend>Manejo de Usuarios</legend>
 </div> 
 <div class="col-lg-2 control-label">
- <a type="button" class="btn btn-primary" href="{% url 'nuevo_usuario' %}"`>Agregar usuario</a>
+ <a type="button" class="btn btn-primary" href="{% url 'nuevo_usuario' %}"`><i class="fa fa-plus" aria-hidden="true"></i> Agregar Usuario</a>
 </div>
 <style>
       .table-striped>tbody>tr:nth-child(odd)>td, 
@@ -88,7 +92,12 @@ function eliminarUsuario(idform){
 </table>
 </div>
 {% else %}
-  <legend>No hay usuarios para mostrar</legend>
+  <div class="col-md-8" align="center">
+  <div class="alert alert-dismissible alert-danger">
+    <button type="button" class="close" data-dismiss="alert">&times;</button>
+    <strong>No hay usuarios para mostrar!</strong> 
+  </div>
+</div>
 {% endif %}
 
 

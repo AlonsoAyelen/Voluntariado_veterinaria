@@ -1,174 +1,158 @@
 
 {% extends 'home/base.html'%}
 
+{% block title%} Agregar hemograma {% endblock %}
+
+{% block hemogramas_active %}class = "active"{% endblock %}
+
 {% block section %}
 {% if mensaje %}
         <legend align="center">{{mensaje}}</legend>
     {% endif %}
 <div class="container">
-<div class="col-lg-8 control-label">
+<div class="col-lg-12">
 <div class="well bs-component">
 <form class="form-horizontal" method='post' action=''>{% csrf_token %}
   <fieldset>
     <legend>{{titulo}}</legend>
     <div class="form-group">
       <label for="canino" class="col-lg-2 control-label">Canino</label>
-      <div class="col-lg-10">
-       <select value="{{canino.id}}" id="canino" placeholder="Canino" name="canino" required value="{{canino.nombre}}"> 
+      <div class="col-lg-4">
+       <select value="{{canino.id}}" id="canino" placeholder="Canino" name="canino" required value="{{canino.nombre}}" class="form-control"> 
         {% for canino in caninos %}
           <option value="{{canino.id}}" id="canino" placeholder="Canino" name="canino" required>{{canino.nombre}} </option>
         {% endfor%}
       </select>
       </div>
-    </div>
-    <div class="form-group">
       <label for="fecha" class="col-lg-2 control-label">Fecha</label>
-      <div class="col-lg-10">
-        <input type="date" class="form-control" id="fecha" placeholder="Fecha" name="fecha" required value="{{hemograma.fecha}}">
+      <div class="col-lg-4">
+        <input type="date" class="form-control" id="fecha" placeholder="Fecha" name="fecha" required value="{{hemograma.fecha|date:"Y-m-d" }}">
       </div>
     </div>
     <div class="form-group">
       <label for="HTO" class="col-lg-2 control-label">HTO</label>
-      <div class="col-lg-10">
+      <div class="col-lg-4">
         <input type="text" class="form-control" id="HTO" placeholder="HTO" name="HTO" required value="{{hemograma.HTO}}">
       </div>
-    </div>
-    <div class="form-group">
-      <label for="s_o_l" class="col-lg-2 control-label">s_o_l</label>
-      <div class="col-lg-10">
-        <input type="number" step="0.01" class="form-control" id="s_o_l" placeholder="s_o_l" name="s_o_l" required value="{{hemograma.s_o_l|floatformat:2}}">
+    <label for="s_o_l" class="col-lg-2 control-label">s_o_l</label>
+      <div class="col-lg-4">
+        <input type="number" step="0.01" class="form-control" id="s_o_l" placeholder="s_o_l" name="s_o_l" required value="{{hemograma.s_o_l|stringformat:"f"}}">
       </div>
     </div>
     <div class="form-group">
       <label for="GR" class="col-lg-2 control-label">GR</label>
-      <div class="col-lg-10">
-        <input type="number" step="0.01" class="form-control" id="GR" placeholder="GR" name="GR" required value="{{hemograma.GR|floatformat}}">
+      <div class="col-lg-4">
+        <input type="number" step="0.01" class="form-control" id="GR" placeholder="GR" name="GR" required value="{{hemograma.GR|stringformat:"f"}}">
       </div>
-    </div>
-    <div class="form-group">
-      <label for="Hb" class="col-lg-2 control-label">Hb</label>
-      <div class="col-lg-10">
-        <input type="number" step="0.01" class="form-control" id="Hb" placeholder="Hb" name="Hb" required value="{{hemograma.Hb|floatformat}}">
+    <label for="Hb" class="col-lg-2 control-label">Hb</label>
+      <div class="col-lg-4">
+        <input type="number" step="0.01" class="form-control" id="Hb" placeholder="Hb" name="Hb" required value="{{hemograma.Hb|stringformat:"f"}}">
       </div>
     </div>
     <div class="form-group">
       <label for="plaquetas" class="col-lg-2 control-label">plaquetas</label>
-      <div class="col-lg-10">
-        <input type="number" step="0.01" class="form-control" id="plaquetas" placeholder="plaquetas" name="plaquetas" required value="{{hemograma.plaquetas|floatformat}}">
+      <div class="col-lg-4">
+        <input type="number" step="0.01" class="form-control" id="plaquetas" placeholder="plaquetas" name="plaquetas" required value="{{hemograma.plaquetas|stringformat:"f"}}">
       </div>
-    </div>
-    <div class="form-group">
-      <label for="GB" class="col-lg-2 control-label">GB</label>
-      <div class="col-lg-10">
-        <input type="number" step="0.01" class="form-control" id="GB" placeholder="GB" name="GB" required value="{{hemograma.GB|floatformat}}">
+    <label for="GB" class="col-lg-2 control-label">GB</label>
+      <div class="col-lg-4">
+        <input type="number" step="0.01" class="form-control" id="GB" placeholder="GB" name="GB" required value="{{hemograma.GB|stringformat:"f"}}">
       </div>
     </div>
     <div class="form-group">
       <label for="VCM" class="col-lg-2 control-label">VCM</label>
-      <div class="col-lg-10">
-        <input type="number" step="0.01" class="form-control" id="VCM" placeholder="VCM" name="VCM" required value="{{hemograma.VCM|floatformat}}">
+      <div class="col-lg-4">
+        <input type="number" step="0.01" class="form-control" id="VCM" placeholder="VCM" name="VCM" required value="{{hemograma.VCM|stringformat:"f"}}">
       </div>
-    </div>
-    <div class="form-group">
-      <label for="HCM" class="col-lg-2 control-label">HCM</label>
-      <div class="col-lg-10">
-        <input type="number" step="0.01" class="form-control" id="HCM" placeholder="HCM" name="HCM" required value="{{hemograma.HCM|floatformat}}">
+    <label for="HCM" class="col-lg-2 control-label">HCM</label>
+      <div class="col-lg-4">
+        <input type="number" step="0.01" class="form-control" id="HCM" placeholder="HCM" name="HCM" required value="{{hemograma.HCM|stringformat:"f"}}">
       </div>
     </div>
     <div class="form-group">
       <label for="ChCM" class="col-lg-2 control-label">ChCM</label>
-      <div class="col-lg-10">
-        <input type="number" step="0.01" class="form-control" id="ChCM" placeholder="ChCM" name="ChCM" required value="{{hemograma.ChCM|floatformat}}">
+      <div class="col-lg-4">
+        <input type="number" step="0.01" class="form-control" id="ChCM" placeholder="ChCM" name="ChCM" required value="{{hemograma.ChCM|stringformat:"f"}}">
       </div>
-    </div>
-    <div class="form-group">
-      <label for="FLR_NB" class="col-lg-2 control-label">FLR_NB</label>
-      <div class="col-lg-10">
-        <input type="number" step="0.01" class="form-control" id="FLR_NB" placeholder="FLR_NB" name="FLR_NB" required value="{{hemograma.FLR_NB|floatformat}}">
+    <label for="FLR_NB" class="col-lg-2 control-label">FLR_NB</label>
+      <div class="col-lg-4">
+        <input type="number" step="0.01" class="form-control" id="FLR_NB" placeholder="FLR_NB" name="FLR_NB" required value="{{hemograma.FLR_NB|stringformat:"f"}}">
       </div>
     </div>
     <div class="form-group">
       <label for="FLR_NS" class="col-lg-2 control-label">FLR_NS</label>
-      <div class="col-lg-10">
-        <input type="number" step="0.01" class="form-control" id="FLR_NS" placeholder="FLR_NS" name="FLR_NS" required value="{{hemograma.FLR_NS|floatformat}}">
+      <div class="col-lg-4">
+        <input type="number" step="0.01" class="form-control" id="FLR_NS" placeholder="FLR_NS" name="FLR_NS" required value="{{hemograma.FLR_NS|stringformat:"f"}}">
       </div>
-    </div>
-    <div class="form-group">
-      <label for="FLR_E" class="col-lg-2 control-label">FLR_E</label>
-      <div class="col-lg-10">
-        <input type="number" step="0.01" class="form-control" id="FLR_E" placeholder="FLR_E" name="FLR_E" required value="{{hemograma.FLR_E|floatformat}}">
+    <label for="FLR_E" class="col-lg-2 control-label">FLR_E</label>
+      <div class="col-lg-4">
+        <input type="number" step="0.01" class="form-control" id="FLR_E" placeholder="FLR_E" name="FLR_E" required value="{{hemograma.FLR_E|stringformat:"f"}}">
       </div>
     </div>
     <div class="form-group">
       <label for="FLR_B" class="col-lg-2 control-label">FLR_B</label>
-      <div class="col-lg-10">
-        <input type="number" step="0.01" class="form-control" id="FLR_B" placeholder="FLR_B" name="FLR_B" required value="{{hemograma.FLR_B|floatformat}}">
+      <div class="col-lg-4">
+        <input type="number" step="0.01" class="form-control" id="FLR_B" placeholder="FLR_B" name="FLR_B" required value="{{hemograma.FLR_B|stringformat:"f"}}">
       </div>
-    </div>
-    <div class="form-group">
-      <label for="FLR_L" class="col-lg-2 control-label">FLR_L</label>
-      <div class="col-lg-10">
-        <input type="number" step="0.01" class="form-control" id="FLR_L" placeholder="FLR_L" name="FLR_L" required value="{{hemograma.FLR_L|floatformat}}">
+    <label for="FLR_L" class="col-lg-2 control-label">FLR_L</label>
+      <div class="col-lg-4">
+        <input type="number" step="0.01" class="form-control" id="FLR_L" placeholder="FLR_L" name="FLR_L" required value="{{hemograma.FLR_L|stringformat:"f"}}">
       </div>
     </div>
     <div class="form-group">
       <label for="FLR_M" class="col-lg-2 control-label">FLR_M</label>
-      <div class="col-lg-10">
-        <input type="number" step="0.01" class="form-control" id="FLR_M" placeholder="FLR_M" name="FLR_M" required value="{{hemograma.FLR_M|floatformat}}">
+      <div class="col-lg-4">
+        <input type="number" step="0.01" class="form-control" id="FLR_M" placeholder="FLR_M" name="FLR_M" required value="{{hemograma.FLR_M|stringformat:"f"}}">
       </div>
-    </div>
-    <div class="form-group">
-      <label for="FLA_REF" class="col-lg-2 control-label">FLA_REF</label>
-      <div class="col-lg-10">
-        <input type="number" step="0.01" class="form-control" id="FLA_REF" placeholder="FLA_REF" name="FLA_REF" required value="{{hemograma.FLA_REF|floatformat}}">
+    <label for="FLA_REF" class="col-lg-2 control-label">FLA_REF</label>
+      <div class="col-lg-4">
+        <input type="number" step="0.01" class="form-control" id="FLA_REF" placeholder="FLA_REF" name="FLA_REF" required value="{{hemograma.FLA_REF|stringformat:"f"}}">
       </div>
     </div>
     <div class="form-group">
       <label for="FLA_NB" class="col-lg-2 control-label">FLA_NB</label>
-      <div class="col-lg-10">
-        <input type="number" step="0.01" class="form-control" id="FLA_NB" placeholder="FLA_NB" name="FLA_NB" required value="{{hemograma.FLA_NB|floatformat}}">
+      <div class="col-lg-4">
+        <input type="number" step="0.01" class="form-control" id="FLA_NB" placeholder="FLA_NB" name="FLA_NB" required value="{{hemograma.FLA_NB|stringformat:"f"}}">
       </div>
-    </div>
-    <div class="form-group">
-      <label for="FLA_NS" class="col-lg-2 control-label">FLA_NS</label>
-      <div class="col-lg-10">
-        <input type="number" step="0.01" class="form-control" id="FLA_NS" placeholder="FLA_NS" name="FLA_NS" required value="{{hemograma.FLA_NS|floatformat}}">
+    <label for="FLA_NS" class="col-lg-2 control-label">FLA_NS</label>
+      <div class="col-lg-4">
+        <input type="number" step="0.01" class="form-control" id="FLA_NS" placeholder="FLA_NS" name="FLA_NS" required value="{{hemograma.FLA_NS|stringformat:"f"}}">
       </div>
     </div>
     <div class="form-group">
       <label for="FLA_E" class="col-lg-2 control-label">FLA_E</label>
-      <div class="col-lg-10">
-        <input type="number" step="0.01" class="form-control" id="FLA_E" placeholder="FLA_E" name="FLA_E" required value="{{hemograma.FLA_E|floatformat}}">
+      <div class="col-lg-4">
+        <input type="number" step="0.01" class="form-control" id="FLA_E" placeholder="FLA_E" name="FLA_E" required value="{{hemograma.FLA_E|stringformat:"f"}}">
       </div>
-    </div>
-    <div class="form-group">
       <label for="FLA_B" class="col-lg-2 control-label">FLA_B</label>
-      <div class="col-lg-10">
-        <input type="number" step="0.01" class="form-control" id="FLA_B" placeholder="FLA_B" name="FLA_B" required value="{{hemograma.FLA_B|floatformat}}">
+      <div class="col-lg-4">
+        <input type="number" step="0.01" class="form-control" id="FLA_B" placeholder="FLA_B" name="FLA_B" required value="{{hemograma.FLA_B|stringformat:"f"}}">
       </div>
     </div>
     <div class="form-group">
       <label for="FLA_L" class="col-lg-2 control-label">FLA_L</label>
-      <div class="col-lg-10">
-        <input type="number" step="0.01" class="form-control" id="FLA_L" placeholder="FLA_L" name="FLA_L" required value="{{hemograma.FLA_L|floatformat}}">
+      <div class="col-lg-4">
+        <input type="number" step="0.01" class="form-control" id="FLA_L" placeholder="FLA_L" name="FLA_L" required value="{{hemograma.FLA_L|stringformat:"f"}}">
       </div>
-    </div>
-     <div class="form-group">
       <label for="FLA_M" class="col-lg-2 control-label">FLA_M</label>
-      <div class="col-lg-10">
-        <input type="number" step="0.01" class="form-control" id="FLA_M" placeholder="FLA_M" name="FLA_M" required value="{{hemograma.FLA_M|floatformat}}">
+      <div class="col-lg-4">
+        <input type="number" step="0.01" class="form-control" id="FLA_M" placeholder="FLA_M" name="FLA_M" required value="{{hemograma.FLA_M|stringformat:"f"}}">
       </div>
     </div>
      <div class="form-group">
       <label for="observaciones" class="col-lg-2 control-label">observaciones</label>
-      <div class="col-lg-10">
+      <div class="col-lg-4">
         <input type="text" class="form-control" id="observaciones" placeholder="observaciones" name="observaciones" value="{{hemograma.observaciones}}">
       </div>
     </div>
     <div class="form-group">
-      <div class="col-lg-10 col-lg-offset-2">
-        <button type="submit" class="btn btn-success">Guardar</button>
-        <button type="reset" class="btn btn-primary">Cancelar</button>
+      <div class="col-lg-12 col-lg-offset-1">
+        <div class="col-lg-5">
+          <button type="submit" class="btn btn-success btn-block">Guardar</button>
+        </div>
+        <div class="col-lg-5">
+          <a type="button" class="btn btn-primary btn-block" href="{% url 'hemogramas' %}">Cancelar</a>
+        </div>
       </div>
     </div>
 
@@ -179,6 +163,7 @@
 </div>
 
 {% endblock %}
+   
 
 
 

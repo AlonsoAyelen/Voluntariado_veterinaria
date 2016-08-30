@@ -5,7 +5,8 @@ from django.db import models
 
 
 
-
+class Sintoma(models.Model):
+	nombre = models.CharField(max_length = 100)
 
 
 class Propietario(models.Model):
@@ -14,7 +15,7 @@ class Propietario(models.Model):
 	direccion = models.CharField(max_length = 100)
 	barrio = models.CharField(max_length = 100)
 	procedencia = models.CharField(max_length = 100)
-	telefono = models.IntegerField()
+	telefono = models.CharField(max_length = 100)
 	edad = models.IntegerField()
 	grado_de_instruccion = models.CharField(max_length = 100)
 	ocupacion = models.CharField(max_length = 100)
@@ -36,17 +37,31 @@ class Propietario(models.Model):
 	agua_servida = models.CharField(max_length = 100)
 	inundaciones = models.CharField(max_length = 100)
 	ultima_inundacion = models.DateField(auto_now = False)
+	signos_clinicos = models.CharField(max_length = 100)
 	integrante = models.CharField(max_length = 100)
-	sintomas = models.CharField(max_length = 100)
+	sintomas = models.ManyToManyField(Sintoma)
 	aclaracion = models.CharField(max_length = 100)
 	status  = models.BooleanField(default = True)
 	class Meta:
 		managed = True      # add this\
 		app_label = 'vete' # & this
 	def __unicode__(self):return self.nombre
+
+
+class Analisis(models.Model):
+	profesional = models.CharField(max_length = 200)
+	historia_clinica = models.CharField(max_length = 200)
+	fecha = models.DateField(auto_now = False)
+	dilucion_inicial = models.CharField(max_length = 200)
+	reactivo = models.BooleanField(default = False)
+	observaciones = models.CharField(max_length = 200)
+
+
 class Canino(models.Model):
-	propietario = models.ForeignKey(Propietario)
+	analisis = models.ForeignKey(Analisis,null=True, blank=True)
+	propietario = models.ForeignKey(Propietario,null=True, blank=True)
 	nombre = models.CharField(max_length = 80)
+	protocolo = models.CharField(max_length = 20)
 	especie = models.CharField(max_length = 40)
 	sexo = models.CharField(max_length = 20)
 	raza = models.CharField(max_length = 40)
@@ -87,7 +102,6 @@ class Canino(models.Model):
 class Bioquimica(models.Model):
 	canino = models.ForeignKey(Canino)
 	fecha = models.DateField(auto_now = False)
-	perfil = models.CharField(max_length = 40)
 	urea = models.DecimalField(max_digits = 5,decimal_places = 2)
 	crea = models.DecimalField(max_digits = 5,decimal_places = 2)
 	ALT = models.DecimalField(max_digits = 5,decimal_places = 2)
@@ -135,5 +149,13 @@ class Hemograma(models.Model):
 	FLA_M = models.IntegerField()
 	observaciones = models.TextField()
 	status  = models.BooleanField(default = True)
+
+
+class Serovar(models.Model):
+	serogrupo = models.CharField(max_length = 200)
+	serovar = models.CharField(max_length = 200)
+	cepa = models.CharField(max_length = 200)
+	especie = models.CharField(max_length = 200)
+
 
 

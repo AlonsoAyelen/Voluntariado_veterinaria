@@ -1,0 +1,69 @@
+
+{% extends 'home/base.html'%}
+
+{% block caninos_active %}class = "active"{% endblock %}
+
+{% block title%} Crear reporte {% endblock %}
+
+{% block section %}
+<div class="container">
+<div class="col-lg-8 control-label">
+<div class="well bs-component">
+<form class="form-horizontal" method='post' action="{{url_action}}">{% csrf_token %}
+  <fieldset>
+    <legend>{{titulo}}</legend>
+    <legend>Crear reporte:</legend>
+    <div class="form-group">
+      <label for="profesional" class="col-lg-2 control-label">Nombre del Profesional</label>
+      <div class="col-lg-10">
+        <input type="text" class="form-control" id="profesional" placeholder="Nombre del Profesional" name="profesional" required value="{{canino.analisis.profesional}}">
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="historiaClinica" class="col-lg-2 control-label">Historia clinica</label>
+      <div class="col-lg-10">
+        <input type="text" class="form-control" id="historiaClinica" placeholder="Historia Clinica" name="historiaClinica" required value="{{canino.analisis.historia_clinica}}">
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="fecha" class="col-lg-2 control-label">Fecha</label>
+      <div class="col-lg-10">
+        <input type="date" class="form-control" id="fecha" placeholder="Fecha" name="fecha" required value="{{canino.analisis.fecha}}">
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="dilucion_inicial" class="col-lg-2 control-label">Dilucion inicial</label>
+      <div class="col-lg-10">
+        <input type="text" class="form-control" id="dilucion_inicial" placeholder="Dilucion inicial" name="dilucion_inicial" required value="{{canino.analisis.dilucion_inicial}}">
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="reactivo" class="col-lg-2 control-label">Reactivo</label>
+      <div class="col-lg-10">
+        <input type="text" class="form-control" id="reactivo" placeholder="Reactivo" name="reactivo" required value="{{canino.analisis.reactivo}}">
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="observaciones" class="col-lg-2 control-label">Observaciones</label>
+      <div class="col-lg-10">
+        <input type="text" class="form-control" id="observaciones" placeholder="Observaciones" name="observaciones" required value="{{canino.analisis.observaciones}}">
+      </div>
+    </div>
+    
+    </div>
+    <div class="form-group" >
+    <div class="col-lg-12 col-lg-offset-1">
+      <div class="col-lg-5">
+        <button type="submit" value='{{duenio.id}}' id="guardar" class="btn btn-success btn-block">Guardar</button>
+      </div>
+      <div class="col-lg-5">
+        <a type="button" class="btn btn-primary btn-block" href="{% url 'caninos_view' %}">Cancelar</a>
+      </div>
+    </div>
+  </fieldset>
+</form>
+</div>
+</div>  
+</div>
+{% endblock %}
+
