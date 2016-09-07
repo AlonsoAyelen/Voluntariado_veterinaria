@@ -19,14 +19,14 @@
 
 <style>
 table, th, td {
-    border: 2px solid black;
+    border: 2px solid;
 }
 th, td {
     padding: 5px;
     text-align: left;
 }
 body  {
-  font: 130% sans-serif;
+  font: 150% sans-serif;
 }
 .col-md-4{
 	width: 30%;
@@ -43,9 +43,18 @@ body  {
       bottom: 0.5cm;
       margin-left: 1cm;
       margin-right: 1cm;
-      height: 2cm;
+      height: 1cm;
    }
  }
+
+ p {
+  width: 50%;
+  margin: 15px;
+  border: black 2px solid;
+  padding: 10px;
+  text-align: center;
+}
+
 
 </style>
 </head>
@@ -53,7 +62,7 @@ body  {
 
 	<div align="center"> 
 	<center> 
-	<table> 
+	<table > 
 	<tr> 
 	<td><img  width="150" height="90" src="vete/static/images/facultad.jpg"  ></td> 
 	<td><img  width="180" height="90" src="vete/static/images/unlp.jpg"  ></td> 
@@ -72,54 +81,62 @@ body  {
     <div align="right">
     
     </div>
-    <h3 align="center">Servicio Central de Laboratorio FCV-UNLP</h3>
-    <h3 align="center">Area de Diagnostico de Leptospirosis</h3>
+    <h3 style="font: 130% sans-serif;margin-left: 130px">Servicio Central de Laboratorio FCV-UNLP</h3>
+    <h3 style="font: 130% sans-serif;margin-left: 150px">Area de Diagn&oacute;stico de Leptospirosis</h3>
     <div >
 
 
 
     </div>
 
+    <div style="margin-left: 52px;margin-right: 52px;">
+      <div class="col-md-4" style="display: inline">&nbsp;&nbsp;&nbsp;
+        <b>Profesional: </b>{{canino.analisis.profesional}}
+      </div>
+      <div class="col-md-4" style="display: inline">&nbsp;&nbsp;&nbsp;
+      	<b>Historia cl&iacute;nica: </b>{{canino.analisis.historia_clinica}}
+      </div>
+      <div class="col-md-4" style="display: inline">&nbsp;&nbsp;&nbsp;
+      	<b>Protocolo: </b>{{canino.protocolo}}
+      </div>
+      <br>
+      <div class="col-md-4" style="display: inline">&nbsp;&nbsp;&nbsp;
+      	<b>Fecha: </b>{{canino.analisis.fecha}}
+      </div>
+      <div class="col-md-4"style="display: inline">&nbsp;&nbsp;&nbsp;
+      	<b>Propietario: </b>{{canino.propietario}}
+      </div>
+      <div class="col-md-4" style="display: inline">&nbsp;&nbsp;&nbsp;
+      	<b>Paciente: </b>{{canino.nombre}}
+      </div>
+      <br>
+      <div class="col-md-4" style="display: inline">&nbsp;&nbsp;&nbsp;
+      	<b>Direcci&oacute;n: </b>{{canino.propietario.direccion}}
+      </div>
+      <div class="col-md-4" style="display: inline">&nbsp;&nbsp;&nbsp;
+      	<b>Especie: </b>{{canino.especie}}
+      </div>
+      <div class="col-md-4"style="display: inline">&nbsp;&nbsp;&nbsp;
+      	<b>Raza: </b>{{canino.raza}}
+      </div>
+      <div class="col-md-4" style="display: inline">&nbsp;&nbsp;&nbsp;
+      	<b>Sexo: </b>{{canino.sexo}}
+      </div>
+      <br>
+      <div class="col-md-4" style="display: inline">&nbsp;&nbsp;&nbsp;
+      	<b>Edad: </b>{{canino.edad}}
+      </div>
+    </div>
+    <br>
 
-    <div class="col-md-4">
-    	<b>Historia clínica: </b>{{canino.analisis.historia_clinica}}
-    </div>
-    <div class="col-md-4">
-    	<b>Protocolo: </b>{{canino.protocolo}}
-    </div>
-    <div class="col-md-4">
-    	<b>Fecha: </b>{{canino.analisis.fecha}}
-    </div>
-    <div class="col-md-4">
-    	<b>Propietario: </b>{{canino.propietario}}
-    </div>
-    <div class="col-md-4">
-    	<b>Paciente: </b>{{canino.nombre}}
-    </div>
-    <div class="col-md-4">
-    	<b>Dirección: </b>{{canino.propietario.direccion}}
-    </div>
-    <div class="col-md-4">
-    	<b>Especie: </b>{{canino.especie}}
-    </div>
-    <div class="col-md-4">
-    	<b>Raza: </b>{{canino.raza}}
-    </div>
-    <div class="col-md-4">
-    	<b>Sexo: </b>{{canino.sexo}}
-    </div>
-    <div class="col-md-4">
-    	<b>Edad: </b>{{canino.edad}}
-    </div>
-    {{canino.analisis.dilucion_inicial}}
-    {{canino.analisis.reactivo}}
 
 
 
+    <h5 style="margin-left: 65px;">DIAGN&Oacute;STICO SEROL&Oacute;GICO: TEST DE MICROAGLUTINACI&Oacute;N (MAT)</h5>
 
+    SEROVARES UTILIZADOS:
 
-
-<table WIDTH=80% align="center" style="background-color:#CFD8DC;">
+<table WIDTH=80% align="center" style="background-color:#CFD8DC;border:black;">
   <thead>
     <tr>
       <th>Serogrupo</th>
@@ -141,24 +158,22 @@ body  {
   </tbody>
 </table>
 
+<h3 style="margin-left: 70px;margin-right: 70px;">RESULTADOS:</h3>
+<p style="margin-left: 70px;margin-right: 70px;">Dilusi&oacute;n inicial {{canino.analisis.dilucion_inicial}}<br> {% if canino.analisis.reactivo == True %} Reactivo {% else %}No reactivo{% endif %} </p>
+
+<h3 style="margin-left: 70px;margin-right: 70px;">OBSERVACIONES:</h3>
+<p style="margin-left: 70px;margin-right: 70px;"> {{canino.analisis.observaciones}}</p>
 
 
 
 
-
-
+<h5 style="margin-top: 110px;margin-left: 140px;">Calle 60 y 118 (1900) La Plata Tel. 4236663 Int. 437</h5>
 
 
 <div id="footerFirst">
-    <div style="width:58px; height: 100%;float:left;">
-        <a>arauz@fcv.unlp.edu.ar</a>
-    </div>
-    <div style="width:58px; height: 100%;float:left;">
-        <a>plmartin@fcv.unlp.edu.ar</a>
-    </div>
-    <div style="width:58px; height: 100%;float:left;">
-        <a>stanchi@fcv.unlp.edu.ar</a>
-    </div>
+    &nbsp;&nbsp;<div style="display: inline">arauz@fcv.unlp.edu.ar</div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <div style="display: inline">plmartin@fcv.unlp.edu.ar</div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <div style="display: inline">stanchi@fcv.unlp.edu.ar</div>&nbsp;
 </div>
 </body>
 </html>

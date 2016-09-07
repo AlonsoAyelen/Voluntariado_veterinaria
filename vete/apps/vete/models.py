@@ -36,7 +36,7 @@ class Propietario(models.Model):
 	roedores = models.CharField(max_length = 100)
 	agua_servida = models.CharField(max_length = 100)
 	inundaciones = models.CharField(max_length = 100)
-	ultima_inundacion = models.DateField(auto_now = False)
+	ultima_inundacion = models.DateField(auto_now = False,null=True)
 	signos_clinicos = models.CharField(max_length = 100)
 	integrante = models.CharField(max_length = 100)
 	sintomas = models.ManyToManyField(Sintoma)

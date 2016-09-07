@@ -643,32 +643,25 @@
     </div>
     <div class="form-group">
       <label for="inundaciones" class="col-lg-2 control-label">Inundaciones</label>
-      {% if duenio.inundaciones == "no" %}
       <div class="col-lg-10">
         <div class="radio-inline">
-          <input name="inundaciones" type="radio" value="no" checked="checked" /> No
+          <input id="lluviano" name="inundaciones" type="radio" value="no" {% if duenio.inundaciones == "no" %}checked="checked"{% endif %} /> No
         </div>
         <div class="radio-inline">
-          <input name="inundaciones" type="radio" value="si" /> Si
+          <input id="lluviasi" name="inundaciones" type="radio" value="si" {% if duenio.inundaciones == "si" or not duenio.inundaciones %}checked="checked"{% endif %} /> Si
         </div>
-      </div>
-      {% else %}
-      <div class="col-lg-10">
-        <div class="radio-inline">
-          <input name="inundaciones" type="radio" value="no" /> No
-        </div>
-        <div class="radio-inline">
-          <input name="inundaciones" type="radio" value="si" checked="checked"/> Si
-        </div>
-      </div>
-      {% endif %}
-    </div>
-    <div class="form-group">
-      <label for="ultima_inundacion" class="col-lg-2 control-label">Ultima inundacion</label>
-      <div class="col-lg-10">
-        <input type="date" class="form-control" id="ultima_inundacion" placeholder="Ultima inundacion" name="ultima_inundacion" required value="{{duenio.ultima_inundacion|date:"Y-m-d"}}">
       </div>
     </div>
+    {% if duenio.inundaciones != "no" %}
+    <div id="fecha">
+      <div class="form-group">
+        <label for="ultima_inundacion" class="col-lg-2 control-label">Ultima inundacion</label>
+        <div class="col-lg-10">
+          <input type="date" class="form-control" id="ultima_inundacion" placeholder="Ultima inundacion" name="ultima_inundacion" value="{{duenio.ultima_inundacion|date:"Y-m-d"}}">
+        </div>
+      </div>
+    </div>
+    {% endif %}
     <legend>Datos clínicos positivos en algún integrante de la familia:</legend>
      <div class="form-group">
       <label for="signos_clinicos" class="col-lg-2 control-label">Signos clinicos</label>
@@ -741,6 +734,15 @@
 </div>
 
 <script type="text/javascript">
+    $('#lluviasi').click(function(){
+        $('#fecha').show("slow");
+    });
+    $('#lluviano').click(function(){
+        $('#fecha').hide("slow");
+    });
+</script>
+
+<script type="text/javascript">
 
     $('#signossi').click(function(){
         $('#ocultar').show("slow");
@@ -750,5 +752,6 @@
     });
 
 </script>
+
 
 {% endblock %}

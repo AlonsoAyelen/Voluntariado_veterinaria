@@ -55,24 +55,27 @@ def nuevo_usuario(request):
 	return render_to_response('home/login_view.html' , context_instance=RequestContext(request))
 
 def login_view(request):
-	if request.method == 'POST':
-		error = ''
-		nombre = request.POST.get('nombreLogin')
-		clave = request.POST.get('claveLogin')
-		user = authenticate(username=nombre, password=clave)
-		if user is not None:
-		    # the password verified for the user
-		    if user.is_active:
-		    	login(request,user)
-		        return redirect('/duenios' )
-		    else:
-		        return render_to_response('home/login_view.html' ,  context_instance=RequestContext(request))
-		else:
-			error = "Usuario o clave incorrectos"
-			return render_to_response('home/login_view.html' ,{ 'mensaje' : error }, context_instance=RequestContext(request))
+	if request.user.is_authenticated():
+		return redirect('/duenios')
 	else:
-		return render_to_response('home/login_view.html' , context_instance=RequestContext(request))
-
+		error = ''
+		if request.method == 'POST':		
+			nombre = request.POST.get('nombreLogin')
+			clave = request.POST.get('claveLogin')
+			user = authenticate(username=nombre, password=clave)		
+			if user is not None:
+			    # the password verified for the user
+			    if user.is_active:
+			    	login(request,user)
+			        return redirect('/duenios' )
+			    else:
+			        return render_to_response('home/login_view.html' ,  context_instance=RequestContext(request))
+			else:
+				error = "Usuario o clave incorrectos"
+				return render_to_response('home/login_view.html' ,{ 'mensaje' : error }, context_instance=RequestContext(request))
+		else:
+			return render_to_response('home/login_view.html' , context_instance=RequestContext(request))
+		
 def duenios_view(request):
 	contexto = {'titulo':'' , 'nombre':'','apellido':'','direccion':'','barrio':'','procedencia':'','telefono':'','edad':'','instruccion':'','ocupacion':'','adultos':'','ninios':'','escolar':'','mascotas':'','tipos':'','vivienda':'','material':'','ambientes':'','agujeros':'','agua':'','excretas':'','residuos':'','recoleccion':'','basural':'','roedores':'','agua_servida':'','inundaciones':'','ultima':'','signos_clinicos':'','integrante':'','sintomas':'','aclaracion':''}
 	if not request.user.is_authenticated():
@@ -296,9 +299,7 @@ def nuevo_duenio_view(request):
 	else:
 		contexto['titulo'] = 'Agregar Duenio'
 		contexto['url_action'] = request.get_full_path()
-		if(request.method == 'POST'):
-			if (request.POST.get('canino') != ""):
-				canino = Canino.objects.filter(id = int(request.POST.get('canino')))
+		if(request.method == 'POST'):	
 			nombre = request.POST.get('nombreDuenio')
 			apellido = request.POST.get('apellido')
 			direccion = request.POST.get('direccion')
@@ -370,7 +371,9 @@ def nuevo_duenio_view(request):
 			else:
 				propietario = Propietario(nombre = nombre,apellido=apellido, direccion = direccion,barrio=barrio,procedencia=procedencia, telefono = telefono,edad=edad,grado_de_instruccion=instruccion ,ocupacion=ocupacion , numero_convivientes_adultos = adultos, numero_convivientes_ninios = ninios, en_edad_escolar=escolar , mascotas=mascotas , tipos = tipos , vivienda = vivienda , material = material , ambientes = ambientes , agujeros = agujeros ,agua = agua , excretas = excretas , residuos_domiciliarios = residuos , recoleccion_de_residuos = recoleccion , basural = basural , roedores = roedores ,agua_servida = agua_servida , inundaciones = inundaciones , ultima_inundacion = ultima ,signos_clinicos = signos_clinicos, integrante = integrante, aclaracion = aclaracion , status = status)
 				propietario.save()
-				canino.update(propietario=propietario)
+				if (request.POST.get('canino') != ""):
+					canino = Canino.objects.filter(id = int(request.POST.get('canino')))
+					canino.update(propietario=propietario)
 				for ids in sintomas_ids:
 					propietario.sintomas.add(Sintoma.objects.filter(pk=ids)[0])
 		contexto['sintomas'] = Sintoma.objects.all()
@@ -465,7 +468,6 @@ def nuevo_canino_view(request):
 			urogenital = request.POST.get('urogenital')
 			musculoesqueleticonervioso = request.POST.get('musculoesqueleticonervioso')
 			peso = request.POST.get('peso')
-			print request.POST.get('peso')
 			actitud = request.POST.get('actitud')
 			mucosas = request.POST.get('mucosas')
 			TLC = request.POST.get('TLC')
@@ -519,6 +521,7 @@ def nuevo_canino_view(request):
 
 
 def actualizar_canino_view(request,pk):
+	propietario = None
 	if not request.user.is_authenticated():
 		return redirect('login')
 	else:
@@ -808,8 +811,32 @@ def generar_pdf_view(request,pk):
 
 
 def estadisticas_view(request):
-	pass
-	return render_to_response('home/estadisticas_view.html' , context_instance=RequestContext(request))
+	contexto = {'porc_machos':'','porc_hembras':'','porc_reactivos':'','porc_no_reactivos':'',}
+	machos = Canino.objects.filter(sexo="macho").count()
+	if Canino.objects.all().count() != 0:
+		machos =  (machos * 100 ) / Canino.objects.all().count()
+	else:
+		machos = 0
+	contexto['machos'] = machos
+	hembras = Canino.objects.filter(sexo="hembra").count()
+	if Canino.objects.all().count() != 0:
+		hembras = ( hembras * 100 ) / Canino.objects.all().count()
+	else:
+		hembras = 0
+	contexto['hembras'] = hembras
+	reactivos = Analisis.objects.filter(reactivo=True).count()
+	if Analisis.objects.all().count() != 0:
+		reactivos =  (reactivos * 100 ) / Analisis.objects.all().count()
+	else:
+		reactivos = 0
+	contexto['porc_reactivos'] = reactivos
+	no_reactivos = Analisis.objects.filter(reactivo=False).count()
+	if Analisis.objects.all().count() != 0:
+		no_reactivos = ( no_reactivos * 100 ) / Analisis.objects.all().count()
+	else:
+		no_reactivos = 0
+	contexto['porc_no_reactivos'] = no_reactivos
+	return render_to_response('home/estadisticas_view.html',contexto , context_instance=RequestContext(request))
 
 
 
@@ -828,6 +855,11 @@ def analisis_view(request,pk):
 			fecha = request.POST.get('fecha')
 			dilucion_inicial = request.POST.get('dilucion_inicial')
 			reactivo = request.POST.get('reactivo')
+			print reactivo
+			if reactivo == "No reactivo":
+				reactivo = False
+			else:
+				reactivo = True
 			observaciones = request.POST.get('observaciones')
 			analisis = Analisis(profesional = nombre_profesional , historia_clinica = historia_clinica,fecha = fecha ,dilucion_inicial = dilucion_inicial,reactivo = reactivo, observaciones = observaciones)
 			analisis.save()

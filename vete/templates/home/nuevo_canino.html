@@ -18,10 +18,10 @@
     <div class="form-group">
       <label for="duenio" class="col-lg-2 control-label">Duenio</label>
       <div class="col-lg-10">
-       <select value="{{duenio.id}}" id="duenio" placeholder="Duenio" name="duenio"  value="{{duenio.nombre}}" class="form-control"> 
-        <option value="{{canino.id}}" id="canino" placeholder="Canino" name="canino"> </option>
+       <select id="duenio" name="duenio" class="form-control"> 
+        <option value="0"> </option>
         {% for duenio in duenios %}
-          <option value="{{duenio.id}}" id="duenio" placeholder="Duenio" name="duenio" required>{{duenio.nombre}} </option>
+          <option value="{{duenio.id}}" {% if canino.propietario.id == duenio.id %} selected pepe{% endif %} >{{duenio.nombre}} </option>
         {% endfor%}
       </select>
       </div>

@@ -26,11 +26,11 @@
       </div>
     </div>
     <div class="form-group">
-      <label for="fecha" class="col-lg-2 control-label">Fecha</label>
-      <div class="col-lg-10">
-        <input type="date" class="form-control" id="fecha" placeholder="Fecha" name="fecha" required value="{{canino.analisis.fecha}}">
+        <label for="fecha" class="col-lg-2 control-label"> Fecha</label>
+        <div class="col-lg-10">
+          <input type="date" class="form-control" id="fecha" placeholder="Ultima inundacion" name="fecha" required value="{{canino.analisis.fecha|date:"Y-m-d"}}">
+        </div>
       </div>
-    </div>
     <div class="form-group">
       <label for="dilucion_inicial" class="col-lg-2 control-label">Dilucion inicial</label>
       <div class="col-lg-10">
@@ -38,15 +38,20 @@
       </div>
     </div>
     <div class="form-group">
-      <label for="reactivo" class="col-lg-2 control-label">Reactivo</label>
+      <label for="reactivo" class="col-lg-2 control-label">Reactivo/No reactivo</label>
       <div class="col-lg-10">
-        <input type="text" class="form-control" id="reactivo" placeholder="Reactivo" name="reactivo" required value="{{canino.analisis.reactivo}}">
+        <div class="radio-inline">
+          <input name="reactivo" type="radio" value="No reactivo" {% if not canino.analisis.reactivo%}checked="checked"{% endif %} /> No
+        </div>
+        <div class="radio-inline">
+          <input name="reactivo" type="radio" value="Reactivo" {% if canino.analisis.reactivo %}checked="checked"{% endif %} /> Si
+        </div>
       </div>
     </div>
     <div class="form-group">
       <label for="observaciones" class="col-lg-2 control-label">Observaciones</label>
       <div class="col-lg-10">
-        <input type="text" class="form-control" id="observaciones" placeholder="Observaciones" name="observaciones" required value="{{canino.analisis.observaciones}}">
+        <input type="text" class="form-control" id="observaciones" placeholder="Observaciones" name="observaciones"  value="{{canino.analisis.observaciones}}">
       </div>
     </div>
     
