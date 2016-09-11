@@ -10,9 +10,13 @@
 {% block title%} Estadisticas {% endblock %}
 
 {% block section %}
-<div id="container" style="min-width: 210px; height: 300px; max-width: 500px; margin-right: 0"></div>
-<div id="container2" style="min-width: 210px; height: 300px; max-width: 500px; margin-left: 0"></div>
+<div class="row ; col-md-12">
+    <div class="col-md-6" id="container" style="min-width: 210px; height: 300px; max-width: 500px"></div>
+    <div class="col-md-6" id="container2" style="min-width: 210px; height: 300px; max-width: 500px"></div>
+    <div class="col-md-6" id="container3" style="min-width: 210px; height: 300px; max-width: 500px; "></div>
+</div>
 <script>
+
 $(function () {
 
     // Radialize the colors
@@ -117,6 +121,51 @@ $(function () {
 });
 </script>
 
+
+<script type="text/javascript">
+$(function () {
+
+   
+
+    // Build the chart
+    $('#container3').highcharts({
+        chart: {
+            plotBackgroundColor: null,
+            plotBorderWidth: null,
+            plotShadow: false,
+            type: 'pie'
+        },
+        title: {
+            text: ' '
+        },
+        tooltip: {
+            pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+        },
+        plotOptions: {
+            pie: {
+                allowPointSelect: true,
+                cursor: 'pointer',
+                dataLabels: {
+                    enabled: true,
+                    format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+                    style: {
+                        color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+                    },
+                    connectorColor: 'silver'
+                }
+            }
+        },
+        series: [{
+            name: '',
+            data: [
+                { name: 'Menos de un año', y: {{menos_uno}} },
+                { name: 'Entre uno y cinco años', y: {{uno_y_cinco}} },
+                { name: 'Mas de cinco años', y: {{mas_cinco}} }
+            ]
+        }]
+    });
+});
+</script>
 
 
 

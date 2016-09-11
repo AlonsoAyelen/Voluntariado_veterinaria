@@ -85,7 +85,7 @@ function eliminarCanino(idform){
       <td>{{canino.edad}}</td>
       <td>
       <div class="col-md-2">
-        <form id="eliminar{{canino.id}}" action="caninos" method="POST">
+        <form id="eliminar{{canino.id}}" action="{% url 'caninos_view' %}" method="POST">
           {% csrf_token %}
           <input type="hidden" name="eliminar" value="{{canino.id}}">
           <button type="button"  class="btn btn-xs " style="background-color:#f44336;color:#fff;" onclick="eliminarCanino('eliminar{{canino.id}}')">

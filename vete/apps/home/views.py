@@ -47,6 +47,7 @@ def nuevo_usuario(request):
 					else:
 						user = User.objects.create_user(username=nombre,password=clave,is_staff=False)
 					user.save()
+					contexto['mensaje'] = "El usuario fue agregado correctamente"
 				else:
 					contexto['mensaje'] = "El usuario ya existe"
 			else:
@@ -371,6 +372,7 @@ def nuevo_duenio_view(request):
 			else:
 				propietario = Propietario(nombre = nombre,apellido=apellido, direccion = direccion,barrio=barrio,procedencia=procedencia, telefono = telefono,edad=edad,grado_de_instruccion=instruccion ,ocupacion=ocupacion , numero_convivientes_adultos = adultos, numero_convivientes_ninios = ninios, en_edad_escolar=escolar , mascotas=mascotas , tipos = tipos , vivienda = vivienda , material = material , ambientes = ambientes , agujeros = agujeros ,agua = agua , excretas = excretas , residuos_domiciliarios = residuos , recoleccion_de_residuos = recoleccion , basural = basural , roedores = roedores ,agua_servida = agua_servida , inundaciones = inundaciones , ultima_inundacion = ultima ,signos_clinicos = signos_clinicos, integrante = integrante, aclaracion = aclaracion , status = status)
 				propietario.save()
+				contexto['mensaje'] = "El propietario fue agregado correctamente"
 				if (request.POST.get('canino') != ""):
 					canino = Canino.objects.filter(id = int(request.POST.get('canino')))
 					canino.update(propietario=propietario)
@@ -435,7 +437,7 @@ def actualizar_duenio_view(request,pk):
 		
 
 def nuevo_canino_view(request):
-	contexto = {'titulo':'','url_action':'','error':'','propietario':'' , 'nombre':'','protocolo':'' ,'especie':'', 'sexo':'','raza':'','edad':'','motivo_de_consulta':'', 'uso_de_la_mascota':'','habitos':'' , 'contacto_con_basural':'' , 'caza':'','caza_roedores':'' ,	'observacion_roedores':'', 'vacunado_contra_leptospirosis':'','desparasitado':'' , 'eliminacion_de_excretas':'',	'habitos_alimenticios':'','piel_Linfonodos':'','digestivo':'','cardio_respiratorio':'','urogenital':'','musculoesqueleticonervioso':'','procedimiento_realizado':''}
+	contexto = {'mensaje':'','titulo':'','url_action':'','error':'','propietario':'' , 'nombre':'','protocolo':'' ,'especie':'', 'sexo':'','raza':'','edad':'','motivo_de_consulta':'', 'uso_de_la_mascota':'','habitos':'' , 'contacto_con_basural':'' , 'caza':'','caza_roedores':'' ,	'observacion_roedores':'', 'vacunado_contra_leptospirosis':'','desparasitado':'' , 'eliminacion_de_excretas':'',	'habitos_alimenticios':'','piel_Linfonodos':'','digestivo':'','cardio_respiratorio':'','urogenital':'','musculoesqueleticonervioso':'','procedimiento_realizado':''}
 	propietario = None
 	if not request.user.is_authenticated():
 		return redirect('login')
@@ -443,7 +445,7 @@ def nuevo_canino_view(request):
 		contexto['titulo'] = 'Agregar Canino'
 		contexto['url_action'] = request.get_full_path()
 		if(request.method == 'POST'): 
-			if (request.POST.get('duenio') != ""):
+			if (request.POST.get('duenio') != "0"):
 				propietario = Propietario.objects.filter(id = int(request.POST.get('duenio')))[0]
 			nombre = request.POST.get('nombreCanino')
 			protocolo = request.POST.get('protocolo')
@@ -515,6 +517,7 @@ def nuevo_canino_view(request):
 			else:
 				canino = Canino(propietario = propietario , nombre = nombre,protocolo = protocolo, especie = especie , sexo=sexo , raza = raza , edad=edad , motivo_de_consulta = motivo_de_consulta, uso_de_la_mascota=uso_de_la_mascota , habitos = habitos , contacto_con_basural = contacto_con_basural , caza = caza , caza_roedores = caza_roedores , observacion_roedores = observacion_roedores , vacunado_contra_leptospirosis = vacunado_contra_leptospirosis , desparasitado = desparasitado , eliminacion_de_excretas = eliminacion_de_excretas , habitos_alimenticios = habitos_alimenticios ,  piel_Linfonodos = piel_Linfonodos , digestivo = digestivo , cardio_respiratorio = cardio_respiratorio , urogenital = urogenital , musculoesqueleticonervioso = musculoesqueleticonervioso ,peso = peso,actitud = actitud,mucosas = mucosas,TLC = TLC,hidratacion = hidratacion, FC = FC, pulso = pulso, FR = FR,T = T, procedimiento_realizado = procedimiento_realizado , status = True)
 				canino.save()	
+				contexto['mensaje'] = "El canino fue agregado correctamente"
 		duenios = Propietario.objects.all()
 		contexto['duenios'] = duenios
 		return render_to_response('home/nuevo_canino.html' ,contexto ,context_instance=RequestContext(request))		
@@ -528,7 +531,8 @@ def actualizar_canino_view(request,pk):
 		caninos = Canino.objects.all()
 		canino = Canino.objects.filter(id = int(pk))
 		if(request.method == 'POST'):
-			propietario = Propietario.objects.filter(id = int(request.POST.get('duenio')))[0]
+			if(request.POST.get('duenio') != "0"):
+				propietario = Propietario.objects.filter(id = int(request.POST.get('duenio')))[0]
 			nombre = request.POST.get('nombreCanino')
 			protocolo = request.POST.get('protocolo')
 			especie = request.POST.get('especie')
@@ -567,7 +571,7 @@ def actualizar_canino_view(request,pk):
 		return render_to_response('home/nuevo_canino.html' ,{'canino':canino[0],'duenios':duenios,'titulo':'Modificar Canino', 'url_action':request.get_full_path()}, context_instance=RequestContext(request))
 
 def nuevo_bioquimica_view(request):
-	contexto = {'titulo':'','url_action':'','canino':'','fecha':'' , 'urea':'', 'crea':'','ALT':'','AST':'','PT':'', 'alb':'','FAS':'' , 'GGT':'' , 'CPK':'','col':'' ,'bil_t':'', 'bil_d':'','trig':'' , 'varios':''}
+	contexto = {'mensaje':'','titulo':'','url_action':'','canino':'','fecha':'' , 'urea':'', 'crea':'','ALT':'','AST':'','PT':'', 'alb':'','FAS':'' , 'GGT':'' , 'CPK':'','col':'' ,'bil_t':'', 'bil_d':'','trig':'' , 'varios':''}
 	if not request.user.is_authenticated():
 		return redirect('login')
 	else:
@@ -612,6 +616,7 @@ def nuevo_bioquimica_view(request):
 			else:
 				bioquimica = Bioquimica(canino=canino,fecha=fecha ,urea=urea, crea=crea,ALT=ALT , AST = AST, PT=PT, alb=alb,FAS=FAS ,GGT=GGT, CPK=CPK,col=col ,bil_t=bil_t, bil_d=bil_d,trig=trig ,varios=varios)
 				bioquimica.save()
+				contexto['mensaje'] = "El analisis fue agregado correctamente"
 	caninos = Canino.objects.all()
 	contexto['caninos'] = caninos
 	return render_to_response('home/nuevo_bioquimica.html' ,contexto, context_instance=RequestContext(request))
@@ -648,7 +653,7 @@ def actualizar_bioquimica_view(request,pk):
 
 
 def nuevo_hemograma_view(request):
-	contexto = {'titulo':'','url_action':'','canino':'','fecha':'' , 'HTO':'' ,'s_o_l':'', 'GR':'','Hb':'','plaquetas':'','GB':'', 'VCM':'','HCM':'' , 'ChCM':'' , 'FLR_NB':'','FLR_NS':'' ,'FLR_E':'', 'FLR_B':'','FLR_L':'' , 'FLR_M':'','FLA_REF':'','FLA_NB':'','FLA_NS':'','FLA_E':'','FLA_B':'','FLA_L':'','FLA_M':'','observaciones':''}
+	contexto = {'mensaje':'','titulo':'','url_action':'','canino':'','fecha':'' , 'HTO':'' ,'s_o_l':'', 'GR':'','Hb':'','plaquetas':'','GB':'', 'VCM':'','HCM':'' , 'ChCM':'' , 'FLR_NB':'','FLR_NS':'' ,'FLR_E':'', 'FLR_B':'','FLR_L':'' , 'FLR_M':'','FLA_REF':'','FLA_NB':'','FLA_NS':'','FLA_E':'','FLA_B':'','FLA_L':'','FLA_M':'','observaciones':''}
 	if not request.user.is_authenticated():
 		return redirect('login')
 	else:
@@ -710,6 +715,7 @@ def nuevo_hemograma_view(request):
 			else:
 				hemograma = Hemograma(canino=canino,fecha=fecha ,HTO=HTO ,s_o_l=s_o_l,GR=GR,Hb=Hb,plaquetas=plaquetas,GB=GB, VCM=VCM,HCM=HCM ,ChCM=ChCM , FLR_NB=FLR_NB,FLR_NS=FLR_NS ,FLR_E=FLR_E, FLR_B=FLR_B,FLR_L=FLR_L ,FLR_M=FLR_M,FLA_REF=FLA_REF,FLA_NB=FLA_NB,FLA_NS=FLA_NS,FLA_E=FLA_E,FLA_B=FLA_B,FLA_L=FLA_L,FLA_M=FLA_M,observaciones=observaciones)
 				hemograma.save()
+				contexto['mensaje'] = "El analisis fue agregado correctamente"
 	caninos = Canino.objects.all()
 	contexto['caninos'] = caninos
 	return render_to_response('home/nuevo_hemograma.html' ,contexto, context_instance=RequestContext(request))
@@ -811,7 +817,7 @@ def generar_pdf_view(request,pk):
 
 
 def estadisticas_view(request):
-	contexto = {'porc_machos':'','porc_hembras':'','porc_reactivos':'','porc_no_reactivos':'',}
+	contexto = {'menos_uno':'','uno_y_cinco':'','mas_cinco':'','porc_machos':'','porc_hembras':'','porc_reactivos':'','porc_no_reactivos':'',}
 	machos = Canino.objects.filter(sexo="macho").count()
 	if Canino.objects.all().count() != 0:
 		machos =  (machos * 100 ) / Canino.objects.all().count()
@@ -836,6 +842,24 @@ def estadisticas_view(request):
 	else:
 		no_reactivos = 0
 	contexto['porc_no_reactivos'] = no_reactivos
+	menos_uno = Canino.objects.filter(edad__lt=1).count()
+	if Canino.objects.all().count() != 0:
+		menos_uno = ( menos_uno * 100 ) / Canino.objects.all().count()
+	else:
+		menos_uno = 0
+	contexto['menos_uno'] = menos_uno
+	uno_y_cinco = Canino.objects.filter(edad__gte=1, edad__lte=5).count()
+	if Canino.objects.all().count() != 0:
+		uno_y_cinco = ( uno_y_cinco * 100 ) / Canino.objects.all().count()
+	else:
+		uno_y_cinco = 0
+	contexto['uno_y_cinco'] = uno_y_cinco
+	mas_cinco = Canino.objects.filter( edad__gt=5).count()
+	if Canino.objects.all().count() != 0:
+		mas_cinco = ( mas_cinco * 100 ) / Canino.objects.all().count()
+	else:
+		mas_cinco = 0
+	contexto['mas_cinco'] = mas_cinco
 	return render_to_response('home/estadisticas_view.html',contexto , context_instance=RequestContext(request))
 
 
@@ -861,8 +885,12 @@ def analisis_view(request,pk):
 			else:
 				reactivo = True
 			observaciones = request.POST.get('observaciones')
-			analisis = Analisis(profesional = nombre_profesional , historia_clinica = historia_clinica,fecha = fecha ,dilucion_inicial = dilucion_inicial,reactivo = reactivo, observaciones = observaciones)
-			analisis.save()
+			if(canino[0].analisis):
+				analisis = canino[0].analisis
+				Analisis.objects.filter(id = analisis.id).update(profesional = nombre_profesional , historia_clinica = historia_clinica,fecha = fecha ,dilucion_inicial = dilucion_inicial,reactivo = reactivo, observaciones = observaciones)
+			else:
+				analisis = Analisis(profesional = nombre_profesional , historia_clinica = historia_clinica,fecha = fecha ,dilucion_inicial = dilucion_inicial,reactivo = reactivo, observaciones = observaciones)
+				analisis.save()
 			canino.update(analisis = analisis)
 		else:
 			return render_to_response('home/formulario_reporte.html',{'canino':canino[0] , 'caninos':caninos} , context_instance=RequestContext(request))
