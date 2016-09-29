@@ -76,7 +76,7 @@ function eliminarCanino(idform){
  
   {% for canino in caninos %}
     <tr >
-      <td>{{canino.propietario.nombre}}</td>
+      <td>{{canino.propietario}}</td>
       <td>{{canino.nombre}}</td>
       <td>{{canino.protocolo}}</td>
       <td>{{canino.especie}}</td>
@@ -111,7 +111,7 @@ function eliminarCanino(idform){
             <div class="modal-content">
               <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">Detalle del canino:{{canino.nombre}}</h4>
+                <h4 class="modal-title">Detalle del canino: {{canino}}</h4>
               </div>
               <div class="modal-body">
                 {% include 'home/ficha_canino.html'%}

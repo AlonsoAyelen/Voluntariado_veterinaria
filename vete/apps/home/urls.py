@@ -1,9 +1,10 @@
 #from django.conf.urls import patterns, url, include
-from views import  nuevo_usuario , login_view , duenios_view , nuevo_duenio_view ,nuevo_canino_view , caninos_view , usuarios_view , logout_view , detalles_duenio_view , detalles_canino_view,actualizar_duenio_view,actualizar_canino_view,actualizar_usuario_view,nuevo_bioquimica_view,nuevo_hemograma_view,bioquimicas_view,hemogramas_view , detalles_hemograma_view , detalles_bioquimica_view , actualizar_bioquimica_view , actualizar_hemograma_view , generar_pdf_view , estadisticas_view , analisis_view
+from views import  nuevo_usuario , login_view , duenios_view , nuevo_duenio_view ,nuevo_canino_view , caninos_view , usuarios_view , logout_view , detalles_duenio_view , detalles_canino_view,actualizar_duenio_view,actualizar_canino_view,actualizar_usuario_view,nuevo_bioquimica_view,nuevo_hemograma_view,bioquimicas_view,hemogramas_view , detalles_hemograma_view , detalles_bioquimica_view , actualizar_bioquimica_view , actualizar_hemograma_view , generar_pdf_view , estadisticas_view , analisis_view , index_view
 from django.conf.urls import url
 from django.contrib import admin
 import vete.apps.home.views
 urlpatterns = [
+	url(r'^$', index_view , name='index'),
 	url(r'^usuario/nuevo/$',nuevo_usuario,name='nuevo_usuario'),
 	url(r'^login/$',login_view,name='login'),
 	url(r'^logout/$',logout_view,name='logout'),

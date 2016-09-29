@@ -21,7 +21,7 @@
        <select id="duenio" name="duenio" class="form-control"> 
         <option value="0"> </option>
         {% for duenio in duenios %}
-          <option value="{{duenio.id}}" {% if canino.propietario.id == duenio.id %} selected pepe{% endif %} >{{duenio.nombre}} </option>
+          <option value="{{duenio.id}}" {% if canino.propietario.id == duenio.id %} selected {% endif %} >{{duenio}} </option>
         {% endfor%}
       </select>
       </div>
@@ -48,21 +48,21 @@
       <label for="sexo" class="col-lg-2 control-label">Sexo</label>
       {% if canino.sexo == "Macho" %}
       <div class="col-lg-10">
-        <div class="radio-inline">
-          <input name="sexo" type="radio" value="Macho" checked="checked"/> Macho
-        </div>
-        <div class="radio-inline">
-          <input name="sexo" type="radio" value="Hembra" /> Hembra
-        </div>
+        <label class="radio-inline">
+          <input name="sexo" id="macho" type="radio" value="Macho" checked="checked"/> Macho
+        </label>
+        <label class="radio-inline">
+          <input name="sexo" id="hembra" type="radio" value="Hembra" /> Hembra
+        </label>
       </div>
       {% else %}
       <div class="col-lg-10">
-        <div class="radio-inline">
-          <input name="sexo" type="radio" value="Macho" /> Macho
-        </div>
-        <div class="radio-inline">
-          <input name="sexo" type="radio" value="Hembra" checked="checked"/> Hembra
-        </div>
+        <label class="radio-inline">
+          <input name="sexo" id="macho" type="radio" value="Macho" /> Macho
+        </label>
+        <label class="radio-inline">
+          <input name="sexo" id="hembra" type="radio" value="Hembra" checked="checked"/> Hembra
+        </label>
       </div>
       {% endif %}
     </div>
@@ -89,63 +89,63 @@
       <label for="uso_de_la_mascota" class="col-lg-2 control-label">Uso de la mascota</label>
       {% if canino.uso_de_la_mascota == "Guardia" %}
       <div class="col-lg-10">
-        <div class="radio-inline">
+        <label class="radio-inline">
           <input name="uso_de_la_mascota" type="radio" value="Guardia" checked="checked"/> Guardia
-        </div>
-        <div class="radio-inline">
+        </label>
+        <label class="radio-inline">
           <input name="uso_de_la_mascota" type="radio" value="Caza"  /> Caza
-        </div>
-        <div class="radio-inline">
+        </label>
+        <label class="radio-inline">
           <input name="uso_de_la_mascota" type="radio" value="Compania" /> Compania
-        </div>
-        <div class="radio-inline">
+        </label>
+        <label class="radio-inline">
           <input name="uso_de_la_mascota" type="radio" value="Otra" /> Otra
-        </div>
+        </label>
       </div>
       {% elif canino.uso_de_la_mascota == "Caza" %}
       <div class="col-lg-10">
-        <div class="radio-inline">
+        <label class="radio-inline">
           <input name="uso_de_la_mascota" type="radio" value="Guardia" /> Guardia
-        </div>
-        <div class="radio-inline">
+        </label>
+        <label class="radio-inline">
           <input name="uso_de_la_mascota" type="radio" value="Caza" checked="checked" /> Caza
-        </div>
-        <div class="radio-inline">
+        </label>
+        <label class="radio-inline">
           <input name="uso_de_la_mascota" type="radio" value="Compania" /> Compania
-        </div>
-        <div class="radio-inline">
+        </label>
+        <label class="radio-inline">
           <input name="uso_de_la_mascota" type="radio" value="Otra" /> Otra
-        </div>
+        </label>
       </div>
       {% elif canino.uso_de_la_mascota == "Compania" %}
       <div class="col-lg-10">
-        <div class="radio-inline">
+        <label class="radio-inline">
           <input name="uso_de_la_mascota" type="radio" value="Guardia" /> Guardia
-        </div>
-        <div class="radio-inline">
+        </label>
+        <label class="radio-inline">
           <input name="uso_de_la_mascota" type="radio" value="Caza"  /> Caza
-        </div>
-        <div class="radio-inline">
+        </label>
+        <label class="radio-inline">
           <input name="uso_de_la_mascota" type="radio" value="Compania" checked="checked" /> Compania
-        </div>
-        <div class="radio-inline">
+        </label>
+        <label class="radio-inline">
           <input name="uso_de_la_mascota" type="radio" value="Otra" /> Otra
-        </div>
+        </label>
       </div>
       {% else %}
       <div class="col-lg-10">
-        <div class="radio-inline">
+        <label class="radio-inline">
           <input name="uso_de_la_mascota" type="radio" value="Guardia" /> Guardia
-        </div>
-        <div class="radio-inline">
+        </label>
+        <label class="radio-inline">
           <input name="uso_de_la_mascota" type="radio" value="Caza"  /> Caza
-        </div>
-        <div class="radio-inline">
+        </label>
+        <label class="radio-inline">
           <input name="uso_de_la_mascota" type="radio" value="Compania" /> Compania
-        </div>
-        <div class="radio-inline">
+        </label>
+        <label class="radio-inline">
           <input name="uso_de_la_mascota" type="radio" value="Otra" checked="checked"/> Otra
-        </div>
+        </label>
       </div>
       {% endif %}
     </div>
@@ -153,93 +153,93 @@
       <label for="habitos" class="col-lg-2 control-label">Habitos</label>
       {% if canino.habitos == "No sale" %}
       <div class="col-lg-10">
-        <div class="radio-inline">
+        <label class="radio-inline">
           <input name="habitos" type="radio" value="No sale" checked="checked"/> No sale
-        </div>
-        <div class="radio-inline">
+        </label>
+        <label class="radio-inline">
           <input name="habitos" type="radio" value="Sale con correa"  /> Sale con correa
-        </div>
-        <div class="radio-inline">
+        </label>
+        <label class="radio-inline">
           <input name="habitos" type="radio" value="Sale sin correa" /> Sale sin correa
-        </div>
-        <div class="radio-inline">
+        </label>
+        <label class="radio-inline">
           <input name="habitos" type="radio" value="Sale sin supervision" /> Sale sin supervision
-        </div>
-        <div class="radio-inline">
+        </label>
+        <label class="radio-inline">
           <input name="habitos" type="radio" value="Vagabundo" /> Vagabundo
-        </div>
+        </label>
       </div>
       {% elif canino.habitos == "Sale con correa" %}
       <div class="col-lg-10">
-        <div class="radio-inline">
+        <label class="radio-inline">
           <input name="habitos" type="radio" value="No sale" /> No sale
-        </div>
-        <div class="radio-inline">  
+        </label>
+        <label class="radio-inline">  
           <input name="habitos" type="radio" value="Sale con correa" checked="checked" /> Sale con correa
-        </div>
-        <div class="radio-inline">
+        </label>
+        <label class="radio-inline">
           <input name="habitos" type="radio" value="Sale sin correa" /> Sale sin correa
-        </div>
-        <div class="radio-inline">
+        </label>
+        <label class="radio-inline">
           <input name="habitos" type="radio" value="Sale sin supervision" /> Sale sin supervision
-        </div>
-        <div class="radio-inline">
+        </label>
+        <label class="radio-inline">
           <input name="habitos" type="radio" value="Vagabundo" /> Vagabundo
-        </div>
+        </label>
       </div>
       {% elif canino.habitos == "Sale sin correa" %}
       <div class="col-lg-10">
-        <div class="radio-inline">
+        <label class="radio-inline">
           <input name="habitos" type="radio" value="No sale" /> No sale
-        </div>
-        <div class="radio-inline">
+        </label>
+        <label class="radio-inline">
           <input name="habitos" type="radio" value="Sale con correa"  /> Sale con correa
-        </div>
-        <div class="radio-inline">
+        </label>
+        <label class="radio-inline">
           <input name="habitos" type="radio" value="Sale sin correa" checked="checked"/> Sale sin correa
-        </div>
-        <div class="radio-inline">
+        </label>
+        <label class="radio-inline">
           <input name="habitos" type="radio" value="Sale sin supervision" /> Sale sin supervision
-        </div>
-        <div class="radio-inline">
+        </label>
+        <label class="radio-inline">
           <input name="habitos" type="radio" value="Vagabundo" /> Vagabundo
-        </div>
+        </label>
       </div>
       {% elif canino.habitos == "Sale sin supervision" %}
       <div class="col-lg-10">
-        <div class="radio-inline">
+        <label class="radio-inline">
           <input name="habitos" type="radio" value="No sale" /> No sale
-        </div>
-        <div class="radio-inline">
+        </label>
+        <label class="radio-inline">
           <input name="habitos" type="radio" value="Sale con correa"  /> Sale con correa
-        </div>
-        <div class="radio-inline">
+        </label>
+        <label class="radio-inline">
           <input name="habitos" type="radio" value="Sale sin correa" /> Sale sin correa
-        </div>
-        <div class="radio-inline">
+        </label>
+        <label class="radio-inline">
           <input name="habitos" type="radio" value="Sale sin supervision" checked="checked"/> Sale sin supervision
-        </div>
-        <div class="radio-inline"> 
+        </label>
+        <label class="radio-inline"> 
           <input name="habitos" type="radio" value="Vagabundo" /> Vagabundo
-        </div>
+        </label>
       </div>
       {% else %}
       <div class="col-lg-10">
-        <div class="radio-inline">
+        <label class="radio-inline">
           <input name="habitos" type="radio" value="No sale" /> No sale
-        </div>
-        <div class="radio-inline">
+        </label>
+        <label class="radio-inline">
           <input name="habitos" type="radio" value="Sale con correa"  /> Sale con correa
-        </div>
-        <div class="radio-inline">
+        </label>
+        <label class="radio-inline">
           <input name="habitos" type="radio" value="Sale sin correa" /> Sale sin correa
-        </div>
-        <div class="radio-inline">
+        </label>
+        <label class="radio-inline">
           <input name="habitos" type="radio" value="Sale sin supervision" /> Sale sin supervision
-        </div>
-        <div class="radio-inline">
+        </label>
+        <label class="radio-inline">
           <input name="habitos" type="radio" value="Vagabundo" checked="checked"/> Vagabundo
-        </div>
+        </label>
       </div>
       {% endif %}
     </div>
@@ -247,39 +247,39 @@
       <label for="contacto_con_basural" class="col-lg-2 control-label">Contacto con basural</label>
       {% if canino.contacto_con_basural == "Ninguno" %}
       <div class="col-lg-10">
-        <div class="radio-inline">
+        <label class="radio-inline">
           <input name="contacto_con_basural" type="radio" value="Ninguno" checked="checked" /> Ninguno
-        </div>
-        <div class="radio-inline">
+        </label>
+        <label class="radio-inline">
           <input name="contacto_con_basural" type="radio" value="Esporadico" /> Esporadico
-        </div>
-        <div class="radio-inline">
+        </label>
+        <label class="radio-inline">
           <input name="contacto_con_basural" type="radio" value="Frecuente" /> Frecuente
-        </div>
+        </label>
       </div>
       {% elif canino.contacto_con_basural == "Esporadico" %}
       <div class="col-lg-10">
-        <div class="radio-inline">
+        <label class="radio-inline">
           <input name="contacto_con_basural" type="radio" value="Ninguno"  /> Ninguno
-        </div>
-        <div class="radio-inline">
+        </label>
+        <label class="radio-inline">
           <input name="contacto_con_basural" type="radio" value="Esporadico" checked="checked"/> Esporadico
-        </div>
-        <div class="radio-inline">
+        </label>
+        <label class="radio-inline">
           <input name="contacto_con_basural" type="radio" value="Frecuente" /> Frecuente
-        </div>
+        </label>
       </div>
       {% else %}
       <div class="col-lg-10">
-        <div class="radio-inline">
+        <label class="radio-inline">
           <input name="contacto_con_basural" type="radio" value="Ninguno"  /> Ninguno
-        </div>
-        <div class="radio-inline">
+        </label>
+        <label class="radio-inline">
           <input name="contacto_con_basural" type="radio" value="Esporadico" /> Esporadico
-        </div>
-        <div class="radio-inline">
+        </label>
+        <label class="radio-inline">
           <input name="contacto_con_basural" type="radio" value="Frecuente" checked="checked"/> Frecuente
-        </div>
+        </label>
       </div>
       {% endif %}
     </div>    
@@ -287,21 +287,21 @@
       <label for="caza" class="col-lg-2 control-label">Comportamiento de caza</label>
       {% if canino.caza == "No" %}
       <div class="col-lg-10">
-        <div class="radio-inline">
+        <label class="radio-inline">
           <input name="caza" type="radio" value="No" checked="checked" /> No
-        </div>
-        <div class="radio-inline">
+        </label>
+        <label class="radio-inline">
           <input name="caza" type="radio" value="Si" /> Si
-        </div>
+        </label>
       </div>
       {% else %}
       <div class="col-lg-10">
-        <div class="radio-inline">
+        <label class="radio-inline">
           <input name="caza" type="radio" value="No"  /> No
-        </div>
-        <div class="radio-inline">
+        </label>
+        <label class="radio-inline">
           <input name="caza" type="radio" value="Si" checked="checked"/> Si
-        </div>
+        </label>
       </div>
       {% endif %}
     </div>
@@ -309,21 +309,21 @@
       <label for="caza_roedores" class="col-lg-2 control-label">Caza roedores</label>
       {% if canino.caza_roedores == "No" %}
       <div class="col-lg-10">
-        <div class="radio-inline">
+        <label class="radio-inline">
           <input name="caza_roedores" type="radio" value="No" checked="checked" /> No
-        </div>
-        <div class="radio-inline">
+        </label>
+        <label class="radio-inline">
           <input name="caza_roedores" type="radio" value="Si" /> Si
-        </div>
+        </label>
       </div>
       {% else %}
       <div class="col-lg-10">
-        <div class="radio-inline">
+        <label class="radio-inline">
           <input name="caza_roedores" type="radio" value="No"  /> No
-        </div>
-        <div class="radio-inline">
+        </label>
+        <label class="radio-inline">
           <input name="caza_roedores" type="radio" value="Si" checked="checked"/> Si
-        </div>
+        </label>
       </div>
     {% endif %}
     </div>
@@ -331,39 +331,39 @@
       <label for="observacion_roedores" class="col-lg-2 control-label">Observacion roedores</label>
       {% if canino.observacion_roedores == "No" %}
       <div class="col-lg-10">
-        <div class="radio-inline">
+        <label class="radio-inline">
           <input name="observacion_roedores" type="radio" value="No" checked="checked"/> No
-        </div>
-        <div class="radio-inline">
+        </label>
+        <label class="radio-inline">
           <input name="observacion_roedores" type="radio" value="Esporadico" /> Esporadico
-        </div>
-        <div class="radio-inline">
+        </label>
+        <label class="radio-inline">
           <input name="observacion_roedores" type="radio" value="Frecuente" /> Frecuente
-        </div>
+        </label>
       </div>
       {% elif canino.observacion_roedores == "Esporadico" %}
       <div class="col-lg-10">
-        <div class="radio-inline">
+        <label class="radio-inline">
           <input name="observacion_roedores" type="radio" value="No" /> No
-        </div>
-        <div class="radio-inline">
+        </label>
+        <label class="radio-inline">
           <input name="observacion_roedores" type="radio" value="Esporadico" checked="checked"/> Esporadico
-        </div>
-        <div class="radio-inline">
+        </label>
+        <label class="radio-inline">
           <input name="observacion_roedores" type="radio" value="Frecuente" /> Frecuente
-        </div>
+        </label>
       </div>
       {% else %}
       <div class="col-lg-10">
-        <div class="radio-inline">
+        <label class="radio-inline">
           <input name="observacion_roedores" type="radio" value="No" /> No
-        </div>
-        <div class="radio-inline">
+        </label>
+        <label class="radio-inline">
           <input name="observacion_roedores" type="radio" value="Esporadico" /> Esporadico
-        </div>
-        <div class="radio-inline">
+        </label>
+        <label class="radio-inline">
           <input name="observacion_roedores" type="radio" value="Frecuente" checked="checked"/> Frecuente
-        </div>
+        </label>
       </div>
       {% endif %}
     </div>
@@ -371,39 +371,39 @@
       <label for="vacunado_contra_leptospirosis" class="col-lg-2 control-label">Vacunado contra leptospirosis</label>
       {% if canino.vacunado_contra_leptospirosis == "No" %}
       <div class="col-lg-10">
-        <div class="radio-inline">
+        <label class="radio-inline">
           <input name="vacunado_contra_leptospirosis" type="radio" value="No" checked="checked"/> No
-        </div>
-        <div class="radio-inline">
+        </label>
+        <label class="radio-inline">
           <input name="vacunado_contra_leptospirosis" type="radio" value="Si" /> Si
-        </div>
-        <div class="radio-inline">
+        </label>
+        <label class="radio-inline">
           <input name="vacunado_contra_leptospirosis" type="radio" value="Desconoce" /> Desconoce
-        </div>
+        </label>
       </div>
       {% elif canino.vacunado_contra_leptospirosis == "Si" %}
       <div class="col-lg-10">
-        <div class="radio-inline">
+        <label class="radio-inline">
           <input name="vacunado_contra_leptospirosis" type="radio" value="No" /> No
-        </div>
-        <div class="radio-inline">  
+        </label>
+        <label class="radio-inline">  
           <input name="vacunado_contra_leptospirosis" type="radio" value="Si" checked="checked"/> Si
-        </div>
-        <div class="radio-inline">  
+        </label>
+        <label class="radio-inline">  
           <input name="vacunado_contra_leptospirosis" type="radio" value="Desconoce" /> Desconoce
-        </div>
+        </label>
       </div>
       {% else %}
       <div class="col-lg-10">
-        <div class="radio-inline">
+        <label class="radio-inline">
           <input name="vacunado_contra_leptospirosis" type="radio" value="No" /> No
-        </div>
-        <div class="radio-inline">
+        </label>
+        <label class="radio-inline">
           <input name="vacunado_contra_leptospirosis" type="radio" value="Si" /> Si
-        </div>
-        <div class="radio-inline">
+        </label>
+        <label class="radio-inline">
           <input name="vacunado_contra_leptospirosis" type="radio" value="Desconoce" checked="checked"/> Desconoce
-        </div>
+        </label>
       </div>
       {% endif%}
     </div>
@@ -411,39 +411,39 @@
       <label for="desparasitado" class="col-lg-2 control-label">Desparasitado</label>
       {% if canino.desparasitado == "No" %}
       <div class="col-lg-10">
-        <div class="radio-inline">
+        <label class="radio-inline">
           <input name="desparasitado" type="radio" value="No" checked="checked" /> No
-        </div>
-        <div class="radio-inline">
+        </label>
+        <label class="radio-inline">
           <input name="desparasitado" type="radio" value="Si" /> Si
-        </div>
-        <div class="radio-inline">
+        </label>
+        <label class="radio-inline">
           <input name="desparasitado" type="radio" value="Desconoce" /> Desconoce
-        </div>
+        </label>
       </div>
       {% elif canino.desparasitado == "Si" %}
       <div class="col-lg-10">
-        <div class="radio-inline">
+        <label class="radio-inline">
           <input name="desparasitado" type="radio" value="No"  /> No
-        </div>
-        <div class="radio-inline">
+        </label>
+        <label class="radio-inline">
           <input name="desparasitado" type="radio" value="Si" checked="checked"/> Si
-        </div>
-        <div class="radio-inline">
+        </label>
+        <label class="radio-inline">
           <input name="desparasitado" type="radio" value="Desconoce" /> Desconoce
-        </div>
+        </label>
       </div>
       {% else %}
       <div class="col-lg-10">
-        <div class="radio-inline">
+        <label class="radio-inline">
           <input name="desparasitado" type="radio" value="No"  /> No
-        </div>
-        <div class="radio-inline">
+        </label>
+        <label class="radio-inline">
           <input name="desparasitado" type="radio" value="Si" /> Si
-        </div>
-        <div class="radio-inline">
+        </label>
+        <label class="radio-inline">
           <input name="desparasitado" type="radio" value="Desconoce" checked="checked"/> Desconoce
-        </div>
+        </label>
       </div>
       {% endif %}
     </div>
@@ -451,39 +451,39 @@
       <label for="eliminacion_de_excretas" class="col-lg-2 control-label">Eliminacion de excretas</label>
       {% if canino.eliminacion_de_excretas == "En la calle" %}
       <div class="col-lg-10">
-        <div class="radio-inline">
+        <label class="radio-inline">
           <input name="eliminacion_de_excretas" type="radio" value="En la calle" checked="checked" /> En la calle
-        </div>
-        <div class="radio-inline">
+        </label>
+        <label class="radio-inline">
           <input name="eliminacion_de_excretas" type="radio" value="En el domicilio" /> En el domicilio
-        </div>
-        <div class="radio-inline">
+        </label>
+        <label class="radio-inline">
           <input name="eliminacion_de_excretas" type="radio" value="Ambas" /> Ambas
-        </div>
+        </label>
       </div>
       {% elif canino.eliminacion_de_excretas == "En el domicilio" %}
       <div class="col-lg-10">
-        <div class="radio-inline">
+        <label class="radio-inline">
           <input name="eliminacion_de_excretas" type="radio" value="En la calle"  /> En la calle
-        </div>
-        <div class="radio-inline">
+        </label>
+        <label class="radio-inline">
           <input name="eliminacion_de_excretas" type="radio" value="En el domicilio" checked="checked" /> En el domicilio
-        <div>
-        <div class="radio-inline">
+        <label>
+        <label class="radio-inline">
           <input name="eliminacion_de_excretas" type="radio" value="Ambas" /> Ambas
-        </div>
+        </label>
       </div>
       {% else %}
       <div class="col-lg-10">
-        <div class="radio-inline">
+        <label class="radio-inline">
           <input name="eliminacion_de_excretas" type="radio" value="En la calle" /> En la calle
-        </div>
-        <div class="radio-inline">
+        </label>
+        <label class="radio-inline">
           <input name="eliminacion_de_excretas" type="radio" value="En el domicilio" /> En el domicilio
-        </div>
-        <div class="radio-inline">
+        </label>
+        <label class="radio-inline">
           <input name="eliminacion_de_excretas" type="radio" value="Ambas" checked="checked" /> Ambas
-        </div>
+        </label>
       </div>
       {% endif %}
     </div>
@@ -491,39 +491,39 @@
       <label for="habitos_alimenticios" class="col-lg-2 control-label">Habitos alimenticios</label>
       {% if canino.habitos_alimenticios == "Alimento balanceado" %}
       <div class="col-lg-10">
-        <div class="radio-inline">
+        <label class="radio-inline">
           <input name="habitos_alimenticios" type="radio" value="Alimento balanceado" checked="checked" /> Alimento balanceado
-        </div>
-        <div class="radio-inline">
+        </label>
+        <label class="radio-inline">
           <input name="habitos_alimenticios" type="radio" value="Comida casera" /> Comida casera
-        </div>
-        <div class="radio-inline">
+        </label>
+        <label class="radio-inline">
           <input name="habitos_alimenticios" type="radio" value="Ambas" /> Ambas
-        </div>
+        </label>
       </div>
       {% elif canino.habitos_alimenticios == "Comida casera" %}
       <div class="col-lg-10">
-        <div class="radio-inline">
+        <label class="radio-inline">
           <input name="habitos_alimenticios" type="radio" value="Alimento balanceado"  /> Alimento balanceado
-        </div>
-        <div class="radio-inline">
+        </label>
+        <label class="radio-inline">
           <input name="habitos_alimenticios" type="radio" value="Comida casera" checked="checked"/> Comida casera
-        <div>
-        <div class="radio-inline">
+        <label>
+        <label class="radio-inline">
           <input name="habitos_alimenticios" type="radio" value="Ambas" /> Ambas
-        </div>
+        </label>
       </div>
       {% else %}
       <div class="col-lg-10">
-        <div class="radio-inline">
+        <label class="radio-inline">
           <input name="habitos_alimenticios" type="radio" value="Alimento balanceado"  /> Alimento balanceado
-        </div>
-        <div class="radio-inline">
+        </label>
+        <label class="radio-inline">
           <input name="habitos_alimenticios" type="radio" value="Comida casera" /> Comida casera
-        </div>
-        <div class="radio-inline">
+        </label>
+        <label class="radio-inline">
           <input name="habitos_alimenticios" type="radio" value="Ambas" checked="checked"/> Ambas
-        </div>
+        </label>
       </div>
       {% endif %}
     </div>
@@ -531,21 +531,21 @@
       <label for="signos_clinicos" class="col-lg-2 control-label">Signos clinicos</label>
       {% if canino.signos_clinicos == "No" %}
       <div class="col-lg-10">
-        <div class="radio-inline">
+        <label class="radio-inline">
           <input name="signos_clinicos" type="radio" value="No" checked="checked" /> No
-        </div>
-        <div class="radio-inline">
+        </label>
+        <label class="radio-inline">
           <input name="signos_clinicos" type="radio" value="Si" /> Si
-        </div>
+        </label>
       </div>
       {% else %}
       <div class="col-lg-10">
-        <div class="radio-inline">
+        <label class="radio-inline">
           <input name="signos_clinicos" type="radio" value="No"  /> No
-        </div>
-        <div class="radio-inline">
+        </label>
+        <label class="radio-inline">
           <input name="signos_clinicos" type="radio" value="Si" checked="checked"/> Si
-        </div>
+        </label>
       </div>  
       {% endif %}
     </div>
@@ -638,63 +638,63 @@
       <label for="procedimiento_realizado" class="col-lg-2 control-label">Procedimiento realizado</label>
       {% if canino.procedimiento_realizado == "VAR" %}
       <div class="col-lg-10">
-        <div class="radio-inline">
+        <label class="radio-inline">
           <input name="procedimiento_realizado" type="radio" value="VAR" checked="checked" /> VAR
-        </div>
-        <div class="radio-inline">
+        </label>
+        <label class="radio-inline">
           <input name="procedimiento_realizado" type="radio" value="ATP" /> ATP
-        </div>
-        <div class="radio-inline">
+        </label>
+        <label class="radio-inline">
           <input name="procedimiento_realizado" type="radio" value="EXTRAC" /> EXTRAC
-        </div>
-        <div class="radio-inline">
+        </label>
+        <label class="radio-inline">
           <input name="procedimiento_realizado" type="radio" value="COPRO" /> COPRO
-        </div>
+        </label>
       </div>
       {% elif canino.procedimiento_realizado == "ATP" %}
       <div class="col-lg-10">
-        <div class="radio-inline">
+        <label class="radio-inline">
           <input name="procedimiento_realizado" type="radio" value="VAR"  /> VAR
-        </div>
-        <div class="radio-inline">
+        </label>
+        <label class="radio-inline">
           <input name="procedimiento_realizado" type="radio" value="ATP" checked="checked"/> ATP
-        </div>
-        <div class="radio-inline">
+        </label>
+        <label class="radio-inline">
           <input name="procedimiento_realizado" type="radio" value="EXTRAC" /> EXTRAC
-        </div>
-        <div class="radio-inline">
+        </label>
+        <label class="radio-inline">
           <input name="procedimiento_realizado" type="radio" value="COPRO" /> COPRO
-        </div>
+        </label>
       </div>
       {% elif canino.procedimiento_realizado == "EXTRAC" %}
       <div class="col-lg-10">
-        <div class="radio-inline">
+        <label class="radio-inline">
           <input name="procedimiento_realizado" type="radio" value="VAR"  /> VAR
-        </div>
-        <div class="radio-inline">
+        </label>
+        <label class="radio-inline">
           <input name="procedimiento_realizado" type="radio" value="ATP" /> ATP
-        </div>
-        <div class="radio-inline">
+        </label>
+        <label class="radio-inline">
           <input name="procedimiento_realizado" type="radio" value="EXTRAC" checked="checked"/> EXTRAC
-        </div>
-        <div class="radio-inline">
+        </label>
+        <label class="radio-inline">
           <input name="procedimiento_realizado" type="radio" value="COPRO" /> COPRO
-        </div>
+        </label>
       </div>
       {% else %}
       <div class="col-lg-10">
-        <div class="radio-inline">
+        <label class="radio-inline">
           <input name="procedimiento_realizado" type="radio" value="VAR" /> VAR
-        </div>
-        <div class="radio-inline">
+        </label>
+        <label class="radio-inline">
           <input name="procedimiento_realizado" type="radio" value="ATP" /> ATP
-        </div>
-        <div class="radio-inline">
+        </label>
+        <label class="radio-inline">
           <input name="procedimiento_realizado" type="radio" value="EXTRAC" /> EXTRAC
-        </div>
-        <div class="radio-inline">
+        </label>
+        <label class="radio-inline">
           <input name="procedimiento_realizado" type="radio" value="COPRO" checked="checked" /> COPRO
-        </div>
+        </label>
       </div>
       {% endif%}
       </div>

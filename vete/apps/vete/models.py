@@ -36,7 +36,7 @@ class Propietario(models.Model):
 	roedores = models.CharField(max_length = 100)
 	agua_servida = models.CharField(max_length = 100)
 	inundaciones = models.CharField(max_length = 100)
-	ultima_inundacion = models.DateField(auto_now = False,null=True)
+	ultima_inundacion = models.DateField(auto_now = False,null=True,blank=True)
 	signos_clinicos = models.CharField(max_length = 100)
 	integrante = models.CharField(max_length = 100)
 	sintomas = models.ManyToManyField(Sintoma)
@@ -45,7 +45,7 @@ class Propietario(models.Model):
 	class Meta:
 		managed = True      # add this\
 		app_label = 'vete' # & this
-	def __unicode__(self):return self.nombre
+	def __unicode__(self):return self.nombre + '-' + self.apellido + '-' + self.direccion
 
 
 class Analisis(models.Model):

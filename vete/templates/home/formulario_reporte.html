@@ -40,12 +40,12 @@
     <div class="form-group">
       <label for="reactivo" class="col-lg-2 control-label">Reactivo/No reactivo</label>
       <div class="col-lg-10">
-        <div class="radio-inline">
+        <label class="radio-inline">
           <input name="reactivo" type="radio" value="No reactivo" {% if not canino.analisis.reactivo%}checked="checked"{% endif %} /> No
-        </div>
-        <div class="radio-inline">
+        </label>
+        <label class="radio-inline">
           <input name="reactivo" type="radio" value="Reactivo" {% if canino.analisis.reactivo %}checked="checked"{% endif %} /> Si
-        </div>
+        </label>
       </div>
     </div>
     <div class="form-group">

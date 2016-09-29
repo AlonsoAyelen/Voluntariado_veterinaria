@@ -327,7 +327,10 @@ def nuevo_duenio_view(request):
 			roedores = request.POST.get('roedores')
 			agua_servida = request.POST.get('agua_servida')
 			inundaciones = request.POST.get('inundaciones')
-			ultima = request.POST.get('ultima_inundacion')
+			if request.POST.get('ultima_inundacion') != "":
+				ultima = request.POST.get('ultima_inundacion')
+			else:
+				ultima = None
 			signos_clinicos = request.POST.get('signos_clinicos')
 			integrante = request.POST.get('integrante')
 			sintomas_ids = request.POST.getlist('sintomas')
@@ -337,7 +340,7 @@ def nuevo_duenio_view(request):
 			aclaracion = request.POST.get('aclaracion')
 			status = True
 			
-			if(len(Propietario.objects.filter(nombre=nombre ,apellido=apellido,status=True))>0):
+			if(len(Propietario.objects.filter(nombre=nombre ,apellido=apellido,direccion=direccion,status=True))>0):
 				contexto['error'] = "El propietario ya existe"
 				contexto['nombre'] = nombre
 				contexto['apellido'] = apellido
@@ -416,7 +419,10 @@ def actualizar_duenio_view(request,pk):
 			roedores = request.POST.get('roedores')
 			agua_servida = request.POST.get('agua_servida')
 			inundaciones = request.POST.get('inundaciones')
-			ultima = request.POST.get('ultima_inundacion')
+			if request.POST.get('ultima_inundacion') != "":
+				ultima = request.POST.get('ultima_inundacion')
+			else:
+				ultima = None
 			signos_clinicos = request.POST.get('signos_clinicos')
 			integrante = request.POST.get('integrante')
 			aclaracion = request.POST.get('aclaracion')
@@ -895,3 +901,11 @@ def analisis_view(request,pk):
 		else:
 			return render_to_response('home/formulario_reporte.html',{'canino':canino[0] , 'caninos':caninos} , context_instance=RequestContext(request))
 	return render_to_response('home/caninos_view.html' ,{'canino':canino , 'caninos':caninos}, context_instance=RequestContext(request))
+
+
+def index_view(request):
+	if not request.user.is_authenticated():
+		return redirect('login')
+	else:
+		return redirect('/duenios')
+

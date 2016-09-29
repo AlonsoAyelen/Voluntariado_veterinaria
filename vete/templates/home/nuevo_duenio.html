@@ -25,7 +25,7 @@
        <select value="{{canino.id}}" id="canino" placeholder="Canino" name="canino" value="{{canino.nombre}}" class="form-control"> 
         <option value="{{canino.id}}" id="canino" placeholder="Canino" name="canino"> </option>
         {% for canino in caninos %}
-          <option value="{{canino.id}}" id="canino" placeholder="Canino" name="canino" required>{{canino.nombre}} </option>
+          <option value="{{canino.id}}" id="canino" placeholder="Canino" name="canino" required>{{canino.nombre}} - {{canino.protocolo}} </option>
         {% endfor%}
       </select>
       </div>
@@ -91,9 +91,9 @@
       </div>
     </div>
     <div class="form-group">
-      <label for="convivientes_ninios" class="col-lg-2 control-label">Ninios</label>
+      <label for="convivientes_ninios" class="col-lg-2 control-label">Niños</label>
       <div class="col-lg-10">
-        <input type="number" class="form-control" id="convivientes_ninios" placeholder="Convivientes ninios" name="convivientes_ninios" required value="{{duenio.numero_convivientes_ninios}}">
+        <input type="number" class="form-control" id="convivientes_ninios" placeholder="Convivientes niños" name="convivientes_ninios" required value="{{duenio.numero_convivientes_ninios}}">
       </div>
     </div>
     <div class="form-group">
@@ -106,63 +106,63 @@
       <label for="mascotas" class="col-lg-2 control-label">Mascotas</label>
       {% if duenio.mascotas == "1" %}
       <div class="col-lg-10">
-        <div class="radio-inline">
+        <label class="radio-inline">
           <input name="mascotas" type="radio" value="1" checked="checked" /> 1
-        </div>
-        <div class="radio-inline">
+        </label>
+        <label class="radio-inline">
           <input name="mascotas" type="radio" value="2" /> 2
-        </div>
-        <div class="radio-inline">
+        </label>
+        <label class="radio-inline">
           <input name="mascotas" type="radio" value="3" /> 3
-        </div>
-        <div class="radio-inline">
+        </label>
+        <label class="radio-inline">
           <input name="mascotas" type="radio" value="mas de 3" /> Mas de 3
-        </div>
+        </label>
       </div>
       {% elif duenio.mascotas = 2 %}
       <div class="col-lg-10">
-        <div class="radio-inline">
+        <label class="radio-inline">
           <input name="mascotas" type="radio" value="1"  /> 1
-        </div>
-        <div class="radio-inline">
+        </label>
+        <label class="radio-inline">
           <input name="mascotas" type="radio" value="2" checked="checked"/> 2
-        </div>
-        <div class="radio-inline">
+        </label>
+        <label class="radio-inline">
           <input name="mascotas" type="radio" value="3" /> 3
-        </div>
-        <div class="radio-inline">
+        </label>
+        <label class="radio-inline">
           <input name="mascotas" type="radio" value="mas de 3" /> Mas de 3
-        </div>
+        </label>
       </div>
       {% elif duenio.mascotas = 3 %}
       <div class="col-lg-10">
-        <div class="radio-inline">
+        <label class="radio-inline">
           <input name="mascotas" type="radio" value="1"  /> 1
-        </div>
-        <div class="radio-inline">
+        </label>
+        <label class="radio-inline">
           <input name="mascotas" type="radio" value="2" /> 2
-        </div>
-        <div class="radio-inline">
+        </label>
+        <label class="radio-inline">
           <input name="mascotas" type="radio" value="3" checked="checked"/> 3
-        </div>
-        <div class="radio-inline">
+        </label>
+        <label class="radio-inline">
           <input name="mascotas" type="radio" value="mas de 3" /> Mas de 3
-        </div>
+        </label>
       </div>
       {% else %}
       <div class="col-lg-10">
-        <div class="radio-inline">
+        <label class="radio-inline">
           <input name="mascotas" type="radio" value="1"  /> 1
-        </div>
-        <div class="radio-inline">
+        </label>
+        <label class="radio-inline">
           <input name="mascotas" type="radio" value="2" /> 2
-        </div>
-        <div class="radio-inline">
+        </label>
+        <label class="radio-inline">
           <input name="mascotas" type="radio" value="3" /> 3
-        </div>
-        <div class="radio-inline">
+        </label>
+        <label class="radio-inline">
           <input name="mascotas" type="radio" value="mas de 3" checked="checked"/> Mas de 3
-        </div>
+        </label>
       </div>
       {% endif %}
     </div>
@@ -177,63 +177,63 @@
       <label for="vivienda" class="col-lg-2 control-label">Vivienda</label>
       {% if duenio.vivienda == "propia" %}
       <div class="col-lg-10">
-        <div class="radio-inline">
+        <label class="radio-inline">
           <input name="vivienda" type="radio" value="propia" checked="checked" /> Propia
-        </div>
-        <div class="radio-inline">
+        </label>
+        <label class="radio-inline">
           <input name="vivienda" type="radio" value="alquila" /> Alquila
-        </div>
-        <div class="radio-inline">
+        </label>
+        <label class="radio-inline">
           <input name="vivienda" type="radio" value="asentamiento" /> Asentamiento
-        </div>
-        <div class="radio-inline">
+        </label>
+        <label class="radio-inline">
           <input name="vivienda" type="radio" value="otros" /> Otros
-        </div>
+        </label>
       </div>
       {% elif duenio.vivienda == "alquila" %}
       <div class="col-lg-10">
-        <div class="radio-inline">
+        <label class="radio-inline">
           <input name="vivienda" type="radio" value="propia"  /> Propia
-        </div>
-        <div class="radio-inline">
+        </label>
+        <label class="radio-inline">
           <input name="vivienda" type="radio" value="alquila" checked="checked"/> Alquila
-        </div>
-        <div class="radio-inline">
+        </label>
+        <label class="radio-inline">
           <input name="vivienda" type="radio" value="asentamiento" /> Asentamiento
-        </div>
-        <div class="radio-inline">
+        </label>
+        <label class="radio-inline">
           <input name="vivienda" type="radio" value="otros" /> Otros
-        </div>
+        </label>
       </div>
       {% elif duenio.vivienda == "asentamiento" %}
       <div class="col-lg-10">
-        <div class="radio-inline">
+        <label class="radio-inline">
           <input name="vivienda" type="radio" value="propia"  /> Propia
-        </div>
-        <div class="radio-inline">
+        </label>
+        <label class="radio-inline">
           <input name="vivienda" type="radio" value="alquila" /> Alquila
-        </div>
-        <div class="radio-inline">
+        </label>
+        <label class="radio-inline">
           <input name="vivienda" type="radio" value="asentamiento" checked="checked"/> Asentamiento
-        </div>
-        <div class="radio-inline">
+        </label>
+        <label class="radio-inline">
           <input name="vivienda" type="radio" value="otros" /> Otros
-        </div>
+        </label>
       </div>
       {% else %}
       <div class="col-lg-10">
-        <div class="radio-inline">
+        <label class="radio-inline">
           <input name="vivienda" type="radio" value="propia" /> Propia
-        </div>
-        <div class="radio-inline">
+        </label>
+        <label class="radio-inline">
           <input name="vivienda" type="radio" value="alquila" /> Alquila
-        </div>
-        <div class="radio-inline">
+        </label>
+        <label class="radio-inline">
           <input name="vivienda" type="radio" value="asentamiento" /> Asentamiento
-        </div>
-        <div class="radio-inline">
+        </label>
+        <label class="radio-inline">
           <input name="vivienda" type="radio" value="otros"  checked="checked"/> Otros
-        </div>
+        </label>
       </div>
       {% endif %}
     </div>
@@ -241,93 +241,93 @@
       <label for="material" class="col-lg-2 control-label">Material</label>
       {% if duenio.material == "carton" %}
       <div class="col-lg-10">
-        <div class="radio-inline">
+        <label class="radio-inline">
           <input name="material" type="radio" value="carton" checked="checked" /> Carton
-        </div>
-        <div class="radio-inline">
+        </label>
+        <label class="radio-inline">
           <input name="material" type="radio" value="madera" /> Madera
-        </div>
-        <div class="radio-inline">
+        </label>
+        <label class="radio-inline">
           <input name="material" type="radio" value="chapa" /> Chapa
-        </div>
-        <div class="radio-inline">
+        </label>
+        <label class="radio-inline">
           <input name="material" type="radio" value="ladrillo" /> Ladrillo
-        </div>
-        <div class="radio-inline">
+        </label>
+        <label class="radio-inline">
           <input name="material" type="radio" value="otros" /> Otros
-        </div>
+        </label>
       </div>
       {% elif duenio.material == "madera" %}
       <div class="col-lg-10">
-        <div class="radio-inline">
+        <label class="radio-inline">
           <input name="material" type="radio" value="carton"  /> Carton
-        </div>
-        <div class="radio-inline">
+        </label>
+        <label class="radio-inline">
           <input name="material" type="radio" value="madera" checked="checked"/> Madera
-        </div>
-        <div class="radio-inline">
+        </label>
+        <label class="radio-inline">
           <input name="material" type="radio" value="chapa" /> Chapa
-        </div>
-        <div class="radio-inline">
+        </label>
+        <label class="radio-inline">
           <input name="material" type="radio" value="ladrillo" /> Ladrillo
-        </div>
-        <div class="radio-inline">
+        </label>
+        <label class="radio-inline">
           <input name="material" type="radio" value="otros" /> Otros
-        </div>
+        </label>
       </div>
       {% elif duenio.material == "chapa" %}
       <div class="col-lg-10">
-        <div class="radio-inline">
+        <label class="radio-inline">
           <input name="material" type="radio" value="carton"  /> Carton
-        </div>
-        <div class="radio-inline">
+        </label>
+        <label class="radio-inline">
           <input name="material" type="radio" value="madera" /> Madera
-        </div>
-        <div class="radio-inline">
+        </label>
+        <label class="radio-inline">
           <input name="material" type="radio" value="chapa" checked="checked"/> Chapa
-        </div>
-        <div class="radio-inline">
+        </label>
+        <label class="radio-inline">
           <input name="material" type="radio" value="ladrillo" /> Ladrillo
-        </div>
-        <div class="radio-inline">
+        </label>
+        <label class="radio-inline">
           <input name="material" type="radio" value="otros" /> Otros
-        </div>
+        </label>
       </div>
       {% elif duenio.material == "ladrillo" %}
       <div class="col-lg-10">
-        <div class="radio-inline">
+        <label class="radio-inline">
           <input name="material" type="radio" value="carton"  /> Carton
-        </div>
-        <div class="radio-inline">
+        </label>
+        <label class="radio-inline">
           <input name="material" type="radio" value="madera" /> Madera
-        </div>
-        <div class="radio-inline">
+        </label>
+        <label class="radio-inline">
           <input name="material" type="radio" value="chapa" /> Chapa
-        </div>
-        <div class="radio-inline">
+        </label>
+        <label class="radio-inline">
           <input name="material" type="radio" value="ladrillo" checked="checked"/> Ladrillo
-        </div>
-        <div class="radio-inline">
+        </label>
+        <label class="radio-inline">
           <input name="material" type="radio" value="otros" /> Otros
-        </div>
+        </label>
       </div>
       {% else %}
       <div class="col-lg-10">
-        <div class="radio-inline">
+        <label class="radio-inline">
           <input name="material" type="radio" value="carton" /> Carton
-        </div>
-        <div class="radio-inline">
+        </label>
+        <label class="radio-inline">
           <input name="material" type="radio" value="madera" /> Madera
-        </div>
-        <div class="radio-inline">
+        </label>
+        <label class="radio-inline">
           <input name="material" type="radio" value="chapa" /> Chapa
-        </div>
-        <div class="radio-inline">
+        </label>
+        <label class="radio-inline">
           <input name="material" type="radio" value="ladrillo" /> Ladrillo
-        </div>
-        <div class="radio-inline">
+        </label>
+        <label class="radio-inline">
           <input name="material" type="radio" value="otros" checked="checked" /> Otros
-        </div>
+        </label>
       </div>
       {% endif %}
     </div>
@@ -341,21 +341,21 @@
       <label for="agujeros" class="col-lg-2 control-label">Agujeros en la vivienda</label>
       {% if duenio.agujeros == "no" %}
       <div class="col-lg-10">
-        <div class="radio-inline">
+        <label class="radio-inline">
           <input name="agujeros" type="radio" value="no" checked="checked" /> No
-        </div>
-        <div class="radio-inline">
+        </label>
+        <label class="radio-inline">
           <input name="agujeros" type="radio" value="si" /> Si
-        </div>
+        </label>
       </div>
       {% else %}
       <div class="col-lg-10">
-        <div class="radio-inline">
+        <label class="radio-inline">
           <input name="agujeros" type="radio" value="no"  /> No
-        </div>
-        <div class="radio-inline">
+        </label>
+        <label class="radio-inline">
           <input name="agujeros" type="radio" value="si" checked="checked"/> Si
-        </div>
+        </label>
       </div>
       {% endif %}
     </div>
@@ -363,63 +363,63 @@
       <label for="agua" class="col-lg-2 control-label">Provision de agua</label>
       {% if duenio.agua == "red" %}
       <div class="col-lg-10">
-        <div class="radio-inline">
+        <label class="radio-inline">
           <input name="agua" type="radio" value="red" checked="checked" /> Red
-        </div>
-        <div class="radio-inline">
+        </label>
+        <label class="radio-inline">
           <input name="agua" type="radio" value="pozo" /> Pozo
-        </div>
-        <div class="radio-inline">
+        </label>
+        <label class="radio-inline">
           <input name="agua" type="radio" value="bomba" /> Bomba de inmersion
-        </div>
-        <div class="radio-inline">
+        </label>
+        <label class="radio-inline">
           <input name="agua" type="radio" value="otros" /> Otros
-        </div>
+        </label>
       </div>
       {% elif duenio.agua == "pozo" %}
       <div class="col-lg-10">
-        <div class="radio-inline">
+        <label class="radio-inline">
           <input name="agua" type="radio" value="red"  /> Red
-        </div>
-        <div class="radio-inline">
+        </label>
+        <label class="radio-inline">
           <input name="agua" type="radio" value="pozo" checked="checked"/> Pozo
-        </div>
-        <div class="radio-inline">
+        labeliv>
+        <label class="radio-inline">
           <input name="agua" type="radio" value="bomba" /> Bomba de inmersion
-        </div>
-        <div class="radio-inline">
+        </label>
+        <label class="radio-inline">
           <input name="agua" type="radio" value="otros" /> Otros
-        </div>
+        </label>
       </div>
       {% elif duenio.agua == "bomba" %}
       <div class="col-lg-10">
-        <div class="radio-inline">
+        <label class="radio-inline">
           <input name="agua" type="radio" value="red" /> Red
-        </div>
-        <div class="radio-inline">
+        </label>
+        <label class="radio-inline">
           <input name="agua" type="radio" value="pozo" /> Pozo
-        </div>
-        <div class="radio-inline">
+        </label>
+        <label class="radio-inline">
           <input name="agua" type="radio" value="bomba" checked="checked"/> Bomba de inmersion
-        </div>
-        <div class="radio-inline">
+        </label>
+        <label class="radio-inline">
           <input name="agua" type="radio" value="otros" /> Otros
-        </div>
+        </label>
       </div>
       {% else %}
       <div class="col-lg-10">
-        <div class="radio-inline">
+        <label class="radio-inline">
           <input name="agua" type="radio" value="red" /> Red
-        </div>
-        <div class="radio-inline">
+        </label>
+        <label class="radio-inline">
           <input name="agua" type="radio" value="pozo" /> Pozo
-        </div>
-        <div class="radio-inline">
+        </label>
+        <label class="radio-inline">
           <input name="agua" type="radio" value="bomba" /> Bomba de inmersion
-        </div>
-        <div class="radio-inline">
+        </label>
+        <label class="radio-inline">
           <input name="agua" type="radio" value="otros" checked="checked"/> Otros
-        </div>
+        </label>
       </div>
       {% endif %}
     </div>
@@ -427,21 +427,21 @@
       <label for="excretas" class="col-lg-2 control-label">Excretas</label>
       {% if duenio.excretas == "cloaca" %}
       <div class="col-lg-10">
-        <div class="radio-inline">
+        <label class="radio-inline">
           <input name="excretas" type="radio" value="cloaca" checked="checked" /> Cloacas
-        </div>
-        <div class="radio-inline">
+        </label>
+        <label class="radio-inline">
           <input name="excretas" type="radio" value="pozo" /> Pozo
-        </div>
+        </label>
       </div>
       {% else %}
       <div class="col-lg-10">
-        <div class="radio-inline">
+        <label class="radio-inline">
           <input name="excretas" type="radio" value="cloaca" /> Cloacas
-        </div>
-        <div class="radio-inline">
+        </label>
+        <label class="radio-inline">
           <input name="excretas" type="radio" value="pozo"  checked="checked"/> Pozo
-        </div>
+        </label>
       </div>
       {% endif %}
     </div>
@@ -449,67 +449,67 @@
       <label for="residuos_domiciliarios" class="col-lg-2 control-label">Residuos domiciliarios</label>
       {% if duenio.residuos_domiciliarios == "tachos con tapa dentro de la vivienda" %}
       <div class="col-lg-10">
-        <div class="radio-inline">
+        <label class="radio-inline">
           <input name="residuos_domiciliarios" type="radio" value="tachos con tapa dentro de la vivienda" checked="checked" /> Tachos con tapa dentro de la vivienda
-        </div>
-        <div class="radio-inline">
+        </label>
+        <label class="radio-inline">
           <input name="residuos_domiciliarios" type="radio" value="tachos sin tapa dentro de la vivienda" /> Tachos sin tapa dentro de la vivienda
-        </div>
+        </label> 
         <br>
-        <div class="radio-inline">
+        <label class="radio-inline">
           <input name="residuos_domiciliarios" type="radio" value="tachos con tapa fuera de la vivienda" /> Tachos con tapa fuera de la vivienda
-        </div>
-        <div class="radio-inline">
+        </label>
+        <label class="radio-inline">
           <input name="residuos_domiciliarios" type="radio" value="tachos sin tapa fuera de la vivienda" /> Tachos sin tapa fuera de la vivienda
-        </div>
+        </label>
       </div>
       {% elif duenio.residuos_domiciliarios == "tachos sin tapa dentro de la vivienda" %}
       <div class="col-lg-10">
-        <div class="radio-inline">  
+        <label class="radio-inline">  
           <input name="residuos_domiciliarios" type="radio" value="tachos con tapa dentro de la vivienda"  /> Tachos con tapa dentro de la vivienda
-        </div>
-        <div class="radio-inline">
+        </label>
+        <label class="radio-inline">
           <input name="residuos_domiciliarios" type="radio" value="tachos sin tapa dentro de la vivienda" checked="checked"/> Tachos sin tapa dentro de la vivienda
-        </div>
+        </label>
         <br>
-        <div class="radio-inline">
+        <label class="radio-inline">
           <input name="residuos_domiciliarios" type="radio" value="tachos con tapa fuera de la vivienda" /> Tachos con tapa fuera de la vivienda
-        </div>
-        <div class="radio-inline">  
+        </label>
+        <label class="radio-inline">  
           <input name="residuos_domiciliarios" type="radio" value="tachos sin tapa fuera de la vivienda" /> Tachos sin tapa fuera de la vivienda
-        </div>
+        </label>
       </div>
       {% elif duenio.residuos_domiciliarios == "tachos con tapa fuera de la vivienda" %}
       <div class="col-lg-10">
-        <div class="radio-inline">
+        <label class="radio-inline">
           <input name="residuos_domiciliarios" type="radio" value="tachos con tapa dentro de la vivienda" /> Tachos con tapa dentro de la vivienda
-        </div>
-        <div class="radio-inline">
+        </label>
+        <label class="radio-inline">
           <input name="residuos_domiciliarios" type="radio" value="tachos sin tapa dentro de la vivienda" /> Tachos sin tapa dentro de la vivienda
-        </div>
+        </label>
         <br>
-        <div class="radio-inline">
+        <label class="radio-inline">
           <input name="residuos_domiciliarios" type="radio" value="tachos con tapa fuera de la vivienda"  checked="checked"/> Tachos con tapa fuera de la vivienda
-        </div>
-        <div class="radio-inline">
+        </label>
+        <label class="radio-inline">
           <input name="residuos_domiciliarios" type="radio" value="tachos sin tapa fuera de la vivienda" /> Tachos sin tapa fuera de la vivienda
-        </div>
+        </label>
       </div>
       {% else %}
       <div class="col-lg-10">
-        <div class="radio-inline">
+        <label class="radio-inline">
           <input name="residuos_domiciliarios" type="radio" value="tachos con tapa dentro de la vivienda" /> Tachos con tapa dentro de la vivienda
-        </div>
-        <div class="radio-inline">
+        </label>
+        <label class="radio-inline">
           <input name="residuos_domiciliarios" type="radio" value="tachos sin tapa dentro de la vivienda" /> Tachos sin tapa dentro de la vivienda
-        </div>
+        </label>
         <br>
-        <div class="radio-inline">  
+        <label class="radio-inline">  
           <input name="residuos_domiciliarios" type="radio" value="tachos con tapa fuera de la vivienda" /> Tachos con tapa fuera de la vivienda
-        </div>
-        <div class="radio-inline">
+        </label>
+        <label class="radio-inline">
           <input name="residuos_domiciliarios" type="radio" value="tachos sin tapa fuera de la vivienda" checked="checked" /> Tachos sin tapa fuera de la vivienda
-        </div>
+        </label>
       </div>
       {% endif %}
     </div>
@@ -517,63 +517,63 @@
       <label for="recoleccion_de_residuos" class="col-lg-2 control-label">Recoleccion de residuos</label>
       {% if duenio.recoleccion_de_residuos == "diaria" %}
       <div class="col-lg-10">
-        <div class="radio-inline">
+        <label class="radio-inline">
           <input name="recoleccion_de_residuos" type="radio" value="diaria" checked="checked" /> Diaria
-        </div>
-        <div class="radio-inline">
+        </label>
+        <label class="radio-inline">
           <input name="recoleccion_de_residuos" type="radio" value="dos o 3 veces semanales" /> Dos o 3 veces semanales
-        </div>
-        <div class="radio-inline">
+        </label>
+        <label class="radio-inline">
           <input name="recoleccion_de_residuos" type="radio" value="semanal" /> Semanal
-        </div>
-        <div class="radio-inline">
+        </label>
+        <label class="radio-inline">
           <input name="recoleccion_de_residuos" type="radio" value="nunca" /> Nunca
-        </div>
+        </label>
       </div>
       {% elif duenio.recoleccion_de_residuos == "dos o 3 veces semanales" %}
       <div class="col-lg-10">
-        <div class="radio-inline">
+        <label class="radio-inline">
           <input name="recoleccion_de_residuos" type="radio" value="diaria"  /> Diaria
-        </div>
-        <div class="radio-inline">
+        </label>
+        <label class="radio-inline">
           <input name="recoleccion_de_residuos" type="radio" value="dos o 3 veces semanales" checked="checked"/> Dos o 3 veces semanales
-        </div>
-        <div class="radio-inline">
+        </label>
+        <label class="radio-inline">
           <input name="recoleccion_de_residuos" type="radio" value="semanal" /> Semanal
-        </div>
-        <div class="radio-inline">
+        </label>
+        <label class="radio-inline">
           <input name="recoleccion_de_residuos" type="radio" value="nunca" /> Nunca
-        </div>
+        </label>
       </div>
       {% elif duenio.recoleccion_de_residuos == "semanal" %}
       <div class="col-lg-10">
-        <div class="radio-inline">
+        <label class="radio-inline">
           <input name="recoleccion_de_residuos" type="radio" value="diaria" /> Diaria
-        </div>
-        <div class="radio-inline">
+        </label>
+        <label class="radio-inline">
           <input name="recoleccion_de_residuos" type="radio" value="dos o 3 veces semanales" /> Dos o 3 veces semanales
-        </div>
-        <div class="radio-inline">
+        </label>
+        <label class="radio-inline">
           <input name="recoleccion_de_residuos" type="radio" value="semanal" checked="checked" /> Semanal
-        </div>
-        <div class="radio-inline">
+        </label>
+        <label class="radio-inline">
           <input name="recoleccion_de_residuos" type="radio" value="nunca" /> Nunca
-        </div>
+        </label>
       </div>
       {% else %}
       <div class="col-lg-10">
-        <div class="radio-inline">
+        <label class="radio-inline">
           <input name="recoleccion_de_residuos" type="radio" value="diaria" /> Diaria
-        </div>
-        <div class="radio-inline">
+        </label>
+        <label class="radio-inline">
           <input name="recoleccion_de_residuos" type="radio" value="dos o 3 veces semanales" /> Dos o 3 veces semanales
-        </div>
-        <div class="radio-inline">
+        </label>
+        <label class="radio-inline">
           <input name="recoleccion_de_residuos" type="radio" value="semanal"/> Semanal
-        </div>
-        <div class="radio-inline">
+        </label>
+        <label class="radio-inline">
           <input name="recoleccion_de_residuos" type="radio" value="nunca" checked="checked"/> Nunca
-        </div>
+        </label>
       </div>
       {% endif %}
     </div>
@@ -582,21 +582,21 @@
       <label for="basural" class="col-lg-2 control-label">Cercania de basurales</label>
       {% if duenio.basural == "no" %}
       <div class="col-lg-10">
-        <div class="radio-inline">
+        <label class="radio-inline">
           <input name="basural" type="radio" value="no" checked="checked" /> No
-        </div>
-        <div class="radio-inline">
+        </label>
+        <label class="radio-inline">
           <input name="basural" type="radio" value="si" /> Si
-        </div>
+        </label>
       </div>
       {% else %}
       <div class="col-lg-10">
-        <div class="radio-inline">
+        <label class="radio-inline">
           <input name="basural" type="radio" value="no" /> No
-        </div>
-        <div class="radio-inline">
+        </label>
+        <label class="radio-inline">
           <input name="basural" type="radio" value="si" checked="checked" /> Si
-        </div>
+        </label>
       </div>
       {% endif %}
     </div>
@@ -604,21 +604,21 @@
       <label for="roedores" class="col-lg-2 control-label">Presencia de roedores</label>
       {% if duenio.roedores == "no" %}
       <div class="col-lg-10">
-        <div class="radio-inline">
+        <label class="radio-inline">
           <input name="roedores" type="radio" value="no" checked="checked" /> No
-        </div>
-        <div class="radio-inline">
+        </label>
+        <label class="radio-inline">
           <input name="roedores" type="radio" value="si" /> Si
-        </div>
+        </label>
       </div>
       {% else %}
       <div class="col-lg-10">
-        <div class="radio-inline">
+        <label class="radio-inline">
           <input name="roedores" type="radio" value="no" /> No
-        </div>
-        <div class="radio-inline">
+        </label>
+        <label class="radio-inline">
           <input name="roedores" type="radio" value="si" checked="checked" /> Si
-        </div>
+        </label>
       </div>
       {% endif %}
     </div>
@@ -626,33 +626,33 @@
       <label for="agua_servida" class="col-lg-2 control-label">Cercania de aguas servidas</label>
       {% if duenio.agua_servida == "no" %}
       <div class="col-lg-10">
-        <div class="radio-inline">
+        <label class="radio-inline">
           <input name="agua_servida" type="radio" value="no" checked="checked" /> No
-        </div>
-        <div class="radio-inline">
+        </label>
+        <label class="radio-inline">
           <input name="agua_servida" type="radio" value="si" /> Si
-        </div>
+        </label>
       </div>
       {% else %}
       <div class="col-lg-10">
-        <div class="radio-inline">
+        <label class="radio-inline">
           <input name="agua_servida" type="radio" value="no"  /> No
-        </div>
-        <div class="radio-inline">
+        </label>
+        <label class="radio-inline">
           <input name="agua_servida" type="radio" value="si" checked="checked"/> Si
-        </div>
+        </label>
       </div>
       {% endif %}
     </div>
     <div class="form-group">
       <label for="inundaciones" class="col-lg-2 control-label">Inundaciones</label>
       <div class="col-lg-10">
-        <div class="radio-inline">
+        <label class="radio-inline">
           <input id="lluviano" name="inundaciones" type="radio" value="no" {% if duenio.inundaciones == "no" %}checked="checked"{% endif %} /> No
-        </div>
-        <div class="radio-inline">
+        </label>
+        <label class="radio-inline">
           <input id="lluviasi" name="inundaciones" type="radio" value="si" {% if duenio.inundaciones == "si" or not duenio.inundaciones %}checked="checked"{% endif %} /> Si
-        </div>
+        </label>
       </div>
     </div>
     {% if duenio.inundaciones != "no" %}
@@ -669,12 +669,12 @@
      <div class="form-group">
       <label for="signos_clinicos" class="col-lg-2 control-label">Signos clinicos</label>
       <div class="col-lg-10">
-        <div class="radio-inline">
+        <label class="radio-inline">
           <input name="signos_clinicos" type="radio" value="no" {% if duenio.signos_clinicos == "no" %}checked ="checked" {% endif %} id="signosno" /> No
-        </div>
-        <div class="radio-inline">
+        </label>
+        <label class="radio-inline">
           <input name="signos_clinicos" type="radio" {% if duenio.signos_clinicos == "si" or not duenio.signos_clinicos %}checked = "checked" {% endif %} value="si" id="signossi"/> Si
-        </div>
+        </label>
       </div>
     </div>
     {% if duenio.signos_clinicos != "no" %}
