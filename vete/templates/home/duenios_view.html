@@ -17,6 +17,10 @@
 {% block title%} Dueños {% endblock %}
 
 {% block section %}
+
+{% if mensaje %}
+        <legend align="center">{{mensaje}}</legend>
+    {% endif %}
 <script>
 function eliminarDuenio(idform){
     

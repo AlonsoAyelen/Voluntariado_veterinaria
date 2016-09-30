@@ -273,8 +273,6 @@ def actualizar_usuario_view(request,pk):
 		usuario = User.objects.filter(id = int(pk))
 		if(request.method == 'POST'):
 			nombre = request.POST.get('nombre')
-			clave = request.POST.get('clave')
-			claveconf = request.POST.get('clave_conf')
 			tipo = request.POST.get('tipo')
 			if tipo == "Clinico":
 				usuario.update(username=nombre , is_staff=True)
@@ -385,6 +383,7 @@ def nuevo_duenio_view(request):
 		return render_to_response('home/nuevo_duenio.html' ,contexto, context_instance=RequestContext(request))
 
 def actualizar_duenio_view(request,pk):
+	mensaje = ''
 	if not request.user.is_authenticated():
 		return redirect('login')
 	else:
@@ -436,10 +435,16 @@ def actualizar_duenio_view(request,pk):
 			for sintoma in duenio[0].sintomas.all():
 				if not sintoma in sintomas:
 					duenio[0].sintomas.remove(sintoma)
-			duenio.update(nombre = nombre,apellido=apellido, direccion = direccion,barrio=barrio,procedencia=procedencia, telefono = telefono,edad=edad,grado_de_instruccion=instruccion ,ocupacion=ocupacion , numero_convivientes_adultos = adultos, numero_convivientes_ninios = ninios, en_edad_escolar=escolar , mascotas=mascotas , tipos = tipos , vivienda = vivienda , material = material , ambientes = ambientes , agujeros = agujeros ,agua = agua , excretas = excretas , residuos_domiciliarios = residuos , recoleccion_de_residuos = recoleccion , basural = basural , roedores = roedores ,agua_servida = agua_servida , inundaciones = inundaciones , ultima_inundacion = ultima ,signos_clinicos=signos_clinicos, integrante = integrante , aclaracion = aclaracion)
-			return render_to_response('home/duenios_view.html' ,{'duenios':duenios}, context_instance=RequestContext(request))
+			if(len(Propietario.objects.filter(nombre=nombre ,apellido=apellido,direccion=direccion,status=True))>0):
+				if Propietario.objects.filter(nombre=nombre ,apellido=apellido,direccion=direccion,status=True)[0].id == int(pk):
+					duenio.update(nombre = nombre,apellido=apellido, direccion = direccion,barrio=barrio,procedencia=procedencia, telefono = telefono,edad=edad,grado_de_instruccion=instruccion ,ocupacion=ocupacion , numero_convivientes_adultos = adultos, numero_convivientes_ninios = ninios, en_edad_escolar=escolar , mascotas=mascotas , tipos = tipos , vivienda = vivienda , material = material , ambientes = ambientes , agujeros = agujeros ,agua = agua , excretas = excretas , residuos_domiciliarios = residuos , recoleccion_de_residuos = recoleccion , basural = basural , roedores = roedores ,agua_servida = agua_servida , inundaciones = inundaciones , ultima_inundacion = ultima ,signos_clinicos=signos_clinicos, integrante = integrante , aclaracion = aclaracion)
+				else:
+					mensaje = "El propietario ya existe"
+			else:
+				duenio.update(nombre = nombre,apellido=apellido, direccion = direccion,barrio=barrio,procedencia=procedencia, telefono = telefono,edad=edad,grado_de_instruccion=instruccion ,ocupacion=ocupacion , numero_convivientes_adultos = adultos, numero_convivientes_ninios = ninios, en_edad_escolar=escolar , mascotas=mascotas , tipos = tipos , vivienda = vivienda , material = material , ambientes = ambientes , agujeros = agujeros ,agua = agua , excretas = excretas , residuos_domiciliarios = residuos , recoleccion_de_residuos = recoleccion , basural = basural , roedores = roedores ,agua_servida = agua_servida , inundaciones = inundaciones , ultima_inundacion = ultima ,signos_clinicos=signos_clinicos, integrante = integrante , aclaracion = aclaracion)
+			return render_to_response('home/duenios_view.html' ,{'duenios':duenios,'mensaje':mensaje}, context_instance=RequestContext(request))
 			
-		return render_to_response('home/nuevo_duenio.html' ,{'duenio':duenio[0] ,'sintomas':sint, 'titulo':'Modificar Duenio', 'url_action':request.get_full_path()}, context_instance=RequestContext(request))
+		return render_to_response('home/nuevo_duenio.html' ,{'mensaje':mensaje,'duenio':duenio[0] ,'sintomas':sint, 'titulo':'Modificar Duenio', 'url_action':request.get_full_path()}, context_instance=RequestContext(request))
 		
 
 def nuevo_canino_view(request):
@@ -485,7 +490,7 @@ def nuevo_canino_view(request):
 			FR = request.POST.get('FR')
 			T = request.POST.get('T')
 			procedimiento_realizado = request.POST.get('procedimiento_realizado')
-			if(len(Canino.objects.filter(nombre=nombre,status=True))>0):
+			if(len(Canino.objects.filter(nombre=nombre,protocolo=protocolo,status=True))>0):
 				contexto['error'] = "El canino ya existe"
 				contexto['propietario'] = propietario 
 				contexto['nombre'] = nombre
@@ -531,6 +536,7 @@ def nuevo_canino_view(request):
 
 def actualizar_canino_view(request,pk):
 	propietario = None
+	mensaje = ''
 	if not request.user.is_authenticated():
 		return redirect('login')
 	else:
@@ -571,10 +577,16 @@ def actualizar_canino_view(request,pk):
 			FR = request.POST.get('FR')
 			T = request.POST.get('T')
 			procedimiento_realizado = request.POST.get('procedimiento_realizado')
-			canino.update(propietario = propietario , nombre = nombre,protocolo = protocolo, especie = especie , sexo=sexo , raza = raza , edad=edad , motivo_de_consulta = motivo_de_consulta, uso_de_la_mascota=uso_de_la_mascota , habitos = habitos , contacto_con_basural = contacto_con_basural , caza = caza , caza_roedores = caza_roedores , observacion_roedores = observacion_roedores , vacunado_contra_leptospirosis = vacunado_contra_leptospirosis , desparasitado = desparasitado , eliminacion_de_excretas = eliminacion_de_excretas , habitos_alimenticios = habitos_alimenticios , piel_Linfonodos = piel_Linfonodos , digestivo = digestivo , cardio_respiratorio = cardio_respiratorio , urogenital = urogenital , musculoesqueleticonervioso = musculoesqueleticonervioso ,peso = peso,actitud = actitud,mucosas = mucosas,TLC = TLC,hidratacion = hidratacion, FC = FC, pulso = pulso, FR = FR,T = T, procedimiento_realizado = procedimiento_realizado , status = True)
-			return render_to_response('home/caninos_view.html' ,{'caninos':caninos}, context_instance=RequestContext(request))
+			if(len(Canino.objects.filter(nombre=nombre,protocolo=protocolo,status=True))>0):
+				if Canino.objects.filter(nombre=nombre,protocolo=protocolo,status=True)[0].id == int(pk):
+					canino.update(propietario = propietario , nombre = nombre,protocolo = protocolo, especie = especie , sexo=sexo , raza = raza , edad=edad , motivo_de_consulta = motivo_de_consulta, uso_de_la_mascota=uso_de_la_mascota , habitos = habitos , contacto_con_basural = contacto_con_basural , caza = caza , caza_roedores = caza_roedores , observacion_roedores = observacion_roedores , vacunado_contra_leptospirosis = vacunado_contra_leptospirosis , desparasitado = desparasitado , eliminacion_de_excretas = eliminacion_de_excretas , habitos_alimenticios = habitos_alimenticios , piel_Linfonodos = piel_Linfonodos , digestivo = digestivo , cardio_respiratorio = cardio_respiratorio , urogenital = urogenital , musculoesqueleticonervioso = musculoesqueleticonervioso ,peso = peso,actitud = actitud,mucosas = mucosas,TLC = TLC,hidratacion = hidratacion, FC = FC, pulso = pulso, FR = FR,T = T, procedimiento_realizado = procedimiento_realizado , status = True)
+				else:
+					mensaje = "El canino ya existe"
+			else:
+				canino.update(propietario = propietario , nombre = nombre,protocolo = protocolo, especie = especie , sexo=sexo , raza = raza , edad=edad , motivo_de_consulta = motivo_de_consulta, uso_de_la_mascota=uso_de_la_mascota , habitos = habitos , contacto_con_basural = contacto_con_basural , caza = caza , caza_roedores = caza_roedores , observacion_roedores = observacion_roedores , vacunado_contra_leptospirosis = vacunado_contra_leptospirosis , desparasitado = desparasitado , eliminacion_de_excretas = eliminacion_de_excretas , habitos_alimenticios = habitos_alimenticios , piel_Linfonodos = piel_Linfonodos , digestivo = digestivo , cardio_respiratorio = cardio_respiratorio , urogenital = urogenital , musculoesqueleticonervioso = musculoesqueleticonervioso ,peso = peso,actitud = actitud,mucosas = mucosas,TLC = TLC,hidratacion = hidratacion, FC = FC, pulso = pulso, FR = FR,T = T, procedimiento_realizado = procedimiento_realizado , status = True)
+			return render_to_response('home/caninos_view.html' ,{'mensaje':mensaje,'caninos':caninos}, context_instance=RequestContext(request))
 		duenios = Propietario.objects.filter()	    
-		return render_to_response('home/nuevo_canino.html' ,{'canino':canino[0],'duenios':duenios,'titulo':'Modificar Canino', 'url_action':request.get_full_path()}, context_instance=RequestContext(request))
+		return render_to_response('home/nuevo_canino.html' ,{'mensaje':mensaje,'canino':canino[0],'duenios':duenios,'titulo':'Modificar Canino', 'url_action':request.get_full_path()}, context_instance=RequestContext(request))
 
 def nuevo_bioquimica_view(request):
 	contexto = {'mensaje':'','titulo':'','url_action':'','canino':'','fecha':'' , 'urea':'', 'crea':'','ALT':'','AST':'','PT':'', 'alb':'','FAS':'' , 'GGT':'' , 'CPK':'','col':'' ,'bil_t':'', 'bil_d':'','trig':'' , 'varios':''}
@@ -602,7 +614,7 @@ def nuevo_bioquimica_view(request):
 			varios = request.POST.get('varios')
 			
 			if(len(Bioquimica.objects.filter(canino=canino , fecha=fecha))>0):
-				contexto['error'] = "El analisis bioquimico ya existe"
+				contexto['mensaje'] = "El analisis bioquimico ya existe"
 				contexto['canino'] = canino
 				contexto['fecha'] = fecha
 				contexto['urea'] = urea
@@ -692,7 +704,7 @@ def nuevo_hemograma_view(request):
 			FLA_M = request.POST.get('FLA_M')
 			observaciones = request.POST.get('observaciones')
 			if(len(Hemograma.objects.filter(canino=canino , fecha=fecha ))>0):
-				contexto['error'] = "El hemograma ya existe"
+				contexto['mensaje'] = "El hemograma ya existe"
 				contexto['canino'] = canino
 				contexto['fecha'] = fecha
 				contexto['HTO'] = HTO
@@ -824,48 +836,51 @@ def generar_pdf_view(request,pk):
 
 def estadisticas_view(request):
 	contexto = {'menos_uno':'','uno_y_cinco':'','mas_cinco':'','porc_machos':'','porc_hembras':'','porc_reactivos':'','porc_no_reactivos':'',}
-	machos = Canino.objects.filter(sexo="macho").count()
-	if Canino.objects.all().count() != 0:
-		machos =  (machos * 100 ) / Canino.objects.all().count()
+	if not request.user.is_authenticated():
+		return redirect('login')
 	else:
-		machos = 0
-	contexto['machos'] = machos
-	hembras = Canino.objects.filter(sexo="hembra").count()
-	if Canino.objects.all().count() != 0:
-		hembras = ( hembras * 100 ) / Canino.objects.all().count()
-	else:
-		hembras = 0
-	contexto['hembras'] = hembras
-	reactivos = Analisis.objects.filter(reactivo=True).count()
-	if Analisis.objects.all().count() != 0:
-		reactivos =  (reactivos * 100 ) / Analisis.objects.all().count()
-	else:
-		reactivos = 0
-	contexto['porc_reactivos'] = reactivos
-	no_reactivos = Analisis.objects.filter(reactivo=False).count()
-	if Analisis.objects.all().count() != 0:
-		no_reactivos = ( no_reactivos * 100 ) / Analisis.objects.all().count()
-	else:
-		no_reactivos = 0
-	contexto['porc_no_reactivos'] = no_reactivos
-	menos_uno = Canino.objects.filter(edad__lt=1).count()
-	if Canino.objects.all().count() != 0:
-		menos_uno = ( menos_uno * 100 ) / Canino.objects.all().count()
-	else:
-		menos_uno = 0
-	contexto['menos_uno'] = menos_uno
-	uno_y_cinco = Canino.objects.filter(edad__gte=1, edad__lte=5).count()
-	if Canino.objects.all().count() != 0:
-		uno_y_cinco = ( uno_y_cinco * 100 ) / Canino.objects.all().count()
-	else:
-		uno_y_cinco = 0
-	contexto['uno_y_cinco'] = uno_y_cinco
-	mas_cinco = Canino.objects.filter( edad__gt=5).count()
-	if Canino.objects.all().count() != 0:
-		mas_cinco = ( mas_cinco * 100 ) / Canino.objects.all().count()
-	else:
-		mas_cinco = 0
-	contexto['mas_cinco'] = mas_cinco
+		machos = Canino.objects.filter(sexo="macho").count()
+		if Canino.objects.all().count() != 0:
+			machos =  (machos * 100 ) / Canino.objects.all().count()
+		else:
+			machos = 0
+		contexto['machos'] = machos
+		hembras = Canino.objects.filter(sexo="hembra").count()
+		if Canino.objects.all().count() != 0:
+			hembras = ( hembras * 100 ) / Canino.objects.all().count()
+		else:
+			hembras = 0
+		contexto['hembras'] = hembras
+		reactivos = Analisis.objects.filter(reactivo=True).count()
+		if Analisis.objects.all().count() != 0:
+			reactivos =  (reactivos * 100 ) / Analisis.objects.all().count()
+		else:
+			reactivos = 0
+		contexto['porc_reactivos'] = reactivos
+		no_reactivos = Analisis.objects.filter(reactivo=False).count()
+		if Analisis.objects.all().count() != 0:
+			no_reactivos = ( no_reactivos * 100 ) / Analisis.objects.all().count()
+		else:
+			no_reactivos = 0
+		contexto['porc_no_reactivos'] = no_reactivos
+		menos_uno = Canino.objects.filter(edad__lt=1).count()
+		if Canino.objects.all().count() != 0:
+			menos_uno = ( menos_uno * 100 ) / Canino.objects.all().count()
+		else:
+			menos_uno = 0
+		contexto['menos_uno'] = menos_uno
+		uno_y_cinco = Canino.objects.filter(edad__gte=1, edad__lte=5).count()
+		if Canino.objects.all().count() != 0:
+			uno_y_cinco = ( uno_y_cinco * 100 ) / Canino.objects.all().count()
+		else:
+			uno_y_cinco = 0
+		contexto['uno_y_cinco'] = uno_y_cinco
+		mas_cinco = Canino.objects.filter( edad__gt=5).count()
+		if Canino.objects.all().count() != 0:
+			mas_cinco = ( mas_cinco * 100 ) / Canino.objects.all().count()
+		else:
+			mas_cinco = 0
+		contexto['mas_cinco'] = mas_cinco
 	return render_to_response('home/estadisticas_view.html',contexto , context_instance=RequestContext(request))
 
 

@@ -17,6 +17,9 @@
 {% block title%} Caninos {% endblock %}
 
 {% block section %}
+{% if mensaje %}
+        <legend align="center">{{mensaje}}</legend>
+    {% endif %}
 
 <div align="center">
   <legend>Manejo de Caninos</legend>
