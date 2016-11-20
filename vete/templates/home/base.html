@@ -41,12 +41,12 @@
 				      <ul class="nav navbar-nav">
 				      	  {% if user.is_authenticated %}
                     {% block nav %}
-                      {% if user.is_staff %}
+                      {% if user.is_staff or user.is_superuser %}
                         <li {% block usuarios_active %}{% endblock %}><a href="{% url 'usuarios_view' %}"><i class="fa fa-users" aria-hidden="true"></i> Manejo de Usuarios</a></li>
                       {% endif %}
     				      	 	<li {% block caninos_active %}{% endblock %}><a href="{% url 'caninos_view' %}"><i class="fa fa-paw fa-2" aria-hidden="true"></i> Manejo de Caninos</a></li>
             					<li {% block duenios_active %}{% endblock %}><a href="{% url 'duenios_view' %}"><i class="fa fa-user" aria-hidden="true"></i> Manejo de Dueños<span class="sr-only">(current)</span></a></li>
-            					{% if user.is_staff %}
+            					{% if user.is_staff or user.is_superuser %}
                         <li {% block estadisticas_active %}{% endblock %}><a href="{% url 'estadisticas' %}"><i class="fa fa-line-chart" aria-hidden="true"></i> Estadísticas</a></li>
                         <li {% block bioquimicas_active %}{% endblock %}><a href="{% url 'bioquimicas' %}"><i class="fa fa-wpforms" aria-hidden="true"></i><i class="fa fa-file-text" aria-hidden="true"></i> Bioquímicas</a></li>
                         <li {% block hemogramas_active %}{% endblock %}><a href="{% url 'hemogramas' %}"><i class="fa fa-tint" aria-hidden="true"></i> Hemogramas</a></li>

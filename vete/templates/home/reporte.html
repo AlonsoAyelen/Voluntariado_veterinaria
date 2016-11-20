@@ -22,7 +22,7 @@ table, th, td {
     border: 2px solid;
 }
 th, td {
-    padding: 5px;
+    padding: 2px;
     text-align: left;
 }
 body  {
@@ -36,7 +36,7 @@ body  {
 
  @page {
     margin: 1cm;
-    margin-bottom: 2.5cm;
+    margin-bottom: 1cm;
     @frame footer {
       -pdf-frame-content: footerFirst;
       
@@ -49,9 +49,9 @@ body  {
 
  p {
   width: 50%;
-  margin: 15px;
+  margin: 20px;
   border: black 2px solid;
-  padding: 10px;
+  padding: 5px;
   text-align: center;
 }
 
@@ -64,9 +64,9 @@ body  {
 	<center> 
 	<table > 
 	<tr> 
-	<td><img  width="150" height="90" src="vete/static/images/facultad.jpg"  ></td> 
-	<td><img  width="180" height="90" src="vete/static/images/unlp.jpg"  ></td> 
-	<td><img  width="180" height="70" src="vete/static/images/punta_indio.jpg"  ></td> 
+	<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img  width="140" height="80" src="vete/static/images/facultad.jpg"  ></td> 
+	<td>&nbsp;&nbsp;<img  width="170" height="80" src="vete/static/images/unlp.jpg"  ></td> 
+	<td>&nbsp;<img  width="170" height="60" src="vete/static/images/punta_indio.jpg"  ></td> 
 	</tr> 
 	</table> 
 	</center> 
@@ -81,15 +81,15 @@ body  {
     <div align="right">
     
     </div>
-    <h3 style="font: 130% sans-serif;margin-left: 130px">Servicio Central de Laboratorio FCV-UNLP</h3>
-    <h3 style="font: 130% sans-serif;margin-left: 150px">Area de Diagn&oacute;stico de Leptospirosis</h3>
+    <h3 style="font: 100% sans-serif;margin-left: 180px">Servicio Central de Laboratorio FCV-UNLP</h3>
+    <h3 style="font: 100% sans-serif;margin-left: 190px">Area de Diagn&oacute;stico de Leptospirosis</h3>
     <div >
 
 
 
     </div>
 
-    <div style="margin-left: 52px;margin-right: 52px;">
+    <div style="margin-left: 52px;margin-right: 52px;font: 90% sans-serif;">
       <div class="col-md-4" style="display: inline">&nbsp;&nbsp;&nbsp;
         <b>Profesional: </b>{{canino.analisis.profesional}}
       </div>
@@ -124,15 +124,14 @@ body  {
       </div>
       <br>
       <div class="col-md-4" style="display: inline">&nbsp;&nbsp;&nbsp;
-      	<b>Edad: </b>{{canino.edad}}
+      	<b>Edad: </b>{{canino.edad|floatformat:1}}
       </div>
     </div>
-    <br>
 
 
 
 
-    <h5 style="margin-left: 65px;">DIAGN&Oacute;STICO SEROL&Oacute;GICO: TEST DE MICROAGLUTINACI&Oacute;N (MAT)</h5>
+    <h5 style="margin-left: 65px;font: 100%">DIAGN&Oacute;STICO SEROL&Oacute;GICO: TEST DE MICROAGLUTINACI&Oacute;N (MAT)</h5>
 
     SEROVARES UTILIZADOS:
 
@@ -158,16 +157,16 @@ body  {
   </tbody>
 </table>
 
-<h3 style="margin-left: 70px;margin-right: 70px;">RESULTADOS:</h3>
+<h4 style="margin-left: 70px;margin-right: 70px;">RESULTADOS:</h3>
 <p style="margin-left: 70px;margin-right: 70px;">Dilusi&oacute;n inicial {{canino.analisis.dilucion_inicial}}<br> {% if canino.analisis.reactivo == True %} Reactivo {% else %}No reactivo{% endif %} </p>
 
-<h3 style="margin-left: 70px;margin-right: 70px;">OBSERVACIONES:</h3>
+<h4 style="margin-left: 70px;margin-right: 70px;">OBSERVACIONES:</h3>
 <p style="margin-left: 70px;margin-right: 70px;"> {{canino.analisis.observaciones}}</p>
 
 
 
 
-<h5 style="margin-top: 110px;margin-left: 140px;">Calle 60 y 118 (1900) La Plata Tel. 4236663 Int. 437</h5>
+<h5 style="margin-top: 20px;margin-left: 140px;">Calle 60 y 118 (1900) La Plata Tel. 4236663 Int. 437</h5>
 
 
 <div id="footerFirst">

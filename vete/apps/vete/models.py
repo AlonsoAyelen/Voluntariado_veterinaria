@@ -65,7 +65,7 @@ class Canino(models.Model):
 	especie = models.CharField(max_length = 40)
 	sexo = models.CharField(max_length = 20)
 	raza = models.CharField(max_length = 40)
-	edad = models.IntegerField()
+	edad = models.FloatField()
 	motivo_de_consulta = models.CharField(max_length = 400)
 	uso_de_la_mascota = models.CharField(max_length = 100)
 	habitos = models.CharField(max_length = 200)
@@ -84,7 +84,7 @@ class Canino(models.Model):
 	urogenital = models.CharField(max_length = 200)
 	musculoesqueleticonervioso = models.CharField(max_length = 200)
 	procedimiento_realizado = models.CharField(max_length = 200)
-	peso = models.DecimalField(max_digits = 4,decimal_places = 2)
+	peso =  models.FloatField()
 	actitud = models.CharField(max_length = 40)
 	mucosas = models.CharField(max_length = 40)
 	TLC = models.CharField(max_length = 40)
@@ -92,7 +92,7 @@ class Canino(models.Model):
 	FC = models.CharField(max_length = 40)
 	pulso = models.CharField(max_length = 40)
 	FR = models.CharField(max_length = 40)
-	T = models.DecimalField(max_digits = 5,decimal_places = 2)
+	T =  models.FloatField()
 	status  = models.BooleanField(default = True)
 	class Meta:
 		managed = True      # add this\

@@ -71,6 +71,8 @@ function eliminarUsuario(idform){
         <td>Data entry</td>
       {% endif %}
       <td>
+      {% if user.is_superuser %}
+      {% if user.id != usuario.id %}
       <div class="col-md-1">
       <form id="eliminar{{usuario.id}}" action="usuarios" method="POST">
           {% csrf_token %}
@@ -85,8 +87,11 @@ function eliminarUsuario(idform){
           <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
         </a> 
         </div>
+      {% endif %}
+      {% endif %}
       </td>
     </tr>
+
     {% endfor %}
   </tbody>
 </table>
