@@ -20,6 +20,7 @@ from django.contrib.auth.decorators import login_required
 from django import http
 from django.template.loader import get_template
 from django.template import Context
+import os
 try:
     import StringIO
     StringIO = StringIO.StringIO
@@ -65,12 +66,12 @@ def login_view(request):
 			clave = request.POST.get('claveLogin')
 			user = authenticate(username=nombre, password=clave)		
 			if user is not None:
-			    # the password verified for the user
-			    if user.is_active:
-			    	login(request,user)
-			        return redirect('/duenios' )
-			    else:
-			        return render_to_response('home/login_view.html' ,  context_instance=RequestContext(request))
+				# the password verified for the user
+				if user.is_active:
+					login(request,user)
+					return redirect('/duenios')
+				else:
+					return render_to_response('home/login_view.html' ,  context_instance=RequestContext(request))
 			else:
 				error = "Usuario o clave incorrectos"
 				return render_to_response('home/login_view.html' ,{ 'mensaje' : error }, context_instance=RequestContext(request))
@@ -690,8 +691,8 @@ def nuevo_bioquimica_view(request):
 					bioquimica.save()
 					contexto['mensaje'] = "El analisis fue agregado correctamente"
 		else:
-			html = "<html><body>It is now %s.</body></html>" 
-    		return HttpResponse(html)
+			html =	"<html><body>No tiene permisos para acceder a esta sección!</body></html>"
+			return HttpResponse(html)
 	caninos = Canino.objects.all()
 	contexto['caninos'] = caninos
 	return render_to_response('home/nuevo_bioquimica.html' ,contexto, context_instance=RequestContext(request))
@@ -726,8 +727,8 @@ def actualizar_bioquimica_view(request,pk):
 			caninos = Canino.objects.filter()	    
 			return render_to_response('home/nuevo_bioquimica.html' ,{'bioquimica':bioquimica[0],'caninos':caninos,'titulo':'Modificar Bioquimica', 'url_action':request.get_full_path()}, context_instance=RequestContext(request))
 		else:
-			html = "<html><body>It is now %s.</body></html>" 
-    		return HttpResponse(html)
+			html = "<html><body>No tiene permisos para acceder a esta sección!</body></html>"
+			return HttpResponse(html)
 
 
 def nuevo_hemograma_view(request):
@@ -796,8 +797,8 @@ def nuevo_hemograma_view(request):
 					hemograma.save()
 					contexto['mensaje'] = "El analisis fue agregado correctamente"
 		else:
-			html = "<html><body>It is now %s.</body></html>" 
-    		return HttpResponse(html)
+			html = "<html><body>No tiene permisos para acceder a esta sección!</body></html>" 
+			return HttpResponse(html)
 	caninos = Canino.objects.all()
 	contexto['caninos'] = caninos
 	return render_to_response('home/nuevo_hemograma.html' ,contexto, context_instance=RequestContext(request))
@@ -839,8 +840,8 @@ def actualizar_hemograma_view(request,pk):
 				hemograma.update(canino=canino,fecha=fecha ,HTO=HTO ,s_o_l=s_o_l,GR=GR,Hb=Hb,plaquetas=plaquetas,GB=GB, VCM=VCM,HCM=HCM ,ChCM=ChCM , FLR_NB=FLR_NB,FLR_NS=FLR_NS ,FLR_E=FLR_E, FLR_B=FLR_B,FLR_L=FLR_L ,FLR_M=FLR_M,FLA_REF=FLA_REF,FLA_NB=FLA_NB,FLA_NS=FLA_NS,FLA_E=FLA_E,FLA_B=FLA_B,FLA_L=FLA_L,FLA_M=FLA_M,observaciones=observaciones)
 				return render_to_response('home/hemogramas_view.html' ,{'hemogramas':hemogramas}, context_instance=RequestContext(request))
 		else:
-			html = "<html><body>It is now %s.</body></html>" 
-    		return HttpResponse(html)
+			html = "<html><body>No tiene permisos para acceder a esta sección!</body></html>" 
+			return HttpResponse(html)
 		caninos = Canino.objects.filter()	    
 		return render_to_response('home/nuevo_hemograma.html' ,{'hemograma':hemograma[0],'caninos':caninos,'titulo':'Modificar Hemograma', 'url_action':request.get_full_path()}, context_instance=RequestContext(request))
 
@@ -861,11 +862,8 @@ def bioquimicas_view(request):
 				bioquimicas = Bioquimica.objects.filter()
 				contexto = {'bioquimicas':bioquimicas}
 		else:
-			html = '''<html>
-<title>Attributes</title>
-%s
-</html>''' 
-    		return HttpResponse(html)
+			html = "<html><body>No tiene permisos para acceder a esta sección!</body></html>"  
+			return HttpResponse(html)
 	return render_to_response('home/bioquimicas_view.html' ,contexto, context_instance=RequestContext(request))
 
 def hemogramas_view(request):
@@ -881,8 +879,8 @@ def hemogramas_view(request):
 				hemogramas = Hemograma.objects.filter()
 				contexto = {'hemogramas':hemogramas}
 		else:
-			html = "<html><body>It is now %s.</body></html>" 
-    		return HttpResponse(html)
+			html = "<html><body>No tiene permisos para acceder a esta sección!</body></html>"
+			return HttpResponse(html)
 	return render_to_response('home/hemogramas_view.html' ,contexto, context_instance=RequestContext(request))
 
 
@@ -895,10 +893,18 @@ def generar_pdf_view(request,pk):
     serovares = Serovar.objects.all()
     result = StringIO()
     template = get_template("home/reporte.html")
+    BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath('images/facultad.jpg')))
+    BASE_DIR += '/vete/static/images/'
+    facultad_image = BASE_DIR  + 'facultad.jpg'
+    unlp_image = BASE_DIR  + 'unlp.jpg'
+    punta_indio_image = BASE_DIR  + 'punta_indio.jpg'
     data = {
         'pagesize':'A4',
         'title':'Reporte',
         'canino':canino[0],
+        'facultad_image':facultad_image,
+        'unlp_image':unlp_image,
+        'punta_indio_image':punta_indio_image,
         'serovares':serovares,
     }
     context = Context(data)
@@ -980,7 +986,6 @@ def analisis_view(request,pk):
 			fecha = request.POST.get('fecha')
 			dilucion_inicial = request.POST.get('dilucion_inicial')
 			reactivo = request.POST.get('reactivo')
-			print reactivo
 			if reactivo == "No reactivo":
 				reactivo = False
 			else:
